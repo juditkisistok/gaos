@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://jucikisistok.github.io/gaos/"
 languageCode = "en-us"
 title = "Genome Analysis & Statistics"
 theme = "hyde"
