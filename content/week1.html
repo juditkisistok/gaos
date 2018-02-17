@@ -1,0 +1,166 @@
+---
+title: Week 1
+author: Judit Kisistók
+date: '2018-01-31'
+slug: week-1
+categories: []
+tags: []
+theme: sandstone
+highlight: zenburn
+---
+
+
+
+<div id="a.-table-of-contents" class="section level3">
+<h3><a name="toc"></a>A. Table of contents</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#toc">Table of contents</a></li>
+<li><a href="#goals">Goals</a></li>
+<li><a href="#basics">The basics of R</a></li>
+<li><a href="#plotting">Plotting</a></li>
+<li><a href="#guppies">The guppy dataset</a></li>
+</ol>
+</div>
+<div id="learning-goals" class="section level3">
+<h3><a name="goals"></a>Learning goals</h3>
+<div id="by-the-end-of-this-session-you-should-be-able-to" class="section level4">
+<h4>By the end of this session, you should be able to…</h4>
+<ul>
+<li>Open an existing R script</li>
+<li>Save an existing R script</li>
+<li>Create a new R script</li>
+<li>Know the 4 panels in RStudio</li>
+<li>Know how and where to get help (StackOverflow, Google Groups)</li>
+</ul>
+</div>
+</div>
+<div id="the-basics-of-r" class="section level3">
+<h3><a name="basics"></a>1. The basics of R</h3>
+<p>Whenever you need to use a package, you might need to install it first (without the #) - this only needs to be done once:</p>
+<pre class="r"><code>#install.packages(&quot;binom&quot;)</code></pre>
+<p>But installing is not enough - everytime you want to use this package, you need to load it like this:</p>
+<pre class="r"><code>library(binom) #notice that you don&#39;t need the quotation marks anymore</code></pre>
+<p>This operation will fail if the package is not installed. If the package is installed, you can also click on Packages in the lower right panel of RStudio, look for the one you need and put a checkmark in the checkbox - this will also load it for you.</p>
+<p>You might want to clear the console - for that, use the Edit menu or the keyboard shortcut (ctrl-L on Windows and ctrl-l on Mac).</p>
+<p>If you want to restart R, use the Session menu or the keyboard shortcut ctrl + shift + f10 (Windows) / shift + cmd + f10 (Mac).</p>
+<p>You can get help using “?”</p>
+<pre class="r"><code>?library
+help(library)</code></pre>
+<p>You can load a dataset like this:</p>
+<pre class="r"><code>birdAbundanceData = read.csv(&quot;chap02e2bDesertBirdAbundance.csv&quot;)</code></pre>
+<p>CSV stands for comma separated values, so this command will be useful if you have such data. To see how you can import other types of data, check out the <a href="https://www.rstudio.com/resources/cheatsheets/" target ="_blank">Data Import Cheat Sheet on this page.</a></p>
+<p>You can get information about a dataset using the summary() function, including the variables, the smallest and largest values you have and some summary statistics - you can see the mean and the median, and you can even calculate the interquartile range from the 3rd and 1st quartile the summary shows you:</p>
+<pre class="r"><code>summary(birdAbundanceData)</code></pre>
+<pre><code>##                     species     abundance     
+##  American Kestrel       : 1   Min.   :  1.00  
+##  Ash-throated Flycatcher: 1   1st Qu.:  3.50  
+##  Bell&#39;s Vireo           : 1   Median : 18.00  
+##  Black Vulture          : 1   Mean   : 74.77  
+##  Black-chin. Hummingbird: 1   3rd Qu.:102.50  
+##  Black-tail. Gnatcatcher: 1   Max.   :625.00  
+##  (Other)                :37</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+<div id="plotting" class="section level3">
+<h3><a name="plotting"></a>2. Plotting</h3>
+<p>This is how you make a histogram:</p>
+<pre class="r"><code># first, we generate some data
+mydata = data.frame(var = &quot;label&quot;, count = c(1,1,1,3,3,7,7,9,9,1,1,2,2,2,2))
+mydata</code></pre>
+<pre><code>##      var count
+## 1  label     1
+## 2  label     1
+## 3  label     1
+## 4  label     3
+## 5  label     3
+## 6  label     7
+## 7  label     7
+## 8  label     9
+## 9  label     9
+## 10 label     1
+## 11 label     1
+## 12 label     2
+## 13 label     2
+## 14 label     2
+## 15 label     2</code></pre>
+<pre class="r"><code>hist(mydata$count, breaks=20)</code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>When you make a histogram (and a gazillion other operations in R), you need to specify which column (variable) you want to use from your data, as there is often a lot of them - you can use the $ for that.</p>
+<p>Generally, mydata$counts means that “dear R, please take mydata, do something with the variable that’s called ‘counts’, and ignore the rest for now”.</p>
+<div id="make-a-histogram-like-figure-2.2-3" class="section level4">
+<h4>Make a histogram like Figure 2.2-3:</h4>
+<pre class="r"><code>hist(birdAbundanceData$abundance, breaks = 20)</code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Of course, we can make it fancier:</p>
+<pre class="r"><code>hist(birdAbundanceData$abundance, breaks = 20, col = &quot;deeppink4&quot;, main = &quot;Histogram of bird abundance data&quot;, xlab = &quot;Abundance&quot;)</code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li><strong>col:</strong> color of the histogram</li>
+<li><strong>main:</strong> title</li>
+<li><strong>xlab:</strong> label on the X axis</li>
+<li><strong>breaks:</strong> you can control the bins with this (whether you want wider or more fine-grained ones) - however, the number you put in doesn’t <em>necessarily</em> correspond to the exact number of bins on the histogram. This is because of the way R runs its algorithm to break up the data but you get something that’s pretty close to what you wanted. Also, there are no strict rules about the number you should use for the breaks - always look at the data and see what makes sense in that context.</li>
+</ul>
+<p>You can go to the <a href="http://whitlockschluter.zoology.ubc.ca/r-code/rcode02" target ="_blank">book homepage</a> and try the R code you can find there.</p>
+<p>Histogram for a numeric variable:</p>
+<pre class="r"><code>hist(birdAbundanceData$abundance, right = FALSE)</code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>When creating histograms of non-categorical data (eg. temperature, number of amino acids in proteins), you have to specify the bins with an interval. Right = FALSE means that the histogram cells / bins are left-closed (right open) intervals: [included….not included)</p>
+<p>How to make a scatterplot:</p>
+<pre class="r"><code>mydata   = data.frame(x = rnorm(100))
+# in this line you&#39;re creating a data frame with a variable x, where you generate this x 
+# by randomly sampling 100 values from a normal distribution
+
+mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
+# mydata$y appends another column (variable) to your dataframe
+# the expression after &quot;=&quot; just means that this y variable is populated by values that are
+# 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
+summary(mydata) </code></pre>
+<pre><code>##        x                  y         
+##  Min.   :-3.69867   Min.   :-7.462  
+##  1st Qu.:-0.72770   1st Qu.: 7.604  
+##  Median : 0.07759   Median :11.190  
+##  Mean   : 0.01024   Mean   :11.000  
+##  3rd Qu.: 0.51537   3rd Qu.:14.075  
+##  Max.   : 2.52912   Max.   :24.135</code></pre>
+<pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
+<pre><code>##             x         y
+## 1  0.27629650 12.670804
+## 2  0.65266378 14.343808
+## 3 -0.90723463  7.693949
+## 4  0.07234786 11.862076
+## 5 -0.03106847 11.424247
+## 6  1.21079648 15.131703</code></pre>
+<pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="the-guppy-dataset" class="section level3">
+<h3><a name="guppies"></a>The guppy dataset</h3>
+<div id="find-the-guppy-dataset-from-chapter-2-and-make-a-plot-similar-to-figure-2.3-3" class="section level4">
+<h4>Find the guppy dataset from chapter 2 and make a plot similar to figure 2.3-3</h4>
+<p>Use read.csv to read the data into a variable called Guppies:</p>
+<pre class="r"><code>guppies &lt;- read.csv(&quot;chap02e3bGuppyFatherSonAttractiveness.csv&quot;)</code></pre>
+<p>Summarize the dataset - what are the variables called and how many variables are in the dataset?</p>
+<pre class="r"><code>summary(guppies)</code></pre>
+<pre><code>##  fatherOrnamentation sonAttractiveness
+##  Min.   :0.0300      Min.   :-0.3200  
+##  1st Qu.:0.3275      1st Qu.: 0.1800  
+##  Median :0.4550      Median : 0.4500  
+##  Mean   :0.4908      Mean   : 0.4872  
+##  3rd Qu.:0.6100      3rd Qu.: 0.8025  
+##  Max.   :1.1200      Max.   : 1.2300</code></pre>
+<p>The variables are called:</p>
+<pre class="r"><code>colnames(guppies)</code></pre>
+<pre><code>## [1] &quot;fatherOrnamentation&quot; &quot;sonAttractiveness&quot;</code></pre>
+<p>There are 2 variables, fatherOrnamentation and sonAttractiveness.</p>
+<p>Create the plot:</p>
+<pre class="r"><code>plot(guppies$fatherOrnamentation, guppies$sonAttractiveness) </code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>A fancier version:</p>
+<pre class="r"><code>plot(guppies$fatherOrnamentation, guppies$sonAttractiveness, col = &quot;deeppink4&quot;, pch=16, xlab=&quot;Father&#39;s Ornamentation&quot;, ylab=&quot;Son&#39;s Attractiveness&quot;) </code></pre>
+<p><img src="/week1_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>#pch = 16: determines the filled circles</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
