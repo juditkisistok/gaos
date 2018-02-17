@@ -1,4 +1,4 @@
-baseurl = "https://jucikisistok.github.io/gaos/"
+baseurl = "https://gaos.netlify.com/"
 languageCode = "en-us"
 title = "Genome Analysis & Statistics"
 theme = "hyde"
