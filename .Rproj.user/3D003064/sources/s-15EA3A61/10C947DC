@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3794715218",
+    "hash" : "3621910865",
     "id" : "10C947DC",
-    "lastKnownWriteTime" : 1518885056,
-    "last_content_update" : 1518885056569,
+    "lastKnownWriteTime" : 1518911172,
+    "last_content_update" : 1518911172839,
     "path" : "~/Documents/GitHub/gaos/config.toml",
     "project_path" : "config.toml",
     "properties" : {
-        "cursorPosition" : "0,36",
-        "scrollLine" : "0"
+        "cursorPosition" : "25,39",
+        "scrollLine" : "5"
     },
     "relative_order" : 1,
     "source_on_save" : false,
