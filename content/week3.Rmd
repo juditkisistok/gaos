@@ -415,10 +415,10 @@ colnames(df) <- c("Sample_nr", "Mean", "Standard_error", "Lower_confidence_limit
 # a fancy plot to visualize the CIs
 ggplot() +
   geom_point(data = df, aes(y = Sample_nr, x = Mean)) +
-  geom_segment(data = df, aes(x    = Lower_confidence_limit,
-                                         xend = Upper_confidence_limit, 
-                                         y    = Sample_nr,
-                                         yend = Sample_nr)) +
+  geom_segment(data = df, aes(x = Lower_confidence_limit,
+                              xend = Upper_confidence_limit, 
+                              y = Sample_nr,
+                              yend = Sample_nr)) +
   geom_vline(xintercept = mean(HumanGeneLengths$gene.length), col = "deeppink4")
 
 ```
@@ -466,11 +466,11 @@ Putting it all together:
 ```{r}
 ggplot() +
   geom_point(data = df, aes(y = Sample_nr, x = Mean, color = as.factor(df$Sample_size))) +
-  geom_segment(data = df, aes(x    = Lower_confidence_limit ,
-                                         xend = Upper_confidence_limit, 
-                                         y    = Sample_nr,
-                                         yend = Sample_nr,
-                                         color = as.factor(df$Sample_size))) +
+  geom_segment(data = df, aes(x = Lower_confidence_limit ,
+                              xend = Upper_confidence_limit, 
+                              y = Sample_nr,
+                              yend = Sample_nr,
+                              color = as.factor(df$Sample_size))) +
   geom_vline(xintercept = mean(HumanGeneLengths$gene.length)) + 
   ylab("") +
   scale_color_discrete(name = "Sample Size") +

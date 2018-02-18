@@ -250,7 +250,7 @@ myBreaks</code></pre>
 <p>Hint: Here is a simple example to draw 5 numbers with replacement from a “made-up” empirical distribution - adapt that for your purposes.</p>
 <pre class="r"><code>madeup=c(3,3,4,5,6,7,8,2,1,3,5,6,12,435,23)
 sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and replace=  specifying here (check the help)?</code></pre>
-<pre><code>## [1]   3 435 435   5 435</code></pre>
+<pre><code>## [1] 12 23  4  4  7</code></pre>
 <p><strong>x:</strong> the data that we want to draw samples from<br />
 <strong>size:</strong> the size of the sample that we want to take<br />
 <strong>replace:</strong> whether or not we want to sample with replacement</p>
@@ -291,16 +291,16 @@ sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and 
   mymedian=median(tryit) #we calculate the median of the sample
   cat(&quot;And the median is: &quot;, mymedian, &quot;\n&quot;) #we concatenate and print it out
 }</code></pre>
-<pre><code>## And the median is:  12 
+<pre><code>## And the median is:  3 
+## And the median is:  3 
 ## And the median is:  5 
+## And the median is:  8 
 ## And the median is:  6 
 ## And the median is:  8 
 ## And the median is:  3 
-## And the median is:  6 
-## And the median is:  3 
 ## And the median is:  5 
-## And the median is:  6 
-## And the median is:  3</code></pre>
+## And the median is:  3 
+## And the median is:  6</code></pre>
 <p>Or we can be smart and instead of “printing it” we “write it down” i.e. store that in a vector:</p>
 <pre class="r"><code>myMedians = NULL # this initializes a &quot;nullvector&quot;
 for (i in 1:10) {
@@ -308,7 +308,7 @@ for (i in 1:10) {
   myMedians[i]=median(tryit) #we add the calculated medians to the nullvector
 }
 myMedians </code></pre>
-<pre><code>##  [1]  5  8  4  5  5  5  5  5  3 12</code></pre>
+<pre><code>##  [1] 7 6 3 3 4 5 4 5 1 3</code></pre>
 <div id="adapt-this-code-to-generate-fig-4.1-3-and-4.1-4-use-104-samples-to-get-the-sampling-distributions." class="section level4">
 <h4>Adapt this code to generate fig 4.1-3 and 4.1-4 (use 10^4 samples to get the sampling distributions).</h4>
 <pre class="r"><code>#nullvectors for the means (different sample sizes)
@@ -458,23 +458,23 @@ hist(medianLength_500,
 <h4>Compare the statistical precision we have to estimate mean SD and median: is the summary statistic that entails most uncertainty?</h4>
 <p>So we created all these nice sampling distributions and we can calculate the standard error to get an idea about their uncertainty:</p>
 <pre class="r"><code>sd(meanLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 99.4878</code></pre>
+<pre><code>## [1] 101.4109</code></pre>
 <pre class="r"><code>sd(meanLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 20.30328</code></pre>
+<pre><code>## [1] 20.55309</code></pre>
 <pre class="r"><code>sd(meanLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 4.043152</code></pre>
+<pre><code>## [1] 4.071717</code></pre>
 <pre class="r"><code>sd(sdLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 162.3681</code></pre>
+<pre><code>## [1] 179.7794</code></pre>
 <pre class="r"><code>sd(sdLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 60.26419</code></pre>
+<pre><code>## [1] 68.11289</code></pre>
 <pre class="r"><code>sd(sdLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 21.01189</code></pre>
+<pre><code>## [1] 20.98974</code></pre>
 <pre class="r"><code>sd(medianLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 90.91342</code></pre>
+<pre><code>## [1] 93.31577</code></pre>
 <pre class="r"><code>sd(medianLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 17.88705</code></pre>
+<pre><code>## [1] 17.73173</code></pre>
 <pre class="r"><code>sd(medianLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 3.566177</code></pre>
+<pre><code>## [1] 3.576505</code></pre>
 <p>We can see that if we compare the precision of our estimates given the 3 sample sizes, the n = 500 estimate is the most precise which is expected. If we take a look at the different summary statistics at the same sample sizes, we find that the median estimate is the least uncertain - this is also expected given that this statistic is the most resistant to the influence of the outliers while the mean and standard deviation are more sensitive to them (remember, the standard deviation is the most uncertain - it is calculated using the mean, which was already pretty sensitive to extreme observations!).</p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
 </div>
@@ -502,10 +502,10 @@ colnames(df) &lt;- c(&quot;Sample_nr&quot;, &quot;Mean&quot;, &quot;Standard_err
 # a fancy plot to visualize the CIs
 ggplot() +
   geom_point(data = df, aes(y = Sample_nr, x = Mean)) +
-  geom_segment(data = df, aes(x    = Lower_confidence_limit,
-                                         xend = Upper_confidence_limit, 
-                                         y    = Sample_nr,
-                                         yend = Sample_nr)) +
+  geom_segment(data = df, aes(x = Lower_confidence_limit,
+                              xend = Upper_confidence_limit, 
+                              y = Sample_nr,
+                              yend = Sample_nr)) +
   geom_vline(xintercept = mean(HumanGeneLengths$gene.length), col = &quot;deeppink4&quot;)</code></pre>
 <p><img src="/week3_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
@@ -546,11 +546,11 @@ df &lt;- data.frame(rbind(df, df_100000))</code></pre>
 <p>Putting it all together:</p>
 <pre class="r"><code>ggplot() +
   geom_point(data = df, aes(y = Sample_nr, x = Mean, color = as.factor(df$Sample_size))) +
-  geom_segment(data = df, aes(x    = Lower_confidence_limit ,
-                                         xend = Upper_confidence_limit, 
-                                         y    = Sample_nr,
-                                         yend = Sample_nr,
-                                         color = as.factor(df$Sample_size))) +
+  geom_segment(data = df, aes(x = Lower_confidence_limit ,
+                              xend = Upper_confidence_limit, 
+                              y = Sample_nr,
+                              yend = Sample_nr,
+                              color = as.factor(df$Sample_size))) +
   geom_vline(xintercept = mean(HumanGeneLengths$gene.length)) + 
   ylab(&quot;&quot;) +
   scale_color_discrete(name = &quot;Sample Size&quot;) +
