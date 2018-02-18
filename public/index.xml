@@ -17,7 +17,7 @@
       <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-3/</guid>
-      <description>A. Table of contents Table of contents Loading libraries Problem 9 Exercises  Reproducing in R the Figure 4.1-1 &amp;amp; important details of histogram drawing in R Generating Figure 4.1-2 Reproducing Figures 4.1-3 and 4.1-4 Trying and evalutating the +/- 2 SEs rule of thumb    Learning goals  Loading libraries library(abd) #we need to load the ABD dataset to be able to access the YeastGenes data in Exercise 1 library(cowplot) #this is just for plotting but you don&amp;#39;t need to worry about it  Chapter 4, Problem 9 One of the great discoveries of biology is that organisms have a class of genes called “regulatory genes”, whose only job is to regulate the activity of other genes.</description>
+      <description>A. Table of contents Table of contents Loading libraries Problem 9 Exercises  Reproducing in R the Figure 4.1-1 &amp;amp; important details of histogram drawing in R Generating Figure 4.1-2 Reproducing Figures 4.1-3 and 4.1-4 Trying and evalutating the +/- 2 SEs rule of thumb    Loading libraries library(abd) #we need to load the ABD dataset to be able to access the YeastGenes data in Exercise 1 library(cowplot) #this is just for plotting but you don&amp;#39;t need to worry about it  Chapter 4, Problem 9 One of the great discoveries of biology is that organisms have a class of genes called “regulatory genes”, whose only job is to regulate the activity of other genes.</description>
     </item>
     
     <item>
