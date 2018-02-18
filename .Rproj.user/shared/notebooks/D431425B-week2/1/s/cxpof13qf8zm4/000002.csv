@@ -1,0 +1,6 @@
+"0","SticklebackPlates %>%"
+"0","  mutate(plates = plates + 2) -> SticklebackPlates_scale1_d"
+"0","# in the first line we choose which data we want to work with"
+"0","# that weird %>% thing is called a pipe - you can think about our data flowing through it, being channeled into whatever command we have next"
+"0","# in this case, it's mutate() - which just simply transforms our variable, so adds 2 to every plate value"
+"0","# at the end, with -> we save this all to another dataframe"

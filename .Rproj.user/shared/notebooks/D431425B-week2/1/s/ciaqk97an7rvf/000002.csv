@@ -1,0 +1,7 @@
+"0","# Base R"
+"0","SticklebackPlates_scale2 = data.frame(genotype = SticklebackPlates$genotype,"
+"0","                                      plates = SticklebackPlates$plates / 62.8)"
+"0","# Dplyr"
+"0","SticklebackPlates %>%"
+"0","  mutate(plates = plates / 62.8) -> SticklebackPlates_scale2_d"
+"0","head(SticklebackPlates_scale2)"

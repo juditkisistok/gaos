@@ -75,10 +75,10 @@ summary(regulatedGenes)</code></pre>
 </div>
 </div>
 <div id="exercises" class="section level3">
-<h3><a name="exercises"></a>Exercises</h3>
+<h3><a name="exercises"></a><u>Exercises</u></h3>
 </div>
 <div id="reproducing-the-figure-4.1-1-important-details-of-histogram-drawing-in-r" class="section level3">
-<h3><a name="exercise1"></a>Reproducing the Figure 4.1-1 &amp; important details of histogram drawing in R</h3>
+<h3><a name="exercise1"></a>1. Reproducing the Figure 4.1-1 &amp; important details of histogram drawing in R</h3>
 <pre class="r"><code>data(HumanGeneLengths) # loading the data of example 4.1 of the book </code></pre>
 <div id="take-a-quick-peek-at-the-data-and-try-to-find-the-size-of-the-titin-gene-hint-footnote-on-page-97" class="section level4">
 <h4>Take a quick peek at the data and try to find the size of the titin gene (hint: footnote on page 97)</h4>
@@ -204,13 +204,13 @@ myBreaks</code></pre>
 </div>
 </div>
 <div id="generating-figure-4.1-2" class="section level3">
-<h3><a name="exercise2"></a>Generating Figure 4.1-2</h3>
+<h3><a name="exercise2"></a>2. Generating Figure 4.1-2</h3>
 <div id="use-the-r-function-sample-to-get-a-vector-of-100-observations-drawn-from-humangenelengths-and-reproduce-fig-4.1-2" class="section level4">
 <h4>Use the R function sample() to get a vector of 100 observations drawn from HumanGeneLengths and reproduce fig 4.1-2</h4>
 <p>Hint: Here is a simple example to draw 5 numbers with replacement from a “made-up” empirical distribution - adapt that for your purposes.</p>
 <pre class="r"><code>madeup=c(3,3,4,5,6,7,8,2,1,3,5,6,12,435,23)
 sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and replace=  specifying here (check the help)?</code></pre>
-<pre><code>## [1] 12 23  4  4  7</code></pre>
+<pre><code>## [1]  5 23  3  3  3</code></pre>
 <p><strong>x:</strong> the data that we want to draw samples from<br />
 <strong>size:</strong> the size of the sample that we want to take<br />
 <strong>replace:</strong> whether or not we want to sample with replacement</p>
@@ -233,7 +233,7 @@ sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and 
 </div>
 </div>
 <div id="reproducing-figures-4.1-3-and-4.1-4" class="section level3">
-<h3><a name="exercise3"></a>Reproducing Figures 4.1-3 and 4.1-4</h3>
+<h3><a name="exercise3"></a>3. Reproducing Figures 4.1-3 and 4.1-4</h3>
 <p>Conceptually, to generate by simulation the sampling distribution of mean gene length, we resample 100 datapoints, we calculate the mean in the sample and “write it down” and repeat that operation many times (say 10^4 times).</p>
 <p>In most programming languages there is a way to “repeat” a sequence of things x times —&gt; the for loop. Here is one basic example:</p>
 <pre class="r"><code>for (year in c(2010,2011,2012,2013,2014,2015)){
@@ -251,16 +251,16 @@ sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and 
   mymedian=median(tryit) #we calculate the median of the sample
   cat(&quot;And the median is: &quot;, mymedian, &quot;\n&quot;) #we concatenate and print it out
 }</code></pre>
-<pre><code>## And the median is:  3 
+<pre><code>## And the median is:  6 
 ## And the median is:  3 
-## And the median is:  5 
-## And the median is:  8 
 ## And the median is:  6 
-## And the median is:  8 
-## And the median is:  3 
+## And the median is:  6 
+## And the median is:  6 
 ## And the median is:  5 
 ## And the median is:  3 
-## And the median is:  6</code></pre>
+## And the median is:  5 
+## And the median is:  8 
+## And the median is:  3</code></pre>
 <p>Or we can be smart and instead of “printing it” we “write it down” i.e. store that in a vector:</p>
 <pre class="r"><code>myMedians = NULL # this initializes a &quot;nullvector&quot;
 for (i in 1:10) {
@@ -268,7 +268,7 @@ for (i in 1:10) {
   myMedians[i]=median(tryit) #we add the calculated medians to the nullvector
 }
 myMedians </code></pre>
-<pre><code>##  [1] 7 6 3 3 4 5 4 5 1 3</code></pre>
+<pre><code>##  [1] 6 4 3 5 5 5 3 3 3 3</code></pre>
 <div id="adapt-this-code-to-generate-fig-4.1-3-and-4.1-4-use-104-samples-to-get-the-sampling-distributions." class="section level4">
 <h4>Adapt this code to generate fig 4.1-3 and 4.1-4 (use 10^4 samples to get the sampling distributions).</h4>
 <pre class="r"><code>#nullvectors for the means (different sample sizes)
@@ -323,7 +323,7 @@ ggplot() + #creates the canvas
 </div>
 <div id="derive-the-sampling-distribution-for-the-sd-in-the-sample-and-the-median." class="section level4">
 <h4>Derive the sampling distribution for the SD in the sample and the median.</h4>
-<p>Standard deviation:</p>
+<p><u>Standard deviation:</u></p>
 <pre class="r"><code># this is the exact same code, I&#39;m just calculating the standard deviation instead of the mean
 
 sdLength_100 = NULL
@@ -368,7 +368,7 @@ hist(sdLength_500,
   geom_histogram(mapping = aes(sdLength_500, y=..density..), fill = &quot;deeppink4&quot;, alpha = 0.6, binwidth = 30) +
   xlab(&quot;Sample standard deviation&quot;)</code></pre>
 <p><img src="/week3_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<p>Median:</p>
+<p><u>Median:</u></p>
 <pre class="r"><code># also the exact same code, just calculating the median
 
 medianLength_100 = NULL
@@ -418,29 +418,29 @@ hist(medianLength_500,
 <h4>Compare the statistical precision we have to estimate mean SD and median: is the summary statistic that entails most uncertainty?</h4>
 <p>So we created all these nice sampling distributions and we can calculate the standard error to get an idea about their uncertainty:</p>
 <pre class="r"><code>sd(meanLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 101.4109</code></pre>
+<pre><code>## [1] 101.9082</code></pre>
 <pre class="r"><code>sd(meanLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 20.55309</code></pre>
+<pre><code>## [1] 20.29445</code></pre>
 <pre class="r"><code>sd(meanLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 4.071717</code></pre>
+<pre><code>## [1] 4.084961</code></pre>
 <pre class="r"><code>sd(sdLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 179.7794</code></pre>
+<pre><code>## [1] 204.9895</code></pre>
 <pre class="r"><code>sd(sdLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 68.11289</code></pre>
+<pre><code>## [1] 63.46729</code></pre>
 <pre class="r"><code>sd(sdLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 20.98974</code></pre>
+<pre><code>## [1] 21.04249</code></pre>
 <pre class="r"><code>sd(medianLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 93.31577</code></pre>
+<pre><code>## [1] 91.32353</code></pre>
 <pre class="r"><code>sd(medianLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 17.73173</code></pre>
+<pre><code>## [1] 17.72409</code></pre>
 <pre class="r"><code>sd(medianLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 3.576505</code></pre>
+<pre><code>## [1] 3.567269</code></pre>
 <p>We can see that if we compare the precision of our estimates given the 3 sample sizes, the n = 500 estimate is the most precise which is expected. If we take a look at the different summary statistics at the same sample sizes, we find that the median estimate is the least uncertain - this is also expected given that this statistic is the most resistant to the influence of the outliers while the mean and standard deviation are more sensitive to them (remember, the standard deviation is the most uncertain - it is calculated using the mean, which was already pretty sensitive to extreme observations!).</p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
 </div>
 </div>
 <div id="trying-and-evaluating-the---2-ses-rule-of-thumb" class="section level3">
-<h3><a name="exercise4"></a>Trying and evaluating the +/- 2 SEs rule of thumb</h3>
+<h3><a name="exercise4"></a>4. Trying and evaluating the +/- 2 SEs rule of thumb</h3>
 <div id="generate-20-samples-of-n100-genes-from-the-human-gene-length-distribution-for-each-sample-calculate-the-mean-and-ci-around-the-mean-using-2ses" class="section level4">
 <h4>Generate 20 samples of n=100 genes from the human gene length distribution, for each sample calculate the mean and CI around the mean using 2SEs</h4>
 <pre class="r"><code>Mean = NULL

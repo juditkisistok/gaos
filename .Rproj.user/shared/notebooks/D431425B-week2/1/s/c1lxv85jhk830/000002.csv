@@ -1,0 +1,2 @@
+"0","dataMM=subset(SticklebackPlates, SticklebackPlates$genotype ==""MM"") "
+"0","head(dataMM)"

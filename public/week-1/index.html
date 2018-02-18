@@ -38,7 +38,7 @@
 
     <ul class="sidebar-nav">
       <li><a href="/">Home</a> </li>
-      <li><a href="/week-1/"> Week 1: Introduction </a></li><li><a href="/week-3/"> Week 3: Sampling distributions </a></li>
+      <li><a href="/week-1/"> Week 1: Introduction </a></li><li><a href="/week-2/"> Week 2: Summary statistics </a></li><li><a href="/week-3/"> Week 3: Sampling distributions </a></li>
     </ul>
 
     <p>&copy; 2018. All rights reserved. </p>
@@ -53,7 +53,7 @@
 <h3><a name="toc"></a>A. Table of contents</h3>
 <ol style="list-style-type: decimal">
 <li><a href="#toc">Table of contents</a></li>
-<li><a href="#goals">Goals</a></li>
+<li><a href="#goals">Learning goals</a></li>
 <li><a href="#basics">The basics of R</a></li>
 <li><a href="#plotting">Plotting</a></li>
 <li><a href="#guppies">The guppy dataset</a></li>
@@ -151,21 +151,21 @@ mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # mydata$y appends another column (variable) to your dataframe
 # the expression after &quot;=&quot; just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) </code></pre>
-<pre><code>##        x                 y           
-##  Min.   :-2.2728   Min.   : 0.09066  
-##  1st Qu.:-0.5574   1st Qu.: 8.15438  
-##  Median : 0.2304   Median :12.38946  
-##  Mean   : 0.1888   Mean   :11.95477  
-##  3rd Qu.: 0.9111   3rd Qu.:15.75151  
-##  Max.   : 2.4528   Max.   :23.69058</code></pre>
+<pre><code>##        x                 y          
+##  Min.   :-2.1535   Min.   :-0.7389  
+##  1st Qu.:-0.6541   1st Qu.: 7.9070  
+##  Median : 0.2051   Median :11.4142  
+##  Mean   : 0.1272   Mean   :11.5965  
+##  3rd Qu.: 0.7159   3rd Qu.:15.1631  
+##  Max.   : 2.1873   Max.   :21.2337</code></pre>
 <pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
-<pre><code>##             x        y
-## 1 -0.04810751 11.51085
-## 2  0.47903245 14.08851
-## 3  1.17127512 15.63196
-## 4  0.76867725 14.73183
-## 5  0.44422967 13.24677
-## 6  1.14036447 17.00891</code></pre>
+<pre><code>##            x         y
+## 1  1.2749633 17.021144
+## 2  0.2822969 11.414964
+## 3  0.5294364 12.541310
+## 4  1.4903667 17.960787
+## 5  2.1872810 21.233732
+## 6 -0.5293973  8.396732</code></pre>
 <pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>

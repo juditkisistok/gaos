@@ -1,0 +1,8 @@
+"0","hist(dataMm$plates, "
+"0","     right = FALSE, "
+"0","     breaks = 30, "
+"0","     xlim = c(0,max(dataMM$plates)), "
+"0","     ylim = c(0,40), "
+"0","     col = ""red"", "
+"0","     main = """",  "
+"0","     xlab = """")"

@@ -1,0 +1,6 @@
+"0","# In Base R, we create a brand new dataframe like this:"
+"0","SticklebackPlates_scale1 = data.frame(genotype = SticklebackPlates$genotype,"
+"0","                                      plates = SticklebackPlates$plates + 2)"
+"0","# when we create this new dataframe, we say what columns (variables) we want - this is the ""genotype ="" and ""plates ="" part"
+"0","# then we say what values we want those variables to have"
+"0","# here we just grab the genotype values from the original dataset as they were, and for the plates, we get the original values as well but we add +2 to every single one of them"

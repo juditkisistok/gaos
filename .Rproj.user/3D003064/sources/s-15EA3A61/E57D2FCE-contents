@@ -63,9 +63,9 @@ We assume that:
 
 *Take me back to [the beginning!](#toc)*
 
-###<a name="exercises"></a>Exercises
+###<a name="exercises"></a><u>Exercises</u>
 
-###<a name="exercise1"></a>Reproducing the Figure 4.1-1 & important details of histogram drawing in R
+###<a name="exercise1"></a>1. Reproducing the Figure 4.1-1 & important details of histogram drawing in R
 ```{r}
 data(HumanGeneLengths) # loading the data of example 4.1 of the book 
 ```
@@ -150,7 +150,7 @@ The second histogram displays the <em>relative frequencies</em> (absolute freque
 
 *Take me back to [the beginning!](#toc)*
 
-###<a name="exercise2"></a>Generating Figure 4.1-2
+###<a name="exercise2"></a>2. Generating Figure 4.1-2
 
 ####Use the R function sample() to get a vector of 100 observations drawn from HumanGeneLengths and reproduce fig 4.1-2
 Hint: Here is a simple example to draw 5 numbers with replacement from a "made-up" empirical distribution - adapt that for your purposes.
@@ -184,7 +184,7 @@ Notice how this histogram is different every single time we run the code - it is
 
 *Take me back to [the beginning!](#toc)*
 
-###<a name="exercise3"></a>Reproducing Figures 4.1-3 and 4.1-4
+###<a name="exercise3"></a>3. Reproducing Figures 4.1-3 and 4.1-4
 
 Conceptually, to generate by simulation the sampling distribution of mean gene length, we resample 100 datapoints, we calculate the mean in the sample and "write it down" and repeat that operation many times (say 10^4 times).
 
@@ -273,7 +273,8 @@ ggplot() + #creates the canvas
 
 #### Derive the sampling distribution for the SD in the sample and the median.
 
-Standard deviation:
+<u>Standard deviation:</u>
+
 ```{r}
 # this is the exact same code, I'm just calculating the standard deviation instead of the mean
 
@@ -322,7 +323,7 @@ ggplot() +
   xlab("Sample standard deviation")
 ```
 
-Median:
+<u>Median:</u>
 
 ```{r}
 # also the exact same code, just calculating the median
@@ -391,7 +392,7 @@ We can see that if we compare the precision of our estimates given the 3 sample 
 
 *Take me back to [the beginning!](#toc)*
 
-###<a name="exercise4"></a>Trying and evaluating the +/- 2 SEs rule of thumb
+###<a name="exercise4"></a>4. Trying and evaluating the +/- 2 SEs rule of thumb
 
 #### Generate 20 samples of n=100 genes from the human gene length distribution, for each sample calculate the mean and CI around the mean using 2SEs
 

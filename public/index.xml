@@ -21,12 +21,21 @@
     </item>
     
     <item>
+      <title>Week 2</title>
+      <link>/week-2/</link>
+      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/week-2/</guid>
+      <description>A. Table of contents Table of contents Learning goals Exercises  Calculating summary statistics in a sample Summarizing and visualizing the Stickleback data of Chapter 3 Developing your intuition for histograms and boxplots Making up your own data by sampling from a theoretical distribution    Learning goals By the end of this session, you should be able to…  load datasets in R from the ABD package calculate summary statistics by hand and using the summary stats functions in R slice data in R (selecting subsets of data) create data but also sample data from a first theoretical distribution and discuss how much samples from this distribution are close to the real observed data be good at making the correspondance between summary statistics (mean, median, SD, etc.</description>
+    </item>
+    
+    <item>
       <title>Week 1</title>
       <link>/week-1/</link>
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-1/</guid>
-      <description>A. Table of contents Table of contents Goals The basics of R Plotting The guppy dataset   Learning goals By the end of this session, you should be able to…  Open an existing R script Save an existing R script Create a new R script Know the 4 panels in RStudio Know how and where to get help (StackOverflow, Google Groups)    1. The basics of R Whenever you need to use a package, you might need to install it first (without the #) - this only needs to be done once:</description>
+      <description>A. Table of contents Table of contents Learning goals The basics of R Plotting The guppy dataset   Learning goals By the end of this session, you should be able to…  Open an existing R script Save an existing R script Create a new R script Know the 4 panels in RStudio Know how and where to get help (StackOverflow, Google Groups)    1. The basics of R Whenever you need to use a package, you might need to install it first (without the #) - this only needs to be done once:</description>
     </item>
     
   </channel>

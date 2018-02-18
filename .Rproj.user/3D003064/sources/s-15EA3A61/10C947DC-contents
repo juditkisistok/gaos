@@ -13,6 +13,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "Week 1: Introduction"
     url = "/week-1/"
 [[menu.main]]
+    name = "Week 2: Summary statistics"
+    url = "/week-2/"
+[[menu.main]]
     name = "Week 3: Sampling distributions"
     url = "/week-3/"
 
