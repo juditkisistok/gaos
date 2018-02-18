@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1945627814",
     "id" : "35B4338E",
-    "lastKnownWriteTime" : 1518879801,
-    "last_content_update" : 1518879801954,
+    "lastKnownWriteTime" : 1518912112,
+    "last_content_update" : 1518912112853,
     "path" : "~/Documents/GitHub/gaos/content/week1.Rmd",
     "project_path" : "content/week1.Rmd",
     "properties" : {
-        "cursorPosition" : "3,17",
+        "cursorPosition" : "10,0",
         "scrollLine" : "0"
     },
     "relative_order" : 3,
