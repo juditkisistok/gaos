@@ -5,8 +5,6 @@ date: '2018-01-31'
 slug: week-1
 categories: []
 tags: []
-theme: sandstone
-highlight: zenburn
 ---
 
 
@@ -102,13 +100,11 @@ When creating histograms of non-categorical data (eg. temperature, number of ami
 How to make a scatterplot:
 ```{r}
 mydata   = data.frame(x = rnorm(100))
-# in this line you're creating a data frame with a variable x, where you generate this x 
-# by randomly sampling 100 values from a normal distribution
+# in this line you're creating a data frame with a variable x, where you generate this x by randomly sampling 100 values from a normal distribution
 
 mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # mydata$y appends another column (variable) to your dataframe
-# the expression after "=" just means that this y variable is populated by values that are
-# 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
+# the expression after "=" just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) 
 head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have 
 plot(x = mydata$x, y = mydata$y) # it's good to specify which data you want on the x axis and which to put on the y axis

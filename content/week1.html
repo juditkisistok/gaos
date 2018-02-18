@@ -5,8 +5,6 @@ date: '2018-01-31'
 slug: week-1
 categories: []
 tags: []
-theme: sandstone
-highlight: zenburn
 ---
 
 
@@ -107,29 +105,27 @@ mydata</code></pre>
 <p>When creating histograms of non-categorical data (eg. temperature, number of amino acids in proteins), you have to specify the bins with an interval. Right = FALSE means that the histogram cells / bins are left-closed (right open) intervals: [included….not included)</p>
 <p>How to make a scatterplot:</p>
 <pre class="r"><code>mydata   = data.frame(x = rnorm(100))
-# in this line you&#39;re creating a data frame with a variable x, where you generate this x 
-# by randomly sampling 100 values from a normal distribution
+# in this line you&#39;re creating a data frame with a variable x, where you generate this x by randomly sampling 100 values from a normal distribution
 
 mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # mydata$y appends another column (variable) to your dataframe
-# the expression after &quot;=&quot; just means that this y variable is populated by values that are
-# 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
+# the expression after &quot;=&quot; just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) </code></pre>
-<pre><code>##        x                   y         
-##  Min.   :-2.361096   Min.   :-2.048  
-##  1st Qu.:-0.767346   1st Qu.: 7.898  
-##  Median :-0.004903   Median :10.825  
-##  Mean   :-0.085618   Mean   :10.700  
-##  3rd Qu.: 0.422408   3rd Qu.:13.919  
-##  Max.   : 2.701491   Max.   :24.462</code></pre>
+<pre><code>##        x                 y           
+##  Min.   :-2.2728   Min.   : 0.09066  
+##  1st Qu.:-0.5574   1st Qu.: 8.15438  
+##  Median : 0.2304   Median :12.38946  
+##  Mean   : 0.1888   Mean   :11.95477  
+##  3rd Qu.: 0.9111   3rd Qu.:15.75151  
+##  Max.   : 2.4528   Max.   :23.69058</code></pre>
 <pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
-<pre><code>##            x         y
-## 1  0.5530459 15.148174
-## 2  0.1886380 10.479221
-## 3 -0.3781382  8.730046
-## 4 -1.5023446  3.536059
-## 5  0.3056007 14.600113
-## 6  0.5747754 13.167168</code></pre>
+<pre><code>##             x        y
+## 1 -0.04810751 11.51085
+## 2  0.47903245 14.08851
+## 3  1.17127512 15.63196
+## 4  0.76867725 14.73183
+## 5  0.44422967 13.24677
+## 6  1.14036447 17.00891</code></pre>
 <pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
