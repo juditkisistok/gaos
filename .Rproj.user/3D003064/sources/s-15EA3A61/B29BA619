@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "288178640",
+    "hash" : "0",
     "id" : "B29BA619",
-    "lastKnownWriteTime" : 1518912493,
-    "last_content_update" : 1518912493371,
+    "lastKnownWriteTime" : 1518915319,
+    "last_content_update" : 1518915319674,
     "path" : "~/Documents/GitHub/gaos/themes/hyde/layouts/partials/head.html",
     "project_path" : "themes/hyde/layouts/partials/head.html",
     "properties" : {
-        "cursorPosition" : "22,58",
+        "cursorPosition" : "22,81",
         "scrollLine" : "0"
     },
     "relative_order" : 6,
