@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519397742335.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "31A9003E",
+    "lastKnownWriteTime" : 1519397984,
+    "last_content_update" : 1519397984719,
+    "path" : "~/Documents/GitHub/gaos/content/week3.Rmd",
+    "project_path" : "content/week3.Rmd",
+    "properties" : {
+        "cursorPosition" : "5,126",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

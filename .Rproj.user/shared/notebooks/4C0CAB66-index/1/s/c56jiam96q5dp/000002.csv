@@ -633,8 +633,8 @@ Attaching package: 'cowplot'
 1: package 'mosaic' was built under R version 3.4.3 
 2: package 'mosaicData' was built under R version 3.4.3 
 3: package 'cowplot' was built under R version 3.4.3 
-4: "
-"2","In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+"
+"2","4: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
 5: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
@@ -649,20 +649,24 @@ Attaching package: 'cowplot'
 5: Setting LC_MONETARY failed, using ""C"" 
 "
 "1","[?25lBuilding sites … "
-"1","[?25h[K
+"1","[?25h[K"
+"1","
                    | EN  
 +------------------+----+
-  Pages            | 11  
+  "
+"1","Pages           "
+"1"," | 11  
   Paginator pages  |  0  
   Non-page files   |  3  
   Static files     | 71  
   Processed images |  0  
-  Aliases          |  0"
-"1","  
-  Sitemaps         |  1  
+  Aliases          |  0  
+"
+"1","  Sitemaps         |"
+"1","  1  
   Cleaned          |  0  
 
-Total in 90 ms
+Total in 157 ms
 "
 "1","[?25lBuilding sites … "
 "1","[?25h[K
@@ -676,10 +680,10 @@ Total in 90 ms
   Processed images |  0  
   Aliases          |  0  
   Sitemaps         |  1  
-  Cleaned         "
-"1"," |  0  
+  Cleaned          "
+"1","|  0  
 
-Total in 44 ms
+Total in 37 ms
 "
 "0","blogdown::serve_site()"
 "1","[?25lBuilding sites … "
@@ -690,15 +694,16 @@ Total in 44 ms
   Pages            | 11  
   Paginator pages  |  0  
   Non-page files   |  3  
-  Static files     | 71  
+ "
+"1"," Static files     | 71  
   Processed images |  0  
   Aliases          |  0  
   Sitemaps         |  1  
   Cleaned          |  0  
 
-Total in 54 ms
+Total in 45 ms
 "
-"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:3083
+"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:6321
 "
-"2","To stop the server, run servr::daemon_stop(""4322976704"") or restart your R session
+"2","To stop the server, run servr::daemon_stop(""4326154848"") or restart your R session
 "
