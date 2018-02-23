@@ -4,7 +4,6 @@ title = "Genome Analysis & Statistics"
 theme = "hyde"
 googleAnalytics = ""
 disqusShortname = ""
-math = true
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
