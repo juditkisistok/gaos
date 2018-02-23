@@ -1,171 +1,489 @@
 ---
-title: Week 4
-author: Judit Kisistok
-date: '2018-02-21'
-slug: week-4
+title: Week 3
+author: Judit Kisistók
+date: '2018-02-14'
+slug: week-3
 categories: []
 tags: []
 ---
-
 ###<a name="toc"></a>A. Table of contents
 1. [Table of contents](#toc)
-2. [Learning goals](#goals)
-3. [Exercises](#exercises)
-    * [Problem A](#problemA)
-    * [Problem B](#problemB)
+2. [Loading libraries](#library)
+3. [Problem 9](#problem9)
+4. [Exercises](#exercises)
+    * [Reproducing in R the Figure 4.1-1 & important details of histogram drawing in R](#exercise1)
+    * [Generating Figure 4.1-2](#exercise2)
+    * [Reproducing Figures 4.1-3 and 4.1-4](#exercise3)
+    * [Trying and evalutating the +/- 2 SEs rule of thumb](#exercise4)
 
-###<a name="goals"></a>Learning goals
-#### By the end of this session, you should be able to...
-+ Calculate probabilities by hand 
-+ Calculate expectation and variance of a random variable 
-+ Calculate the expectation and variance of a sum of n random variables and relate this to the terms:
-    * SD of a population
-    * SE of a sample
-    
+###<a name="library"></a>Loading libraries
+```{r message = FALSE, warning = FALSE}
+library(abd) #we need to load the ABD dataset to be able to access the YeastGenes data in Exercise 1
+library(cowplot) #this is just for plotting but you don't need to worry about it
+```
+
+###<a name="problem9"></a>Chapter 4, Problem 9
+
+One of the great discoveries of biology is that organisms have a class of genes called "regulatory genes", whose only job is to regulate the activity of other genes. How many genes does the typical regulatory gene regulate? A study of interaction networks in yeast (<em>S. cerevisiae</em>) came up with the following data for 109 regulatory genes (Guelzim et al. 2002).
+
+Loading the data and taking a peek at the summary:
+```{r}
+regulatedGenes=read.csv("chap04q09NumberGenesRegulated.csv") 
+#read.csv() function - use this whenever you have comma-separated data (aka a csv)
+summary(regulatedGenes)
+```
+
+####What type of graph should be used to display these data?
+
+A histogram:
+```{r}
+hist(regulatedGenes$ngenes, breaks=30, col="cornflowerblue",
+     xlab="Number of genes regulated", main="Regulatory genes in yeast")
+```
+
+#### What is the estimated mean number of genes regulated by a regulatory gene in the yeast genome?
+```{r}
+mean(regulatedGenes$ngenes)
+
+median(regulatedGenes$ngenes) #just for reference
+```
+
+#### What is the standard error of the mean?
+```{r}
+sd(regulatedGenes$ngenes)/sqrt(109)
+# the standard error is the standard deviation divided by the square root of the sample size and here the sample size is 109
+```
+
+#### Explain what this standard error measures and what assumptions are we making when calculating it.
+
+We assume that:  
+
+  * the sample is obtained through random sampling  
+  * the statistic is distributed symmetrically   
+
+*Take me back to [the beginning!](#toc)*
+
 ###<a name="exercises"></a><u>Exercises</u>
 
-####<a name="problemA"></a>Problem A
-#### A1.
-<em><b>$X$</b> and <b>$Y$</b> are independent random variables and <b>$a$</b> and <b>$b$</b> are constants. You have the following scaled random variables:</em>
+###<a name="exercise1"></a>1. Reproducing the Figure 4.1-1 & important details of histogram drawing in R
+```{r}
+data(HumanGeneLengths) # loading the data of example 4.1 of the book 
+```
 
-$$U = X + Y$$
-$$V = a \cdot X$$ 
-$$W = a \cdot X + b$$ 
+#### Take a quick peek at the data and try to find the size of the titin gene (hint: footnote on page 97)
+```{r}
+summary(HumanGeneLengths)
+```
+Since we know that the longest human gene is the one encoding titin, we can find its length by looking at the Max value in the summary - 99631 nt.
 
-<u>a) Calculate the expectation of these random variables!</u>
+#### How many genes are in the dataset?
+```{r}
+dim(HumanGeneLengths)
+# this indicates the number of rows and the number of columns in the data - hence, the number of genes (20290) and the number of variables (1 - gene length)
+```
 
-$$E[X + Y] = E[X] + E[Y]$$ 
+#### Draw a histogram:
+```{r}
+hist(HumanGeneLengths$gene.length, breaks=50, col="deeppink4", main="", xlab="Gene length (nt)") 
+```
 
-$$E[a \cdot X] = E[a] \cdot E[X] = a \cdot E[X]$$ because the expectation of a constant is the constant itself  
+#### Identify what the options col, main and xlab are allowing you to do.
 
-$$E[a \cdot X + b] = E[a] \cdot E[X] + E[b] = a \cdot E[X] + b$$
+**col:** you can add color to your histogram (<a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf" target ="_blank">here is a cool color reference guide if you really want to make it fancy</a>)  
+**main:** adds the title to the histogram  
+**xlab:** adds the label on the x axis  
 
-<u>b) Calculate the variance and relate these results to the table on page 85 (effect of scaling a statistical measurement)!</u>
+#### Why is this graph a BAD display of the data?
 
-$$V[U] = V[X] + V[Y]$$  
+Because even though the majority of the data span from 1 to 15000, the histogram above displays the full range up to 10000 - so we get a large empty-looking area. In this case it's a great idea to say that we want to see a histogram that displays the values between 0 and 15000 - and make a mental note of the "unusual" data point that we disregard in this way.
 
-$$V[a \cdot X] = V[X] = a^2 \cdot V[X]$$ - the variance of the random variable is multiplied by the square of the constant
+#### Are there 50 bins on the following graph? If not, why not?
+```{r}
+# we can save the histogram in a variable so that we can gain some information about it later
+histdata <- hist(HumanGeneLengths$gene.length, breaks=50, col="deeppink4", main="", xlab="Gene length (nt)",xlim = c(0,15000)) 
+histdata
+# this way we can see the bins, the counts in each bin, etc.
+```
+By examining this, we can see that R indeed gave us 50 bins, but it did so over the span of the entire range - we just can't see most of them because we chose to display our data up to 15000.
 
-$$V[a \cdot X + b] = a^2 \cdot V[X]$$ - adding a constant doesn't change the variance
+Let's make a vector of breakpoints for the histogram to enforce the same bins as in the book (500 nt). How many breaks are there?
+```{r}
+myBreaks=seq(from=0, to=15000,  by=500)
+length(myBreaks) #number of breaks
+myBreaks
+```
 
-If you look at the table on page 85, it basically shows you these exact same rules.
+#### Why does R choke here?
+```{r}
+#hist(HumanGeneLengths$gene.length, breaks=myBreaks, xlim = c(0,15000))
+```
+It says "some 'x' not counted; maybe 'breaks' do not span range of 'x'".
 
-<u><em>Proofs:</em></u>
-$$
-\begin{aligned}
-V[X + Y] &= E[(X+Y)^2] - (E[X+Y])^2 \\
-&= E[X^2 + 2 \cdot X \cdot Y + Y^2] - (E[X] + E[Y])^2 \\
-&= E[X^2] + 2 \cdot E[X \cdot Y] + E[Y^2] - ((E[X])^2 + 2 \cdot E[X] \cdot E[Y] + (E[Y]^2)) \\
-&= E[X^2] + 2 \cdot E[X \cdot Y] + E[Y^2] - (E[X])^2 - 2 \cdot E[X] \cdot E[Y] - (E[Y]^2) \\
-&= (E[X^2]-(E[X])^2) + (E[Y^2]-(E[Y])^2) + 2 \cdot (E[X \cdot Y] - E[X] \cdot E[Y]) \\
-&= V[X] + V[Y] + 2 \cdot Cov(X,Y)
-\end{aligned}
-$$
-The $Cov(X,Y)$ part is called the covariance, and it expresses how our variables $X$ and $Y$ vary together. However, in this case $X$ and $Y$ are independent, therefore, the covariance is 0 - hence, we ultimately arrive to the formula $V[X+Y] = V[X] + V[Y]$.
+It's because we're essentially creating the breaks up to 15000, however, the biggest data point (the gene encoding titin) has the value 99700.
 
-$$
-\begin{aligned}
-V[a \cdot X] &= E[(a \cdot X)^2] - (E[a \cdot X])^2 \\
-&= E[a^2 \cdot X^2] - (a \cdot E[X])^2 \\
-&= a^2 \cdot E[X^2] - a^2 \cdot E[X]^2 \\
-&= a^2 \cdot (E[X^2] - (E[X])^2) \\
-&= a^2 \cdot V[X] 
-\end{aligned}
-$$
+#### What are we doing here?
+```{r}
+myBreaks=c(seq(from=0, to=15000, by=500),99700) 
+myBreaks
+```
+We are correcting the previous mistake by adding another break between 15000 and 97500, so that the breaks span the entire range of x.
 
-$$
-\begin{aligned}
-V[a \cdot X + b] 
-&= E[(a \cdot X + b)^2] - (E[a \cdot X + b])^2 \\
-&= E[a^2 \cdot X^2 + 2 \cdot a \cdot b \cdot X + b^2] - (a \cdot E[X] + b)^2 \\
-&= a^2 \cdot E[X^2] + 2 \cdot a \cdot b \cdot E[X] + b^2 - a^2 \cdot E^2[X] - 2 \cdot a \cdot b \cdot E[X] - b^2 \\
-&= a^2 \cdot E[X^2] - a^2 \cdot E^2[X] \\
-&= a^2 \cdot (E[X^2] - E^2[X]) \\
-&= a^2 \cdot V[X] \\
-\end{aligned}
-$$
+This one is still bad (but at least more fine-grained):
+```{r}
+hist(HumanGeneLengths$gene.length, breaks=myBreaks, col = "deeppink4", main = "", xlab="Gene length (nt)")
+```
 
-#### A2.
+#### Look at the Y axis: is this the same Y axis as the book? 
+```{r warning = FALSE}
+hist(HumanGeneLengths$gene.length, breaks=myBreaks, xlim = c(0,15000), col="deeppink4", main="", xlab="Gene length (nt)", freq=T) 
+```
 
-Imagine that you have n measurements (or observations) that are independent from each other, and that each observation comes from the same underlying population. We define a random variable for each observation: $X_1$, $X_2$,..., $X_n$. All random variables $X_i$ are independent have the same underlying probability distribution.
+It's not the same Y axis.
 
-<u>Calculate $E[M]$ and discuss what this implies when we estimate the mean of a population from the sample mean.</u>
+#### What is the difference between frequency of a class and counts of observation per class? 
+```{r}
+hist(HumanGeneLengths$gene.length, breaks=myBreaks, xlim = c(0,15000), col="deeppink4", main="", xlab="Gene length (nt)", freq=F)
+```
 
-$$
-\begin{aligned}
-E[M] &= E[(X_1 ... X_n) / n] \\
-&= 1/n \cdot (E[X_1] + ... + E[X_n]) \\
-&= 1/n \cdot (\mu + ... + \mu) \\
-&= 1/n \cdot (n\cdot \mu) \\
-&= \mu
-\end{aligned}
-$$
+The first histogram displays counts in the bins and adding them together should sum to the number of observations in total. It shows the <em>absolute frequencies</em>.
+The second histogram displays the <em>relative frequencies</em> (absolute frequency / total number of observations) and should sum up to 1 - this is still not the exact same scale as we see in the book, however, the goal is not to make an exact carbon copy. This is the best we can do here and the point is really just to understand the difference between absolute and relative frequencies.
 
-This means that the expected value of the sample mean is exactly the same as the mean of the individual $X_i$ - this means that whenever we want to estimate the mean of a population parameter, calculating the mean of our sample is the best we can do.
+*Take me back to [the beginning!](#toc)*
 
-<u>Calculate $V[M]$ and $sqrt(V[M])$ and relate your result to the formula of the book when calculating the $SE$ of a mean in a sample with size $n$.</u>
+###<a name="exercise2"></a>2. Generating Figure 4.1-2
 
-$$
-\begin{aligned}
-V[M] &= V[\frac{X_1...X_n}{n}] \\
-&= V[\frac{1}{n^2} \cdot (X_1 + X_2 ... + X_n)] \\
-&= \frac{1}{n^2}\cdot\mu^2_1 + \mu^2_2... + \mu^2_n \\
-&= \frac{1}{n^2}\cdot n \cdot \mu^2 \\
-& = \mu^2 / n
-\end{aligned}
-$$
+####Use the R function sample() to get a vector of 100 observations drawn from HumanGeneLengths and reproduce fig 4.1-2
+Hint: Here is a simple example to draw 5 numbers with replacement from a "made-up" empirical distribution - adapt that for your purposes.
+```{r}
+madeup=c(3,3,4,5,6,7,8,2,1,3,5,6,12,435,23)
+sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and replace=  specifying here (check the help)?
+```
 
-Analogously...
+**x:** the data that we want to draw samples from  
+**size:** the size of the sample that we want to take  
+**replace:** whether or not we want to sample with replacement  
 
-$$\sqrt{(V[M])} = \frac{\mu}{\sqrt{n}}$$
+#### Discuss what is the conceptual difference between replace = T and replace = F (what should we use here?)
 
-Notice that this is exactly how we calculated the standard error of the mean!
+**replace = T**: sampling WITH replacement - when we sample with replacement, the sample values (sampled units) are independent  
+**replace = F**: sampling WITHOUT replacement - in this case the sample values are not independent, because what we pick as a first value will affect what we can pick as a second value - this complicates computations  
 
-In these proofs we were able to substitute $$E[X_i] = \mu$$ and $$V[X_i] = \sigma^2$$ because the observations are independent and come from the same underlying probability distribution. <b>The random variables are independently and identically distributed, so they have the same mean and variance.</b>
+As we want a random sample (where each unit has equal chance of being picked and the selection of units is independent), we should sample with replacement.
 
-Take me back to [the beginning!](#toc)\cdot
+```{r warning = FALSE}
+hist(sample(x = HumanGeneLengths$gene.length, size = 100,replace = T), 
+     breaks=myBreaks, 
+     xlim = c(0,15000), 
+     col="deeppink4", 
+     main="", 
+     xlab="Gene length (number of nucleotides)", 
+     freq=T) 
+```
 
-###<a name="problemB"></a>Problem B
+Notice how this histogram is different every single time we run the code - it is due to the randomness in sampling.
 
-Let $X$ be a random variable recording the genotype of an individual for a given SNP in the genome.
+*Take me back to [the beginning!](#toc)*
 
-An individual is either AA, AT or TT and we map the genotype to the number of A alleles so if we have an individual being TT then $X=0$, AT then $X=1$, and AA then $X=2$.
+###<a name="exercise3"></a>3. Reproducing Figures 4.1-3 and 4.1-4
 
-Imagine that we sample a very large (infinite) population and that the frequency of T in the population is 0.15. Imagine also that individuals are mating at random.
+Conceptually, to generate by simulation the sampling distribution of mean gene length, we resample 100 datapoints, we calculate the mean in the sample and "write it down" and repeat that operation many times (say 10^4 times).
 
-<u>Calculate the following probabilities:</u>
+In most programming languages there is a way to "repeat" a sequence of things x times ---> the for loop. Here is one basic example:
+```{r}
+for (year in c(2010,2011,2012,2013,2014,2015)){
+  print(paste("The year is", year))
+}
+```
 
-$X = 0$ means that the individual has the TT genotype.  
-$$Pr(X = 0) = Pr[T] \cdot Pr[T] = 0.15 \cdot 0.15 = 0.0225$$
+Here the print statement is executed with various values of the year, but you can also use that to do something just 10 times.
 
-$X = 1$ means that the individual has the AT genotype.  
-$$Pr(X = 1) = (Pr[A] \cdot Pr[T]) + (Pr[T] \cdot Pr[A]) = 0.85 \cdot 0.15 = 0.255$$
+```{r}
+for (i in 1:10) {
+  tryit=sample(x = madeup, size = 5,replace = T) #we take the sample
+  mymedian=median(tryit) #we calculate the median of the sample
+  cat("And the median is: ", mymedian, "\n") #we concatenate and print it out
+}
 
-$X = 2$ means that the individual has the AA genotype.  
-$$Pr(X = 2) = Pr[A] \cdot Pr[A] = 0.85 \cdot 0.85 = 0.7225$$
+```
 
-<u>Calculate $E[X]$ and $V[X]$.</u>
+Or we can be smart and instead of "printing it" we "write it down" i.e. store that in a vector:
+```{r}
+myMedians = NULL # this initializes a "nullvector"
+for (i in 1:10) {
+  tryit=sample(x = madeup, size = 5,replace = T)
+  myMedians[i]=median(tryit) #we add the calculated medians to the nullvector
+}
+myMedians 
+```
 
-$$E[X] = 0 \cdot Pr[X = 0] + 1 \cdot Pr[X = 1]+2 \cdot Pr[X = 2] = 0 \cdot 0.0225 + 1 \cdot 0.255 + 2 \cdot 0.7225 = 1.7$$
+#### Adapt this code to generate fig 4.1-3 and 4.1-4 (use 10^4 samples to get the sampling distributions).
+```{r}
+#nullvectors for the means (different sample sizes)
+meanLength_100 = NULL
+meanLength_20 = NULL
+meanLength_500 = NULL
 
-Fine, but what does this mean? According to this calculation the expectation of $X$ is 1.7 - however, we don't even have this option. $X$ can be either 0, 1 or 2, corresponding to the genotypes TT, AT and AA. Our result is closest to 2, so we can say that we'd expect genotype AA to be the "typical" one. If we're looking at the probabilities, this actually makes sense as the probability of the AA genotype is the largest, 0.7225, so we wouldn't be very suprised to observe that genotype the most often.
+for (i in 1:10000) {
+  # taking the samples with different sample sizes
+  sample_100 = sample(x = HumanGeneLengths$gene.length, size = 100, replace = T) 
+  sample_20 = sample(x = HumanGeneLengths$gene.length, size = 20, replace = T)
+  sample_500 = sample(x = HumanGeneLengths$gene.length, size = 500, replace = T)
+  # calculating the means
+  meanLength_100[i] = mean(sample_100)
+  meanLength_20[i] = mean(sample_20)
+  meanLength_500[i] = mean(sample_500)
+}
 
-Quick sidenote: if you think about 0, 1 and 2 as numbers here, you might be led astray because then you might start thinking that when we're multiplying $Pr[X = 0]$ by 0, we're essentially "losing" or "disregarding" it. This is not true. Let's imagine a population where there are <em>only</em> TT individuals (so no A alleles whatsoever). Then the calculation would look like this:
+par(mfrow=c(3,1)) # creating the 3*1 figure layout
 
-$$Pr(X = 0) = Pr[T] \cdot Pr[T] = 1 \cdot 1 = 1$$
-$$Pr(X = 1) = (Pr[A] \cdot Pr[T]) + (Pr[T] \cdot Pr[A]) = 1 \cdot 0 = 0$$
+hist(meanLength_20,
+     breaks = 80,
+     col = "deeppink4",
+     main = "Sample size = 20",
+     xlab = "", 
+     freq = F, 
+     xlim = c(1000,5200))
 
-$$Pr(X = 2) = Pr[A] \cdot Pr[A] = 0 \cdot 0 = 0$$
-$$E[X] = 0 \cdot Pr[X = 0] + 1 \cdot Pr[X = 1]+2 \cdot Pr[X = 2] = 0 \cdot 1 + 1 \cdot 0 + 2 \cdot 0 = 0$$
-Does this mean that we calculated that the expectation is <em>nothing</em>? No. What we calculated is that the expectation is 0, corresponding to genotype TT, meaning that the typical individual has the TT genotype, which makes sense if there are only T alleles in the population. So in this case think about the values of $X$ as "indicators" for the genotypes.
+hist(meanLength_100,
+     breaks = 80,
+     col = "deeppink4",
+     main = "Sample size = 100",
+     xlab = "", 
+     freq = F, 
+     xlim = c(1000,5200))
 
-Let's get back to the original exercise now and calculate the variance:
+hist(meanLength_500,
+     breaks = 80,
+     col = "deeppink4",
+     main = "Sample size = 500",
+     xlab = "Sample mean length", 
+     freq = F, 
+     xlim = c(1000,5200))
+```
 
-$$V[X] = E[X^2] - (E[X])^2 = (0\cdot0.0225 + 1\cdot0.255 + 4\cdot0.7225) - 1.7^2 = 3.145 - 2.89 = 0.255$$
-Notice what you need to square here! $(E[X])^2$ is fairly simple - you just take what you calculated in the previous exercise, square it and call it a day.  
-$E[X^2]$ is a bit more tricky - it's the expectation of $X^2$. The <b>probabilities remain the same</b>, however, you need to multiply them by $X^2$ instead of $X$ (ie. 0, 1, and 4 instead of 0, 1 and 2). 
+```{r}
+# putting it all together on a "fancier" plot
+ggplot() + #creates the canvas 
+  geom_histogram(mapping = aes(x = meanLength_20, y=..density..), fill = "red", alpha = 0.6, binwidth = 50, col = "black") + #adds the first histogram 
+  geom_histogram(mapping = aes(meanLength_100, y=..density..), fill = "green", alpha = 0.6, binwidth = 50, col = "black") + # adds the second histogram on top of the first
+  geom_histogram(mapping = aes(meanLength_500, y=..density..), fill = "deeppink4", alpha = 0.6, binwidth = 50, col = "black") + # adds the third histogram on top
+  xlab("Sample mean length")
+```
 
-\cdotTake me back to [the beginning!](#toc)\cdot
 
-<em>This R notebook was made by Judit Kisistók. It was supplemented and formatted by Simon Grund Sørensen.  
-The exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.</em>
+#### Derive the sampling distribution for the SD in the sample and the median.
+
+<u>Standard deviation:</u>
+
+```{r}
+# this is the exact same code, I'm just calculating the standard deviation instead of the mean
+
+sdLength_100 = NULL
+sdLength_20 = NULL
+sdLength_500 = NULL
+
+for (i in 1:10000) {
+  sample_100_sd = sample(x = HumanGeneLengths$gene.length, size = 100, replace = T)
+  sample_20_sd = sample(x = HumanGeneLengths$gene.length, size = 20, replace = T)
+  sample_500_sd = sample(x = HumanGeneLengths$gene.length, size = 500, replace = T)
+  sdLength_100[i] = sd(sample_100_sd)
+  sdLength_20[i] = sd(sample_20_sd)
+  sdLength_500[i] = sd(sample_500_sd)
+}
+
+par(mfrow=c(3,1))
+
+hist(sdLength_20,
+     breaks = 180,
+     col = "deeppink4",
+     main = "Sample size = 20",
+     xlab = "", 
+     freq = F)
+
+hist(sdLength_100,
+     breaks = 180,
+     col = "deeppink4",
+     main = "Sample size = 100",
+     xlab = "", 
+     freq = F)
+
+hist(sdLength_500,
+     breaks = 180,
+     col = "deeppink4",
+     main = "Sample size = 500",
+     xlab = "Sample standard deviation", 
+     freq = F)
+```
+
+```{r}
+ggplot() +
+  geom_histogram(mapping = aes(x = sdLength_20, y=..density..), fill = "red", alpha = 0.6, binwidth = 30) +
+  geom_histogram(mapping = aes(sdLength_100, y=..density..), fill = "green", alpha = 0.6, binwidth = 30) +
+  geom_histogram(mapping = aes(sdLength_500, y=..density..), fill = "deeppink4", alpha = 0.6, binwidth = 30) +
+  xlab("Sample standard deviation")
+```
+
+<u>Median:</u>
+
+```{r}
+# also the exact same code, just calculating the median
+
+medianLength_100 = NULL
+medianLength_20 = NULL
+medianLength_500 = NULL
+
+for (i in 1:10000) {
+  sample_100_median = sample(x = HumanGeneLengths$gene.length, size = 100, replace = T)
+  sample_20_median = sample(x = HumanGeneLengths$gene.length, size = 20, replace = T)
+  sample_500_median = sample(x = HumanGeneLengths$gene.length, size = 500, replace = T)
+  medianLength_100[i] = median(sample_100_median)
+  medianLength_20[i] = median(sample_20_median)
+  medianLength_500[i] = median(sample_500_median)
+}
+
+par(mfrow=c(3,1))
+
+hist(medianLength_20,
+     breaks = 180,
+     col = "deeppink4",
+     main = "Sample size = 20",
+     xlab = "", 
+     freq = F)
+
+hist(medianLength_100,
+     breaks = 180,
+     col = "deeppink4",
+     main = "Sample size = 100",
+     xlab = "", 
+     freq = F)
+
+hist(medianLength_500,
+     breaks = 180,
+     col = "deeppink4",
+     main = "Sample size = 500",
+     xlab = "Sample median", 
+     freq = F)
+```
+
+```{r}
+ggplot() +
+  geom_histogram(mapping = aes(x = medianLength_20, y=..density..), fill = "red", alpha = 0.6, binwidth = 20, col = "black") +
+  geom_histogram(mapping = aes(medianLength_100, y=..density..), fill = "green", alpha = 0.6, binwidth = 20, col = "black") +
+  geom_histogram(mapping = aes(medianLength_500, y=..density..), fill = "deeppink4", alpha = 0.6, binwidth = 20, col = "black") +
+  xlab("Sample median")
+```
+
+#### Compare the statistical precision we have to estimate mean SD and median: is the summary statistic that entails most uncertainty?
+
+So we created all these nice sampling distributions and we can calculate the standard error to get an idea about their uncertainty:
+```{r}
+sd(meanLength_20)/sqrt(20)
+sd(meanLength_100)/sqrt(100)
+sd(meanLength_500)/sqrt(500)
+sd(sdLength_20)/sqrt(20)
+sd(sdLength_100)/sqrt(100)
+sd(sdLength_500)/sqrt(500)
+sd(medianLength_20)/sqrt(20)
+sd(medianLength_100)/sqrt(100)
+sd(medianLength_500)/sqrt(500)
+```
+
+We can see that if we compare the precision of our estimates given the 3 sample sizes, the n = 500 estimate is the most precise which is expected. If we take a look at the different summary statistics at the same sample sizes, we find that the median estimate is the least uncertain - this is also expected given that this statistic is the most resistant to the influence of the outliers while the mean and standard deviation are more sensitive to them (remember, the standard deviation is the most uncertain - it is calculated using the mean, which was already pretty sensitive to extreme observations!).
+
+*Take me back to [the beginning!](#toc)*
+
+###<a name="exercise4"></a>4. Trying and evaluating the +/- 2 SEs rule of thumb
+
+#### Generate 20 samples of n=100 genes from the human gene length distribution, for each sample calculate the mean and CI around the mean using 2SEs
+
+```{r}
+Mean = NULL
+SE = NULL
+epoch = NULL # don't worry about this, I just needed it for plotting purposes
+sample_size = 100
+
+for(i in 1:20){
+  sample <- sample(x = HumanGeneLengths$gene.length, size = sample_size,replace = T)
+  Mean[i] = mean(sample)
+  SE[i] = sd(sample)/sqrt(sample_size)
+  epoch[i] = i
+}
+# putting it all together in a nice dataframe
+df <- data.frame() #creating an empty dataframe
+df <- data.frame(cbind(epoch, Mean, SE, Mean-2*SE, Mean+2*SE, sample_size)) #binding the columns together
+colnames(df) <- c("Sample_nr", "Mean", "Standard_error", "Lower_confidence_limit", "Upper_confidence_limit", "Sample_size") #naming the columns in the dataframe
+
+# a fancy plot to visualize the CIs
+ggplot() +
+  geom_point(data = df, aes(y = Sample_nr, x = Mean)) +
+  geom_segment(data = df, aes(x = Lower_confidence_limit,
+                              xend = Upper_confidence_limit, 
+                              y = Sample_nr,
+                              yend = Sample_nr)) +
+  geom_vline(xintercept = mean(HumanGeneLengths$gene.length), col = "deeppink4")
+
+```
+
+#### How many intervals out of 20 "cover" the true mean? Is that what we expect for a 95% CI? (if you repeat that several times, numbers vary a bit)
+
+It depends - I ran this code several times and sometimes every interval covered the true mean, sometimes only 17 out of 20, etc. This is not exactly what we would expect from a 95% CI, however, the 2SE rule of thumb is just an approximation and keeping this in mind, it works relatively well.
+
+Just to demonstrate how the CIs change when the sample size gets bigger, let's increase the sample size...
+
+```{r}
+Mean_1000 = NULL
+SE_1000 = NULL
+epoch_1000 = NULL
+sample_size = 1000
+
+
+for(i in 1:20){
+  sample_1000 <- sample(x = HumanGeneLengths$gene.length, size = sample_size,replace = T)
+  Mean_1000[i] = mean(sample_1000)
+  SE_1000[i] = sd(sample_1000)/sqrt(1000)
+  epoch_1000[i] = 20+i
+}
+df_1000 <- data.frame(epoch_1000, Mean_1000, SE_1000, Mean_1000-2*SE_1000, Mean_1000+2*SE_1000, sample_size)
+colnames(df_1000) <- c("Sample_nr", "Mean", "Standard_error", "Lower_confidence_limit", "Upper_confidence_limit", "Sample_size")
+df <- data.frame(rbind(df, df_1000))
+
+Mean_100000 = NULL
+SE_100000 = NULL
+epoch_100000 = NULL
+sample_size = 100000
+
+for(i in 1:20){
+  sample_100000 <- sample(x = HumanGeneLengths$gene.length, size = sample_size,replace = T)
+  Mean_100000[i] = mean(sample_100000)
+  SE_100000[i] = sd(sample_100000)/sqrt(100000)
+  epoch_100000[i] = 40+i
+}
+df_100000 <- data.frame(epoch_100000, Mean_100000, SE_100000, Mean_100000-2*SE_100000, Mean_100000+2*SE_100000, sample_size)
+colnames(df_100000) <- c("Sample_nr", "Mean", "Standard_error", "Lower_confidence_limit", "Upper_confidence_limit", "Sample_size")
+df <- data.frame(rbind(df, df_100000))
+```
+
+Putting it all together:
+```{r}
+ggplot() +
+  geom_point(data = df, aes(y = Sample_nr, x = Mean, color = as.factor(df$Sample_size))) +
+  geom_segment(data = df, aes(x = Lower_confidence_limit ,
+                              xend = Upper_confidence_limit, 
+                              y = Sample_nr,
+                              yend = Sample_nr,
+                              color = as.factor(df$Sample_size))) +
+  geom_vline(xintercept = mean(HumanGeneLengths$gene.length)) + 
+  ylab("") +
+  scale_color_discrete(name = "Sample Size") +
+  theme(
+  axis.text.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.line.y = element_blank()) 
+```
+
+We can see that the bigger the sample size, the narrower the confidence interval - hence, we have more certainty in our estimate.
+
+*Take me back to [the beginning!](#toc)*
+
+<em>This R notebook was made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá's solution sheet.   
+The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</em>
