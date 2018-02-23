@@ -153,20 +153,20 @@ mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # the expression after &quot;=&quot; just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) </code></pre>
 <pre><code>##        x                  y         
-##  Min.   :-2.68192   Min.   :-1.719  
-##  1st Qu.:-0.62268   1st Qu.: 7.466  
-##  Median : 0.09863   Median :11.198  
-##  Mean   : 0.05413   Mean   :11.155  
-##  3rd Qu.: 0.70400   3rd Qu.:15.115  
-##  Max.   : 2.06230   Max.   :21.345</code></pre>
+##  Min.   :-3.09566   Min.   :-5.380  
+##  1st Qu.:-0.63623   1st Qu.: 8.192  
+##  Median :-0.04743   Median :10.571  
+##  Mean   :-0.03580   Mean   :10.893  
+##  3rd Qu.: 0.63418   3rd Qu.:14.300  
+##  Max.   : 2.76733   Max.   :25.106</code></pre>
 <pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
-<pre><code>##            x         y
-## 1  0.1501718 11.288432
-## 2  0.7596645 15.168644
-## 3 -0.6740138  6.999203
-## 4  0.3405366 14.621430
-## 5 -1.7624100  2.674033
-## 6  1.6089468 19.342700</code></pre>
+<pre><code>##             x         y
+## 1  2.74409321 24.622029
+## 2  0.24298825 10.246386
+## 3 -0.82227458  7.017002
+## 4 -0.01572575 11.106717
+## 5 -1.34612579  4.510645
+## 6 -0.80809303  8.806346</code></pre>
 <pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
@@ -199,8 +199,6 @@ summary(mydata) </code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre class="r"><code>#pch = 16: determines the filled circles</code></pre>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
-<p><em>This R notebook was made by Judit Kisistók.<br />
-The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</em></p>
 </div>
 </div>
 

@@ -7,14 +7,14 @@
     "folds" : "",
     "hash" : "0",
     "id" : "AE0CB874",
-    "lastKnownWriteTime" : 1519398563,
-    "last_content_update" : 1519398563897,
+    "lastKnownWriteTime" : 1519398686,
+    "last_content_update" : 1519398686596,
     "path" : "~/Documents/GitHub/gaos/content/week2.Rmd",
     "project_path" : "content/week2.Rmd",
     "properties" : {
         "chunk_output_type" : "inline",
-        "cursorPosition" : "6,196",
-        "scrollLine" : "0",
+        "cursorPosition" : "576,40",
+        "scrollLine" : "548",
         "tempName" : "Untitled1"
     },
     "relative_order" : 8,
