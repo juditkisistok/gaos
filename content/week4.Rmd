@@ -28,7 +28,7 @@ tags: []
 
 ####<a name="problemA"></a>Problem A
 #### A1.
-<em><b>$X$</b> and <b>$Y$</b> are independent random variables and <b>$a$</b> and <b>$b$</b> are constants. You have the following scaled random variables:</em>
+<b>$X$</b> and <b>$Y$</b> are independent random variables and <b>$a$</b> and <b>$b$</b> are constants. You have the following scaled random variables:
 
 $$U = X + Y$$
 $$V = a \cdot X$$ 
