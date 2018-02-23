@@ -573,3 +573,6 @@ max(fakemm_df$plates)
 If we look at the two extremes, we see that they don't match up perfectly - but we can see these on the plots as well. This is most likely due to the random sampling process - we can't quite expect to be as lucky as to pick the same minimum and maximum values at random as we have in the original data, especially when we are working with a relatively low sample size. 
 
 *Take me back to [the beginning!](#toc)*
+
+<em>This R notebook was made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá's solution sheet.   
+The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</em>

@@ -145,3 +145,6 @@ plot(guppies$fatherOrnamentation, guppies$sonAttractiveness, col = "deeppink4", 
 ```
 
 *Take me back to [the beginning!](#toc)*
+
+<em>This R notebook was made by Judit Kisistók.   
+The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</em>
