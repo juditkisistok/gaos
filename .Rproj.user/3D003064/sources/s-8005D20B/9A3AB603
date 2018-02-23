@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519395601648.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "825189314",
+    "id" : "9A3AB603",
+    "lastKnownWriteTime" : 1519396053,
+    "last_content_update" : 1519396053060,
+    "path" : "~/Documents/GitHub/gaos/content/week4.Rmd",
+    "project_path" : "content/week4.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "166,1",
+        "scrollLine" : "160",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

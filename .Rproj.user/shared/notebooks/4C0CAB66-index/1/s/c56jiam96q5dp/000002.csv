@@ -1,22 +1,704 @@
+"0","blogdown::build_site()"
+"2","Rendering content/week1.Rmd
+"
+"2","During startup - Warning messages:
+1: Setting LC_CTYPE failed, using ""C"" 
+2: Setting LC_COLLATE failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
+"
+"1","library                  package:base                  R Documentation
+
+_L_o_a_d_i_n_g/_A_t_t_a_c_h_i_n_g _a_n_d _L_i_s_t_i_n_g _o_f _P_a_c_k_a_g_e_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     'library' and 'require' load and attach add-on packages.
+
+_U_s_a_g_e:
+
+     library(package, help, pos = 2, lib.loc = NULL,
+             character.only = FALSE, logical.return = FALSE,
+             warn.conflicts = TRUE, quietly = FALSE,
+             verbose = getOption(""verbose"
+"1","""))
+     
+     require(package, lib.loc = NULL, quietly = FALSE,
+             warn.conflicts = TRUE,
+             character.only = FALSE)
+     
+_A_r_g_u_m_e_n_t_s:
+
+package, help: the name of a package, given as a name or literal
+          character string, or a character string, depending on whether
+          'character.only' is 'FALSE' (default) or 'TRUE').
+
+     pos: the position on the search list at which to attach the loaded
+          namespace.  Can also be the name of a position on the curr"
+"1","ent
+          search list as given by 'search()'.
+
+ lib.loc: a character vector describing the location of R library trees
+          to search through, or 'NULL'.  The default value of 'NULL'
+          corresponds to all libraries currently known to
+          '.libPaths()'.  Non-existent library trees are silently
+          ignored.
+
+character.only: a logical indicating whether 'package' or 'help' can be
+          assumed to be character strings.
+
+logical.return: logical.  If it is 'TRUE', 'FALSE' or 'TRUE'"
+"1"," is
+          returned to indicate success.
+
+warn.conflicts: logical.  If 'TRUE', warnings are printed about
+          'conflicts' from attaching the new package.  A conflict is a
+          function masking a function, or a non-function masking a
+          non-function.
+
+ verbose: a logical.  If 'TRUE', additional diagnostics are printed.
+
+ quietly: a logical.  If 'TRUE', no message confirming package
+          attaching is printed, and most often, no errors/warnings are
+          printed if package attachi"
+"1","ng fails.
+
+_D_e_t_a_i_l_s:
+
+     'library(package)' and 'require(package)' both load the namespace
+     of the package with name 'package' and attach it on the search
+     list.  'require' is designed for use inside other functions; it
+     returns 'FALSE' and gives a warning (rather than an error as
+     'library()' does by default) if the package does not exist.  Both
+     functions check and update the list of currently attached packages
+     and do not reload a namespace which is already loaded. "
+"1"," (If you
+     want to reload such a package, call 'detach(unload = TRUE)' or
+     'unloadNamespace' first.)  If you want to load a package without
+     attaching it on the search list, see 'requireNamespace'.
+
+     To suppress messages during the loading of packages use
+     'suppressPackageStartupMessages': this will suppress all messages
+     from R itself but not necessarily all those from package authors.
+
+     If 'library' is called with no 'package' or 'help' argument, it
+     lists all available pack"
+"1","ages in the libraries specified by
+     'lib.loc', and returns the corresponding information in an object
+     of class '""libraryIQR""'.  (The structure of this class may change
+     in future versions.)  Use '.packages(all = TRUE)' to obtain just
+     the names of all available packages, and 'installed.packages()'
+     for even more information.
+
+     'library(help = somename)' computes basic information about the
+     package 'somename', and returns this in an object of class
+     '""packageInfo""'.  (The st"
+"1","ructure of this class may change in
+     future versions.)  When used with the default value ('NULL') for
+     'lib.loc', the attached packages are searched before the
+     libraries.
+
+_V_a_l_u_e:
+
+     Normally 'library' returns (invisibly) the list of attached
+     packages, but 'TRUE' or 'FALSE' if 'logical.return' is 'TRUE'.
+     When called as 'library()' it returns an object of class
+     '""libraryIQR""', and for 'library(help=)', one of class
+     '""packageInfo""'.
+
+     'require' returns (invisib"
+"1","ly) a logical indicating whether the
+     required package is available.
+
+_L_i_c_e_n_s_e_s:
+
+     Some packages have restrictive licenses, and there is a mechanism
+     to allow users to be aware of such licenses.  If
+     'getOption(""checkPackageLicense"") == TRUE', then at first use of a
+     package with a not-known-to-be-FOSS (see below) license the user
+     is asked to view and accept the license: a list of accepted
+     licenses is stored in file '~/.R/licensed'.  In a non-interactive
+     ses"
+"1","sion it is an error to use such a package whose license has not
+     already been recorded as accepted.
+
+     As from R 3.4.0 the license check is done when the namespace is
+     loaded.
+
+     Free or Open Source Software (FOSS, e.g. <URL:
+     https://en.wikipedia.org/wiki/FOSS>) packages are determined by
+     the same filters used by 'available.packages' but applied to just
+     the current package, not its dependencies.
+
+     There can also be a site-wide file 'R_HOME/etc/licensed.site' of
+     packages"
+"1"," (one per line).
+
+_F_o_r_m_a_l _m_e_t_h_o_d_s:
+
+     'library' takes some further actions when package 'methods' is
+     attached (as it is by default).  Packages may define formal
+     generic functions as well as re-defining functions in other
+     packages (notably 'base') to be generic, and this information is
+     cached whenever such a namespace is loaded after 'methods' and
+     re-defined functions (implicit generics) are excluded from the
+     list of conflicts.  The caching and check "
+"1","for conflicts require
+     looking for a pattern of objects; the search may be avoided by
+     defining an object '.noGenerics' (with any value) in the
+     namespace.  Naturally, if the package _does_ have any such
+     methods, this will prevent them from being used.
+
+_N_o_t_e:
+
+     'library' and 'require' can only load/attach an _installed_
+     package, and this is detected by having a 'DESCRIPTION' file
+     containing a 'Built:' field.
+
+     Under Unix-alikes, the code checks that the package was"
+"1"," installed
+     under a similar operating system as given by 'R.version$platform'
+     (the canonical name of the platform under which R was compiled),
+     provided it contains compiled code.  Packages which do not contain
+     compiled code can be shared between Unix-alikes, but not to other
+     OSes because of potential problems with line endings and
+     OS-specific help files.  If sub-architectures are used, the OS
+     similarity is not checked since the OS used to build may differ
+     (e.g. 'i386-p"
+"1","c-linux-gnu' code can be built on an
+     'x86_64-unknown-linux-gnu' OS).
+
+     The package name given to 'library' and 'require' must match the
+     name given in the package's 'DESCRIPTION' file exactly, even on
+     case-insensitive file systems such as are common on Windows and
+     macOS.
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) _The New S
+     Language_.  Wadsworth & Brooks/Cole.
+
+_S_e_e _A_l_s_o:
+
+     '.libPaths', '.packages'.
+
+     'attach"
+"1","', 'detach', 'search', 'objects', 'autoload',
+     'requireNamespace', 'library.dynam', 'data', 'install.packages'
+     and 'installed.packages'; 'INSTALL', 'REMOVE'.
+
+     The initial set of packages attached is set by
+     'options(defaultPackages=)': see also 'Startup'.
+
+_E_x_a_m_p_l_e_s:
+
+     library()                   # list all available packages
+     library(lib.loc = .Library) # list all packages in the default library
+     library(help = splines)     # documentation on package 'splines'
+ "
+"1","    library(splines)            # attach package 'splines'
+     require(splines)            # the same
+     search()                    # ""splines"", too
+     detach(""package:splines"")
+     
+     # if the package name is in a character vector, use
+     pkg <- ""splines""
+     library(pkg, character.only = TRUE)
+     detach(pos = match(paste(""package"", pkg, sep = "":""), search()))
+     
+     require(pkg, character.only = TRUE)
+     detach(pos = match(paste(""package"", pkg, sep = "":""), search()))
+     
+     requir"
+"1","e(nonexistent)        # FALSE
+     ## Not run:
+     
+     ## if you want to mask as little as possible, use
+     library(mypkg, pos = ""package:base"")
+     ## End(Not run)
+     
+
+"
+"1","library                  package:base                  R Documentation
+
+_L_o_a_d_i_n_g/_A_t_t_a_c_h_i_n_g _a_n_d _L_i_s_t_i_n_g _o_f _P_a_c_k_a_g_e_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     'library' and 'require' load and attach add-on packages.
+
+_U_s_a_g_e:
+
+     library(package, help, pos = 2, lib.loc = NULL,
+             character.only = FALSE, logical.return = FALSE,
+             warn.conflicts = TRUE, quietly = FALSE,
+             verbose = getOption(""verbose"
+"1","""))
+     
+     require(package, lib.loc = NULL, quietly = FALSE,
+             warn.conflicts = TRUE,
+             character.only = FALSE)
+     
+_A_r_g_u_m_e_n_t_s:
+
+package, help: the name of a package, given as a name or literal
+          character string, or a character string, depending on whether
+          'character.only' is 'FALSE' (default) or 'TRUE').
+
+     pos: the position on the search list at which to attach the loaded
+          namespace.  Can also be the name of a position on the curr"
+"1","ent
+          search list as given by 'search()'.
+
+ lib.loc: a character vector describing the location of R library trees
+          to search through, or 'NULL'.  The default value of 'NULL'
+          corresponds to all libraries currently known to
+          '.libPaths()'.  Non-existent library trees are silently
+          ignored.
+
+character.only: a logical indicating whether 'package' or 'help' can be
+          assumed to be character strings.
+
+logical.return: logical.  If it is 'TRUE', 'FALSE' or 'TRUE'"
+"1"," is
+          returned to indicate success.
+
+warn.conflicts: logical.  If 'TRUE', warnings are printed about
+          'conflicts' from attaching the new package.  A conflict is a
+          function masking a function, or a non-function masking a
+          non-function.
+
+ verbose: a logical.  If 'TRUE', additional diagnostics are printed.
+
+ quietly: a logical.  If 'TRUE', no message confirming package
+          attaching is printed, and most often, no errors/warnings are
+          printed if package attachi"
+"1","ng fails.
+
+_D_e_t_a_i_l_s:
+
+     'library(package)' and 'require(package)' both load the namespace
+     of the package with name 'package' and attach it on the search
+     list.  'require' is designed for use inside other functions; it
+     returns 'FALSE' and gives a warning (rather than an error as
+     'library()' does by default) if the package does not exist.  Both
+     functions check and update the list of currently attached packages
+     and do not reload a namespace which is already loaded. "
+"1"," (If you
+     want to reload such a package, call 'detach(unload = TRUE)' or
+     'unloadNamespace' first.)  If you want to load a package without
+     attaching it on the search list, see 'requireNamespace'.
+
+     To suppress messages during the loading of packages use
+     'suppressPackageStartupMessages': this will suppress all messages
+     from R itself but not necessarily all those from package authors.
+
+     If 'library' is called with no 'package' or 'help' argument, it
+     lists all available pack"
+"1","ages in the libraries specified by
+     'lib.loc', and returns the corresponding information in an object
+     of class '""libraryIQR""'.  (The structure of this class may change
+     in future versions.)  Use '.packages(all = TRUE)' to obtain just
+     the names of all available packages, and 'installed.packages()'
+     for even more information.
+
+     'library(help = somename)' computes basic information about the
+     package 'somename', and returns this in an object of class
+     '""packageInfo""'.  (The st"
+"1","ructure of this class may change in
+     future versions.)  When used with the default value ('NULL') for
+     'lib.loc', the attached packages are searched before the
+     libraries.
+
+_V_a_l_u_e:
+
+     Normally 'library' returns (invisibly) the list of attached
+     packages, but 'TRUE' or 'FALSE' if 'logical.return' is 'TRUE'.
+     When called as 'library()' it returns an object of class
+     '""libraryIQR""', and for 'library(help=)', one of class
+     '""packageInfo""'.
+
+     'require' returns (invisib"
+"1","ly) a logical indicating whether the
+     required package is available.
+
+_L_i_c_e_n_s_e_s:
+
+     Some packages have restrictive licenses, and there is a mechanism
+     to allow users to be aware of such licenses.  If
+     'getOption(""checkPackageLicense"") == TRUE', then at first use of a
+     package with a not-known-to-be-FOSS (see below) license the user
+     is asked to view and accept the license: a list of accepted
+     licenses is stored in file '~/.R/licensed'.  In a non-interactive
+     ses"
+"1","sion it is an error to use such a package whose license has not
+     already been recorded as accepted.
+
+     As from R 3.4.0 the license check is done when the namespace is
+     loaded.
+
+     Free or Open Source Software (FOSS, e.g. <URL:
+     https://en.wikipedia.org/wiki/FOSS>) packages are determined by
+     the same filters used by 'available.packages' but applied to just
+     the current package, not its dependencies.
+
+     There can also be a site-wide file 'R_HOME/etc/licensed.site' of
+     packages"
+"1"," (one per line).
+
+_F_o_r_m_a_l _m_e_t_h_o_d_s:
+
+     'library' takes some further actions when package 'methods' is
+     attached (as it is by default).  Packages may define formal
+     generic functions as well as re-defining functions in other
+     packages (notably 'base') to be generic, and this information is
+     cached whenever such a namespace is loaded after 'methods' and
+     re-defined functions (implicit generics) are excluded from the
+     list of conflicts.  The caching and check "
+"1","for conflicts require
+     looking for a pattern of objects; the search may be avoided by
+     defining an object '.noGenerics' (with any value) in the
+     namespace.  Naturally, if the package _does_ have any such
+     methods, this will prevent them from being used.
+
+_N_o_t_e:
+
+     'library' and 'require' can only load/attach an _installed_
+     package, and this is detected by having a 'DESCRIPTION' file
+     containing a 'Built:' field.
+
+     Under Unix-alikes, the code checks that the package was"
+"1"," installed
+     under a similar operating system as given by 'R.version$platform'
+     (the canonical name of the platform under which R was compiled),
+     provided it contains compiled code.  Packages which do not contain
+     compiled code can be shared between Unix-alikes, but not to other
+     OSes because of potential problems with line endings and
+     OS-specific help files.  If sub-architectures are used, the OS
+     similarity is not checked since the OS used to build may differ
+     (e.g. 'i386-p"
+"1","c-linux-gnu' code can be built on an
+     'x86_64-unknown-linux-gnu' OS).
+
+     The package name given to 'library' and 'require' must match the
+     name given in the package's 'DESCRIPTION' file exactly, even on
+     case-insensitive file systems such as are common on Windows and
+     macOS.
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) _The New S
+     Language_.  Wadsworth & Brooks/Cole.
+
+_S_e_e _A_l_s_o:
+
+     '.libPaths', '.packages'.
+
+     'attach"
+"1","', 'detach', 'search', 'objects', 'autoload',
+     'requireNamespace', 'library.dynam', 'data', 'install.packages'
+     and 'installed.packages'; 'INSTALL', 'REMOVE'.
+
+     The initial set of packages attached is set by
+     'options(defaultPackages=)': see also 'Startup'.
+
+_E_x_a_m_p_l_e_s:
+
+     library()                   # list all available packages
+     library(lib.loc = .Library) # list all packages in the default library
+     library(help = splines)     # documentation on package 'splines'
+ "
+"1","    library(splines)            # attach package 'splines'
+     require(splines)            # the same
+     search()                    # ""splines"", too
+     detach(""package:splines"")
+     
+     # if the package name is in a character vector, use
+     pkg <- ""splines""
+     library(pkg, character.only = TRUE)
+     detach(pos = match(paste(""package"", pkg, sep = "":""), search()))
+     
+     require(pkg, character.only = TRUE)
+     detach(pos = match(paste(""package"", pkg, sep = "":""), search()))
+     
+     requir"
+"1","e(nonexistent)        # FALSE
+     ## Not run:
+     
+     ## if you want to mask as little as possible, use
+     library(mypkg, pos = ""package:base"")
+     ## End(Not run)
+     
+
+"
+"2","Rendering content/week2.Rmd
+"
+"2","During startup - Warning messages:
+1: Setting LC_CTYPE failed, using ""C"" 
+2: Setting LC_COLLATE failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
+"
+"2","Loading required package: nlme
+"
+"2","Loading required package: lattice
+"
+"2","Loading required package: grid
+"
+"2","Loading required package: mosaic
+"
+"2","Loading required package: dplyr
+"
+"2","
+Attaching package: 'dplyr'
+
+"
+"2","The following object is masked from 'package:nlme':
+
+    collapse
+
+"
+"2","The following objects are masked from 'package:stats':
+
+    filter, lag
+
+"
+"2","The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+"
+"2","Loading required package: ggformula
+"
+"2","Loading required package: ggplot2
+"
+"2","
+New to ggformula?  Try the tutorials: 
+	learnr::run_tutorial(""introduction"", package = ""ggformula"")
+	learnr::run_tutorial(""refining"", package = ""ggformula"")
+"
+"2","Loading required package: mosaicData
+"
+"2","Loading required package: Matrix
+"
+"2","
+The 'mosaic' package masks several functions from core packages in order to add 
+additional features.  The original behavior of these functions should not be affected by this.
+
+Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.
+"
+"2","
+Attaching package: 'mosaic'
+
+"
+"2","The following object is masked from 'package:Matrix':
+
+    mean
+
+"
+"2","The following objects are masked from 'package:dplyr':
+
+    count, do, tally
+
+"
+"2","The following objects are masked from 'package:stats':
+
+    IQR, binom.test, cor, cor.test, cov, fivenum, median,
+    prop.test, quantile, sd, t.test, var
+
+"
+"2","The following objects are masked from 'package:base':
+
+    max, mean, min, prod, range, sample, sum
+
+"
+"2","
+Attaching package: 'cowplot'
+
+"
+"2","The following object is masked from 'package:mosaic':
+
+    theme_map
+
+"
+"2","The following object is masked from 'package:ggplot2':
+
+    ggsave
+
+"
+"2","Warning messages:
+1: package 'mosaic' was built under R version 3.4.3 
+2: package 'mosaicData' was built under R version 3.4.3 
+3: package 'cowplot' was built under R version 3.4.3 
+"
+"2","Rendering content/week3.Rmd
+"
+"2","During startup - Warning messages:
+1: Setting LC_CTYPE failed, using ""C"" 
+2: Setting LC_COLLATE failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
+"
+"2","Loading required package: nlme
+"
+"2","Loading required package: lattice
+"
+"2","Loading required package: grid
+"
+"2","Loading required package: mosaic
+"
+"2","Loading required package: dplyr
+"
+"2","
+Attaching package: 'dplyr'
+
+"
+"2","The following object is masked from 'package:nlme':
+
+    collapse
+
+"
+"2","The following objects are masked from 'package:stats':
+
+    filter, lag
+
+"
+"2","The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+"
+"2","Loading required package: ggformula
+"
+"2","Loading required package: ggplot2
+"
+"2","
+New to ggformula?  Try the tutorials: 
+	learnr::run_tutorial(""introduction"", package = ""ggformula"")
+	learnr::run_tutorial(""refining"", package = ""ggformula"")
+"
+"2","Loading required package: mosaicData
+"
+"2","Loading required package: Matrix
+"
+"2","
+The 'mosaic' package masks several functions from core packages in order to add 
+additional features.  The original behavior of these functions should not be affected by this.
+
+Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.
+"
+"2","
+Attaching package: 'mosaic'
+
+"
+"2","The following object is masked from 'package:Matrix':
+
+    mean
+
+"
+"2","The following objects are masked from 'package:dplyr':
+
+    count, do, tally
+
+"
+"2","The following objects are masked from 'package:stats':
+
+    IQR, binom.test, cor, cor.test, cov, fivenum, median,
+    prop.test, quantile, sd, t.test, var
+
+"
+"2","The following objects are masked from 'package:base':
+
+    max, mean, min, prod, range, sample, sum
+
+"
+"2","
+Attaching package: 'cowplot'
+
+"
+"2","The following object is masked from 'package:mosaic':
+
+    theme_map
+
+"
+"2","The following object is masked from 'package:ggplot2':
+
+    ggsave
+
+"
+"2","Warning messages:
+1: package 'mosaic' was built under R version 3.4.3 
+2: package 'mosaicData' was built under R version 3.4.3 
+3: package 'cowplot' was built under R version 3.4.3 
+4: "
+"2","In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+  the AREAS in the plot are wrong -- rather use 'freq = FALSE'
+5: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+  the AREAS in the plot are wrong -- rather use 'freq = FALSE'
+"
+"2","Rendering content/week4.Rmd
+"
+"2","During startup - Warning messages:
+1: Setting LC_CTYPE failed, using ""C"" 
+2: Setting LC_COLLATE failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
+"
+"1","[?25lBuilding sites … "
+"1","[?25h[K
+                   | EN  
++------------------+----+
+  Pages            | 11  
+  Paginator pages  |  0  
+  Non-page files   |  3  
+  Static files     | 71  
+  Processed images |  0  
+  Aliases          |  0"
+"1","  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Total in 90 ms
+"
+"1","[?25lBuilding sites … "
+"1","[?25h[K
+"
+"1","                   | EN  
++------------------+----+
+  Pages            | 11  
+  Paginator pages  |  0  
+  Non-page files   |  3  
+  Static files     | 71  
+  Processed images |  0  
+  Aliases          |  0  
+  Sitemaps         |  1  
+  Cleaned         "
+"1"," |  0  
+
+Total in 44 ms
+"
 "0","blogdown::serve_site()"
 "1","[?25lBuilding sites … "
 "1","[?25h[K
 "
 "1","                   | EN  
 +------------------+----+
-  Pages            | 10  
+  Pages            | 11  
   Paginator pages  |  0  
   Non-page files   |  3  
   Static files     | 71  
   Processed images |  0  
-  Aliases          |  0 "
-"1"," 
+  Aliases          |  0  
   Sitemaps         |  1  
   Cleaned          |  0  
 
-Total in 58 ms
+Total in 54 ms
 "
-"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:4108
+"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:3083
 "
-"2","To stop the server, run servr::daemon_stop(""4324763872"") or restart your R session
+"2","To stop the server, run servr::daemon_stop(""4322976704"") or restart your R session
 "

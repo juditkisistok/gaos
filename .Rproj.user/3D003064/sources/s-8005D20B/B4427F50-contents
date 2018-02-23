@@ -3,6 +3,8 @@ site: blogdown:::blogdown_site
 ---
 
 ```{r}
+blogdown::build_site()
+
 blogdown::serve_site()
 ```
 

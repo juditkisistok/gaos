@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "43811309",
+    "hash" : "3481067613",
     "id" : "B4427F50",
-    "lastKnownWriteTime" : 1519394865,
-    "last_content_update" : 1519394865875,
+    "lastKnownWriteTime" : 1519396219,
+    "last_content_update" : 1519396219981,
     "path" : "~/Documents/GitHub/gaos/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
         "cursorPosition" : "5,15",
-        "scrollLine" : "0"
+        "scrollLine" : "1"
     },
     "relative_order" : 2,
     "source_on_save" : false,
