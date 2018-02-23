@@ -1,0 +1,142 @@
+---
+title: Week 4
+author: Judit Kisistok
+date: '2018-02-21'
+slug: week-4
+categories: []
+tags: []
+---
+
+###<a name="toc"></a>A. Table of contents
+1. [Table of contents](#toc)
+2. [Learning goals](#goals)
+3. [Exercises](#exercises)
+    \cdot [Problem A](#problemA)
+    \cdot [Problem B](#problemB)
+
+###<a name="goals"></a>Learning goals
+#### By the end of this session, you should be able to...
++ Calculate probabilities by hand 
++ Calculate expectation and variance of a random variable 
++ Calculate the expectation and variance of a sum of n random variables and relate this to the terms:
+    \cdot SD of a population
+    \cdot SE of a sample
+    
+###<a name="exercises"></a><u>Exercises</u>
+
+####<a name="problemA"></a>Problem A
+#### A1.
+<em><b>X</b> and <b>Y</b> are independent random variables and <b>a</b> and <b>b</b> are constants. You have the following scaled random variables:</em>
+
+$$U = X + Y$$
+$$V = a \cdot X$$ 
+$$W = a \cdot X + b$$ 
+
+<u>a) Calculate the expectation of these random variables!</u>
+
+$$E[X + Y] = E[X] + E[Y]$$ 
+
+$$E[a \cdot X] = E[a] \cdot E[X] = a \cdot E[X]$$, because the expectation of a constant is the constant itself  
+
+$$E[a \cdot X + b] = E[a] \cdot E[X] + E[b] = a \cdot E[X] + b$$
+
+<u>a) Calculate the variance and relate these results to the table on page 85 (effect of scaling a statistical measurement)!</u>
+
+$$V[U] = V[X] + V[Y]$$  
+
+$$V[a \cdot X] = V[X] = a^2 \cdot V[X]$$ - the variance of the random variable is multiplied by the square of the constant
+
+$$V[a \cdot X + b] = a^2 \cdot V[X]$$ - adding a constant doesn't change the variance
+
+If you look at the table on page 85, it basically shows you these exact same rules.
+
+<u><em>Proofs:</em></u>
+
+$$
+\begin{aligned}
+V[a \cdot X] &= E[(a \cdot X)^2] - (E[a \cdot X])^2 \\
+&= E[a^2 \cdot X^2] - (a \cdot E[X])^2 \\
+&= a^2 \cdot E[X^2] - a^2 \cdot E[X]^2 \\
+&= a^2 \cdot (E[X^2] - (E[X])^2) \\
+&= a^2 \cdot V[X] 
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+V[a \cdot X + b] 
+&= E[(a \cdot X + b)^2] - (E[a \cdot X + b])^2 \\
+&= E[a^2 \cdot X^2 - 2 \cdot a \cdot b \cdot X + b^2] - (a \cdot E[X] + b)^2 \\
+&= a^2 \cdot E[X^2] + 2 \cdot a \cdot b \cdot E[X] + b^2 - a^2 \cdot E^2[X] - 2 \cdot a \cdot b \cdot E[X] - b^2 \\
+&= a^2 \cdot E[X^2] - a^2 \cdot E^2[X] \\
+&= a^2 \cdot (E[X^2] - E^2[X]) \\
+&= a^2 \cdot V[X] \\
+\end{aligned}
+$$
+
+#### A2.
+
+Imagine that you have n measurements (or observations) that are independent from each other, and that each observation comes from the same underlying population. We define a random variable for each observation: X1, X2,..., Xn. All random variables Xi are independent have the same underlying probability distribution.
+
+<u>Calculate E[M] and discuss what this implies when we estimate the mean of a population from the sample mean.</u>
+
+$$
+\begin{aligned}
+E[M] &= E[(X_1 ... X_n) / n] \\
+&= 1/n \cdot (E[X_1] + ... + E[X_n]) \\
+&= 1/n \cdot (\mu + ... + \mu) \\
+&= 1/n \cdot (n\cdot \mu) \\
+&= \mu
+\end{aligned}
+$$
+
+This means that the expected value of the sample mean is exactly the same as the mean of the individual Xi - this means that whenever we want to estimate the mean of a population parameter, calculating the mean of our sample is the best we can do.
+
+<u>Calculate V[M] and sqrt(V[M]) and relate your result to the formula of the book when calculating the SE of a mean in a sample with size n.</u>
+
+$$
+\begin{aligned}
+V[M] &= V[\frac{X_1...X_n}{n}] \\
+&= V[\frac{1}{n^2} \cdot (X_1 + X_2 ... + X_n)] \\
+&= \frac{1}{n^2}\cdot\mu^2_1 + \mu^2_2... + \mu^2_n \\
+&= \frac{1}{n^2}\cdot n \cdot \mu^2 \\
+& = \mu^2 / n
+\end{aligned}
+$$
+
+Analogously...
+
+$$\sqrt{(V[M])} = \frac{\mu}{\sqrt{n}}$$
+
+Notice that this is exactly how we calculated the standard error of the mean!
+
+In these proofs we were able to substitute $$E[X_i] = \mu$$ and $$V[X_i] = \mu^2$$ because the observations are independent and come from the same underlying probability distribution. <b>The random variables are independently and identically distributed, so they have the same mean and variance.<\b>
+
+Take me back to [the beginning!](#toc)\cdot
+
+###<a name="problemB"></a>Problem B
+
+Let X be a random variable recording the genotype of an individual for a given SNP in the genome.
+
+An individual is either AA, AT or TT and we map the genotype to the number of A alleles so if we have an individual being TT then X=0, AT then X=1, and AA then X=2.
+
+Imagine that we sample a very large (infinite) population and that the frequency of T in the population is 0.15. Imagine also that individuals are mating at random.
+
+<u>Calculate the following probabilities:</u>
+
+X = 0 means that the individual has the TT genotype.  
+$$Pr(X = 0) = Pr[T] \cdot Pr[T] = 0.15 \cdot 0.15 = 0.0225$$
+
+X = 1 means that the individual has the AT genotype.  
+$$Pr(X = 1) = (Pr[A] \cdot Pr[T]) + (Pr[T] \cdot Pr[A]) = 0.85 \cdot 0.15 = 0.255$$
+
+X = 0 means that the individual has the AA genotype.  
+$$Pr(X = 2) = Pr[A] \cdot Pr[A] = 0.85 \cdot 0.85 = 0.7225$$
+
+<u>Calculate E[X] and V[X].</u>
+
+$$E[X] = 0\cdotPr[X = 0] + 1\cdotPr[X = 1]+2\cdotPr[X = 2] = 0\cdot0.0225 + 1\cdot0.255 + 2\cdot0.7225 = 1.7$$
+
+$$V[X] = E[X^2] - (E[X])^2 = (0\cdot0.0225 + 1\cdot0.255 + 4\cdot0.7225) - 1.7^2 = 3.145 - 2.89 = 0.255$$
+
+\cdotTake me back to [the beginning!](#toc)\cdot

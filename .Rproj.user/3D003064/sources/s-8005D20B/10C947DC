@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1518878305013.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "10C947DC",
+    "lastKnownWriteTime" : 1519392209,
+    "last_content_update" : 1519392209372,
+    "path" : "~/Documents/GitHub/gaos/config.toml",
+    "project_path" : "config.toml",
+    "properties" : {
+        "cursorPosition" : "22,18",
+        "scrollLine" : "9"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "toml"
+}
