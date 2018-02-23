@@ -4,6 +4,7 @@ author: Judit Kisistok
 date: '2018-02-21'
 slug: week-4
 summary: Calculating probabilities by hand. Deriving the expectation and variance of random variables.
+credit: Made by Judit Kisistók. Supplemented and formatted by Simon Grund Sørensen. The exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.
 categories: []
 tags: []
 ---
@@ -181,6 +182,3 @@ Notice what you need to square here! $(E[X])^2$ is fairly simple - you just take
 $E[X^2]$ is a bit more tricky - it's the expectation of $X^2$. The <b>probabilities remain the same</b>, however, you need to multiply them by $X^2$ instead of $X$ (ie. 0, 1, and 4 instead of 0, 1 and 2). 
 
 \cdotTake me back to [the beginning!](#toc)\cdot
-
-<em>This R notebook was made by Judit Kisistók. It was supplemented and formatted by Simon Grund Sørensen.  
-The exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.</em>

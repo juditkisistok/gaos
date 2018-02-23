@@ -4,6 +4,7 @@ author: Judit Kisistók
 date: '2018-02-14'
 slug: week-3
 summary: Computing sampling distributions. Quantifying the uncertainty of estimates (standard error and confidence intervals).
+credit: Made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá's solution sheet. The R exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.
 categories: []
 tags: []
 ---
@@ -485,6 +486,3 @@ ggplot() +
 We can see that the bigger the sample size, the narrower the confidence interval - hence, we have more certainty in our estimate.
 
 *Take me back to [the beginning!](#toc)*
-
-<em>This R notebook was made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá's solution sheet.   
-The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</em>

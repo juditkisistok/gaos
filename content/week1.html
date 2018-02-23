@@ -4,6 +4,7 @@ author: Judit Kisistók
 date: '2018-01-31'
 slug: week-1
 summary: Introduction to statistics and R. Loading and plotting data.
+credit: Made by Judit Kisistók. The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.
 categories: []
 tags: []
 ---
@@ -113,20 +114,20 @@ mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # the expression after &quot;=&quot; just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) </code></pre>
 <pre><code>##        x                  y         
-##  Min.   :-3.48646   Min.   :-5.815  
-##  1st Qu.:-0.55690   1st Qu.: 7.684  
-##  Median : 0.05525   Median :10.819  
-##  Mean   :-0.03263   Mean   :10.716  
-##  3rd Qu.: 0.73610   3rd Qu.:15.086  
-##  Max.   : 2.09165   Max.   :22.713</code></pre>
+##  Min.   :-2.68192   Min.   :-1.719  
+##  1st Qu.:-0.62268   1st Qu.: 7.466  
+##  Median : 0.09863   Median :11.198  
+##  Mean   : 0.05413   Mean   :11.155  
+##  3rd Qu.: 0.70400   3rd Qu.:15.115  
+##  Max.   : 2.06230   Max.   :21.345</code></pre>
 <pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
-<pre><code>##             x         y
-## 1  0.05699871 10.113726
-## 2 -0.39584859  8.629889
-## 3  0.39221523 10.238366
-## 4 -0.48190859  7.650959
-## 5  1.75747155 19.321355
-## 6 -1.71067798  1.697296</code></pre>
+<pre><code>##            x         y
+## 1  0.1501718 11.288432
+## 2  0.7596645 15.168644
+## 3 -0.6740138  6.999203
+## 4  0.3405366 14.621430
+## 5 -1.7624100  2.674033
+## 6  1.6089468 19.342700</code></pre>
 <pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>

@@ -4,6 +4,7 @@ author: Judit Kisistók
 date: '2018-02-07'
 slug: week-2
 summary: Calculating and visualizing summary statistics (mean, median, standard deviation, interquartile range). Simulating data. 
+credit: Made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá's solution sheet. The R exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.
 categories: []
 tags: []
 ---
