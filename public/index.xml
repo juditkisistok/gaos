@@ -6,10 +6,19 @@
     <description>Recent content on Genome Analysis &amp; Statistics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Week 4</title>
+      <link>/week-4/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/week-4/</guid>
+      <description>A. Table of contents Table of contents Learning goals Exercises  Problem A Problem B    Learning goals By the end of this session, you should be able to…  Calculate probabilities by hand Calculate expectation and variance of a random variable Calculate the expectation and variance of a sum of n random variables and relate this to the terms:  SD of a population SE of a sample     Exercises Problem A  A1.</description>
+    </item>
     
     <item>
       <title>Week 3</title>

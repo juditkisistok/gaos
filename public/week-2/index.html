@@ -420,18 +420,18 @@ plot_grid(plot_MM, plot_Mm, plot_mm, nrow =  3) +
 SDOfMM=3.4 # standard deviation of the MM individuals
 myFakeSample=rnorm(n = 82, mean = meanOfMM, sd=SDOfMM) ## 82 independent observations drawn from the normal distribution that matches the data (aka has the same mean and standard deviation as the original data)
 myFakeSample</code></pre>
-<pre><code>##  [1] 65.28906 60.10489 63.77570 66.16952 63.03745 59.89028 57.25677
-##  [8] 58.82429 60.21559 65.90057 63.65269 59.97042 60.49989 63.96225
-## [15] 55.04320 59.07272 60.85630 63.71272 63.73290 66.52605 64.35344
-## [22] 63.84894 57.91447 66.42131 65.15629 62.40376 65.37944 62.66438
-## [29] 66.87671 63.64722 62.26850 67.98236 64.16927 60.63364 61.10842
-## [36] 60.03740 63.79374 67.38931 54.65677 67.81247 64.13291 60.96611
-## [43] 61.24008 56.38006 63.63537 55.06696 64.67980 63.67331 60.53042
-## [50] 61.78090 63.81488 61.73619 58.27836 60.75250 67.88725 63.48675
-## [57] 62.19585 65.35574 60.97711 66.11233 63.40167 59.80887 61.90916
-## [64] 64.01450 62.59378 61.43028 64.77993 61.00960 65.10433 60.15361
-## [71] 62.66764 60.98315 65.71330 58.04917 59.75232 66.06574 66.41358
-## [78] 58.93662 61.21133 61.34995 66.12856 60.11596</code></pre>
+<pre><code>##  [1] 60.73969 64.44114 66.90794 63.25091 59.44927 64.71824 65.03070
+##  [8] 63.82732 66.87857 63.42194 65.40598 66.40021 59.80848 65.97578
+## [15] 67.26980 68.71682 62.29888 62.61367 64.10432 60.56513 62.29724
+## [22] 62.24630 64.20645 65.35337 63.00819 63.73320 66.33741 65.35628
+## [29] 65.30883 58.55841 65.65078 61.13840 58.93583 71.18442 58.21784
+## [36] 64.99353 69.40929 64.37727 60.66380 65.94748 62.79548 67.62130
+## [43] 58.41393 59.87063 64.09511 63.20271 58.02412 65.70739 61.28777
+## [50] 56.67024 61.84943 68.09799 65.66088 60.34515 66.05254 66.93787
+## [57] 62.29392 58.75796 58.92884 61.40985 62.19995 61.05939 64.72311
+## [64] 61.00608 61.57823 60.58548 59.13631 63.86372 63.20989 61.87120
+## [71] 65.41781 64.71623 62.89958 62.80947 62.20016 62.24747 64.85919
+## [78] 67.09221 68.03814 62.87149 61.12424 66.80807</code></pre>
 <pre class="r"><code>hist(myFakeSample)</code></pre>
 <p><img src="/week2_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p><strong>rnorm:</strong> draws values from the normal distribution, <strong>n</strong> is the number of samples drawn, <strong>mean</strong> and <strong>sd</strong> is the mean and standard distribution of the normal distribution we’re drawing from.</p>
@@ -562,12 +562,12 @@ plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
 ##           Max.   :69.00</code></pre>
 <pre class="r"><code>summary(fakeMM_df)</code></pre>
 <pre><code>##    genotype             plates     
-##  Length:82          Min.   :54.26  
-##  Class :character   1st Qu.:59.88  
-##  Mode  :character   Median :62.23  
-##                     Mean   :62.38  
-##                     3rd Qu.:64.37  
-##                     Max.   :73.51</code></pre>
+##  Length:82          Min.   :55.09  
+##  Class :character   1st Qu.:60.05  
+##  Mode  :character   Median :62.17  
+##                     Mean   :62.48  
+##                     3rd Qu.:65.19  
+##                     Max.   :69.77</code></pre>
 <pre class="r"><code>summary(dataMm)</code></pre>
 <pre><code>##  genotype     plates     
 ##  mm:  0   Min.   :10.00  
@@ -577,13 +577,13 @@ plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
 ##           3rd Qu.:62.00  
 ##           Max.   :68.00</code></pre>
 <pre class="r"><code>summary(fakeMm_df)</code></pre>
-<pre><code>##    genotype             plates      
-##  Length:174         Min.   : 4.069  
-##  Class :character   1st Qu.:37.861  
-##  Mode  :character   Median :47.400  
-##                     Mean   :49.897  
-##                     3rd Qu.:61.473  
-##                     Max.   :94.636</code></pre>
+<pre><code>##    genotype             plates     
+##  Length:174         Min.   :20.40  
+##  Class :character   1st Qu.:39.10  
+##  Mode  :character   Median :51.68  
+##                     Mean   :51.51  
+##                     3rd Qu.:62.51  
+##                     Max.   :97.43</code></pre>
 <pre class="r"><code>summary(datamm)</code></pre>
 <pre><code>##  genotype     plates     
 ##  mm:88    Min.   : 6.00  
@@ -594,12 +594,12 @@ plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
 ##           Max.   :37.00</code></pre>
 <pre class="r"><code>summary(fakemm_df)</code></pre>
 <pre><code>##    genotype             plates      
-##  Length:88          Min.   : 4.065  
-##  Class :character   1st Qu.: 9.430  
-##  Mode  :character   Median :11.752  
-##                     Mean   :11.968  
-##                     3rd Qu.:14.672  
-##                     Max.   :20.329</code></pre>
+##  Length:88          Min.   : 1.724  
+##  Class :character   1st Qu.: 8.713  
+##  Mode  :character   Median :11.470  
+##                     Mean   :11.440  
+##                     3rd Qu.:13.588  
+##                     Max.   :19.420</code></pre>
 </div>
 <div id="is-the-simulated-data-able-to-reproduce-sample-the-property-of-the-sample" class="section level4">
 <h4>Is the simulated data able to reproduce sample the property of the sample:</h4>
@@ -609,28 +609,28 @@ plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
 <pre class="r"><code>mean(dataMM$plates)</code></pre>
 <pre><code>## [1] 62.78049</code></pre>
 <pre class="r"><code>mean(fakeMM_df$plates)</code></pre>
-<pre><code>## [1] 62.37537</code></pre>
+<pre><code>## [1] 62.48309</code></pre>
 <pre class="r"><code>mean(dataMm$plates)</code></pre>
 <pre><code>## [1] 50.37931</code></pre>
 <pre class="r"><code>mean(fakeMm_df$plates)</code></pre>
-<pre><code>## [1] 49.89661</code></pre>
+<pre><code>## [1] 51.5078</code></pre>
 <pre class="r"><code>mean(datamm$plates)</code></pre>
 <pre><code>## [1] 11.67045</code></pre>
 <pre class="r"><code>mean(fakemm_df$plates)</code></pre>
-<pre><code>## [1] 11.96826</code></pre>
+<pre><code>## [1] 11.44004</code></pre>
 <p>The means match up nicely, but it’s no surprise since we specified the means when we were generating the fake samples.</p>
 <pre class="r"><code>median(dataMM$plates)</code></pre>
 <pre><code>## [1] 63</code></pre>
 <pre class="r"><code>median(fakeMM_df$plates)</code></pre>
-<pre><code>## [1] 62.22722</code></pre>
+<pre><code>## [1] 62.17493</code></pre>
 <pre class="r"><code>median(dataMm$plates)</code></pre>
 <pre><code>## [1] 59</code></pre>
 <pre class="r"><code>median(fakeMm_df$plates)</code></pre>
-<pre><code>## [1] 47.40021</code></pre>
+<pre><code>## [1] 51.68459</code></pre>
 <pre class="r"><code>median(datamm$plates)</code></pre>
 <pre><code>## [1] 11</code></pre>
 <pre class="r"><code>median(fakemm_df$plates)</code></pre>
-<pre><code>## [1] 11.75174</code></pre>
+<pre><code>## [1] 11.46963</code></pre>
 <p>The medians match for the MM and mm genotypes and differ quite a bit for the Mm genotype - this just supports what we have seen on the plots before. In the real data the median is more to the right (we have a skewed distribution there), most likely somewhere around the peak, while in the fake data it’s close to the mean and around the middle of the distribution (which is expected because in the normal distribution the mean and the median are identical, while in the real Mm data this is not the case).</p>
 <ul>
 <li>the SD ?</li>
@@ -638,15 +638,15 @@ plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
 <pre class="r"><code>sd(dataMM$plates)</code></pre>
 <pre><code>## [1] 3.410313</code></pre>
 <pre class="r"><code>sd(fakeMM_df$plates)</code></pre>
-<pre><code>## [1] 3.785009</code></pre>
+<pre><code>## [1] 3.329913</code></pre>
 <pre class="r"><code>sd(dataMm$plates)</code></pre>
 <pre><code>## [1] 15.14687</code></pre>
 <pre class="r"><code>sd(fakeMm_df$plates)</code></pre>
-<pre><code>## [1] 17.17245</code></pre>
+<pre><code>## [1] 15.45859</code></pre>
 <pre class="r"><code>sd(datamm$plates)</code></pre>
 <pre><code>## [1] 3.567805</code></pre>
 <pre class="r"><code>sd(fakemm_df$plates)</code></pre>
-<pre><code>## [1] 3.817405</code></pre>
+<pre><code>## [1] 3.920128</code></pre>
 <p>The standard deviations match up as well because we also specified them when generating the fake samples.</p>
 <ul>
 <li>some other aspect of the data such as the more outlier points (such as the lowest value)?</li>
@@ -654,27 +654,27 @@ plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
 <pre class="r"><code>min(dataMM$plates)</code></pre>
 <pre><code>## [1] 42</code></pre>
 <pre class="r"><code>min(fakeMM_df$plates)</code></pre>
-<pre><code>## [1] 54.25836</code></pre>
+<pre><code>## [1] 55.09013</code></pre>
 <pre class="r"><code>min(dataMm$plates)</code></pre>
 <pre><code>## [1] 10</code></pre>
 <pre class="r"><code>min(fakeMm_df$plates)</code></pre>
-<pre><code>## [1] 4.068729</code></pre>
+<pre><code>## [1] 20.3959</code></pre>
 <pre class="r"><code>min(datamm$plates)</code></pre>
 <pre><code>## [1] 6</code></pre>
 <pre class="r"><code>min(fakemm_df$plates)</code></pre>
-<pre><code>## [1] 4.064744</code></pre>
+<pre><code>## [1] 1.723672</code></pre>
 <pre class="r"><code>max(dataMM$plates)</code></pre>
 <pre><code>## [1] 69</code></pre>
 <pre class="r"><code>max(fakeMM_df$plates)</code></pre>
-<pre><code>## [1] 73.51365</code></pre>
+<pre><code>## [1] 69.77088</code></pre>
 <pre class="r"><code>max(dataMm$plates)</code></pre>
 <pre><code>## [1] 68</code></pre>
 <pre class="r"><code>max(fakeMm_df$plates)</code></pre>
-<pre><code>## [1] 94.63612</code></pre>
+<pre><code>## [1] 97.42992</code></pre>
 <pre class="r"><code>max(datamm$plates)</code></pre>
 <pre><code>## [1] 37</code></pre>
 <pre class="r"><code>max(fakemm_df$plates)</code></pre>
-<pre><code>## [1] 20.32914</code></pre>
+<pre><code>## [1] 19.4204</code></pre>
 <p>If we look at the two extremes, we see that they don’t match up perfectly - but we can see these on the plots as well. This is most likely due to the random sampling process - we can’t quite expect to be as lucky as to pick the same minimum and maximum values at random as we have in the original data, especially when we are working with a relatively low sample size.</p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
 <p><em>This R notebook was made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá’s solution sheet.<br />
@@ -690,6 +690,17 @@ The R exercise session was created by Palle Villesen and Thomas Bataillon at Aar
 hljs.configure({languages: ["r"]});
 hljs.initHighlightingOnLoad();
 </script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 
 
     </div>
