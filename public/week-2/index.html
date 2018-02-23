@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.36" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Week 2 &middot; Genome Analysis &amp; Statistics</title>
+
+  
+  <link rel="stylesheet" href="/css/print.css" media="print">
+  <link rel="stylesheet" href="/css/poole.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css" rel="stylesheet">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Genome Analysis &amp; Statistics" />
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/"><h1>Genome Analysis &amp; Statistics</h1></a>
+      <p class="lead">
+       R notebooks created for students taking the course in Spring 2018 at Aarhus University. 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      <li><a href="/week-1/"> Week 1: Introduction </a></li><li><a href="/week-2/"> Week 2: Summary statistics </a></li><li><a href="/week-3/"> Week 3: Sampling distributions </a></li><li><a href="/week-4/"> Week 4: Probability </a></li>
+    </ul>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Week 2</h1>
+  <span class="post-date">Wed, Feb 7, 2018</span>
+  <div id="a.-table-of-contents" class="section level3">
+<h3><a name="toc"></a>A. Table of contents</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#toc">Table of contents</a></li>
+<li><a href="#goals">Learning goals</a></li>
+<li><a href="#exercises">Exercises</a>
+<ul>
+<li><a href="#exercise1">Calculating summary statistics in a sample</a></li>
+<li><a href="#exercise2">Summarizing and visualizing the Stickleback data of Chapter 3</a></li>
+<li><a href="#exercise3">Developing your intuition for histograms and boxplots</a></li>
+<li><a href="#exercise4">Making up your own data by sampling from a theoretical distribution</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="learning-goals" class="section level3">
+<h3><a name="goals"></a>Learning goals</h3>
+<div id="by-the-end-of-this-session-you-should-be-able-to" class="section level4">
+<h4>By the end of this session, you should be able to…</h4>
+<ul>
+<li>load datasets in R from the ABD package</li>
+<li>calculate summary statistics by hand and using the summary stats functions in R</li>
+<li>slice data in R (selecting subsets of data)</li>
+<li>create data but also sample data from a first theoretical distribution and discuss how much samples from this distribution are close to the real observed data</li>
+<li>be good at making the correspondance between summary statistics (mean, median, SD, etc.) and graphical representation of the data by:
+<ul>
+<li>histograms</li>
+<li>boxplots</li>
+<li>cumulative frequency distributions</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="exercises" class="section level3">
+<h3><a name="exercises"></a><u>Exercises</u></h3>
+</div>
+<div id="calculating-summary-statistics-in-a-sample" class="section level3">
+<h3><a name="exercise1"></a>1. Calculating summary statistics in a sample</h3>
+<p>Here is how you can “make” your own data sample (redo Exercise 3.1 in R)</p>
+<pre class="r"><code>myDataNyHand=c(1.23,1.5,2,3,4,1,4) ## a new vector 
+# c stands for concatenation - so here you&#39;re essentially concatenating a bunch of numbers together into a vector</code></pre>
+<div id="create-a-vector-containing-the-data-in-example-3-3.1." class="section level4">
+<h4>Create a vector containing the data in Example 3 3.1.</h4>
+<pre class="r"><code>data=c(0.9, 1.4, 1.2, 1.2, 1.3, 2.0, 1.4, 1.6)</code></pre>
+</div>
+<div id="check-with-pencil-and-paper-and-with-r-that-you-can-calculate-all-the-summary-statistics-presented-in-the-book-example-mean-median-sd-quantiles-then-check-with-the-r-function-how-to-get-these-statistics-directly." class="section level4">
+<h4>Check with pencil and paper and with R that you can calculate all the summary statistics presented in the book example (mean, median, SD, quantiles), then check with the R function how to get these statistics directly.</h4>
+<pre class="r"><code>meanOfData = mean(data)
+meanOfData</code></pre>
+<pre><code>## [1] 1.375</code></pre>
+<pre class="r"><code>SDOfData = sd(data)
+SDOfData</code></pre>
+<pre><code>## [1] 0.324037</code></pre>
+<pre class="r"><code>quantile(data)</code></pre>
+<pre><code>##   0%  25%  50%  75% 100% 
+## 0.90 1.20 1.35 1.45 2.00</code></pre>
+<pre class="r"><code># to get the interquartile range, we subtract the 25% quantile (1st quartile) from the 75% quantile (= 3rd quartile), so it&#39;s going to be 1.45 - 1.20 = 0.25</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="summarizing-and-visualizing-the-stickleback-data-of-chapter-3" class="section level3">
+<h3><a name="exercise2"></a>2. Summarizing and visualizing the Stickleback data of Chapter 3</h3>
+<p>First, we import some libraries (if you haven’t installed this, then first you need to do so using the install.packages() function):</p>
+<pre class="r"><code>library(abd) # this is what we need for the data
+library(cowplot) # don&#39;t worry about this, I&#39;ll just use it for plotting</code></pre>
+<p>Then, we obtain the Stickleback data from the abd package:</p>
+<pre class="r"><code>data(&quot;SticklebackPlates&quot;) # getting the dataset - this only works if a dataset is included in a package, otherwise you need another data import method (eg. read.csv() for comma-separated data)
+head(SticklebackPlates) # a quick peek at the dataset - useful for seeing the variables and the first couple datapoints</code></pre>
+<pre><code>##   genotype plates
+## 1       mm     11
+## 2       Mm     63
+## 3       Mm     22
+## 4       Mm     10
+## 5       mm     14
+## 6       mm     11</code></pre>
+<pre class="r"><code>names(SticklebackPlates) # this way you can get the name of each dataset column (aka variable)</code></pre>
+<pre><code>## [1] &quot;genotype&quot; &quot;plates&quot;</code></pre>
+<p>You can get an overview of the data in one single function:</p>
+<pre class="r"><code>summary(SticklebackPlates)</code></pre>
+<pre><code>##  genotype     plates     
+##  mm: 88   Min.   : 6.00  
+##  Mm:174   1st Qu.:14.00  
+##  MM: 82   Median :57.00  
+##           Mean   :43.43  
+##           3rd Qu.:62.00  
+##           Max.   :69.00</code></pre>
+<p>Here you’ll also see the variables and some summary statistics like the mean and the median.</p>
+<div id="what-is-the-sample-size" class="section level4">
+<h4>What is the sample size?</h4>
+<p>Adding up all genotypes from the summary table: 88 + 174 + 82 = 344</p>
+</div>
+<div id="what-is-the-mean-and-the-median" class="section level4">
+<h4>What is the mean and the median?</h4>
+<p>You can also see this in the summary table. Mean: 43.43 Median: 57</p>
+</div>
+<div id="what-is-the-sd-of-the-data-is-that-info-in-summary" class="section level4">
+<h4>What is the SD of the data ? Is that info in summary()?</h4>
+<p>It’s not, but it’s easy to calculate it anyway:</p>
+<pre class="r"><code>sd(SticklebackPlates$plates)</code></pre>
+<pre><code>## [1] 22.23716</code></pre>
+<p>Note that you need to choose which column you want to use for the calculation - this is achieved with the $. If you didn’t do this and just wrote sd(SticklebackPlates), R wouldn’t know which standard deviation you want as there are multiple variables (genotype, plates) - and in real datasets you often have even more than this.</p>
+<p>One fundamental of summarizing data: “slicing” the data in groups and making summary stats by groups.</p>
+<p>For instance here is how to select a specific subset meeting one condition - I only want the data matching a specific condition (here the genotype being MM):</p>
+<pre class="r"><code>dataMM=subset(SticklebackPlates, SticklebackPlates$genotype ==&quot;MM&quot;) 
+head(dataMM)</code></pre>
+<pre><code>##    genotype plates
+## 20       MM     64
+## 25       MM     65
+## 28       MM     62
+## 31       MM     63
+## 38       MM     60
+## 42       MM     64</code></pre>
+</div>
+<div id="use-r-to-calculate-the-summary-statistics-from-the-data-presented-in-table-3.3-1-of-the-book-for-each-genotype-calculate-the-sample-size-mean-median-sd-and-interquartile-range." class="section level4">
+<h4>Use R to calculate the summary statistics from the data presented in Table 3.3-1 of the book: for each genotype calculate the sample size, mean, median, SD and interquartile range.</h4>
+<p>A suggestion is to work on subdataset and use summary() on each subdataset. To do so try subset(). This a super useful / must R function in practice.</p>
+<p><u>1. MM genotype</u></p>
+<pre class="r"><code>dataMM=subset(SticklebackPlates, SticklebackPlates$genotype ==&quot;MM&quot;) 
+length(dataMM$plates) #sample size </code></pre>
+<pre><code>## [1] 82</code></pre>
+<pre class="r"><code>mean(dataMM$plates) #mean</code></pre>
+<pre><code>## [1] 62.78049</code></pre>
+<pre class="r"><code>median(dataMM$plates) #median</code></pre>
+<pre><code>## [1] 63</code></pre>
+<pre class="r"><code>sd(dataMM$plates) #standard deviation</code></pre>
+<pre><code>## [1] 3.410313</code></pre>
+<pre class="r"><code>summary(dataMM$plates) #interquartile range: 64.00-62.00 = 2</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   42.00   62.00   63.00   62.78   64.00   69.00</code></pre>
+<p><u>2. Mm genotype</u></p>
+<pre class="r"><code>dataMm=subset(SticklebackPlates, SticklebackPlates$genotype ==&quot;Mm&quot;)
+length(dataMm$plates) #sample size </code></pre>
+<pre><code>## [1] 174</code></pre>
+<pre class="r"><code>mean(dataMm$plates) #mean</code></pre>
+<pre><code>## [1] 50.37931</code></pre>
+<pre class="r"><code>median(dataMm$plates) #median</code></pre>
+<pre><code>## [1] 59</code></pre>
+<pre class="r"><code>sd(dataMm$plates) #standard deviation</code></pre>
+<pre><code>## [1] 15.14687</code></pre>
+<pre class="r"><code>summary(dataMm$plates) #interquartile range: 62.00-41.00 = 21</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   10.00   41.00   59.00   50.38   62.00   68.00</code></pre>
+<p><u>3. mm genotype</u></p>
+<pre class="r"><code>datamm=subset(SticklebackPlates, SticklebackPlates$genotype ==&quot;mm&quot;)
+length(datamm$plates) #sample size </code></pre>
+<pre><code>## [1] 88</code></pre>
+<pre class="r"><code>mean(datamm$plates) #mean</code></pre>
+<pre><code>## [1] 11.67045</code></pre>
+<pre class="r"><code>median(datamm$plates) #median</code></pre>
+<pre><code>## [1] 11</code></pre>
+<pre class="r"><code>sd(datamm$plates) #standard deviation</code></pre>
+<pre><code>## [1] 3.567805</code></pre>
+<pre class="r"><code>summary(datamm$plates) #interquartile range: 13.00-10.00 = 3</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    6.00   10.00   11.00   11.67   13.00   37.00</code></pre>
+</div>
+<div id="use-the-subset-function-above-to-calculate-the-sd-and-the-cv-for-each-genotype-mm-mm-and-mm." class="section level4">
+<h4>Use the subset function above to calculate the SD and the CV for each genotype (MM, Mm and mm).</h4>
+<p>We have already calculated the standard deviation above. The CV is just (standard deviation / mean)*100%, so:</p>
+<pre class="r"><code>(sd(dataMM$plates)/mean(dataMM$plates))*100 #CV for the MM genotype</code></pre>
+<pre><code>## [1] 5.432122</code></pre>
+<pre class="r"><code>(sd(dataMm$plates)/mean(dataMm$plates))*100 #CV for the Mm genotype</code></pre>
+<pre><code>## [1] 30.06565</code></pre>
+<pre class="r"><code>(sd(datamm$plates)/mean(datamm$plates))*100 #CV for the mm genotype</code></pre>
+<pre><code>## [1] 30.57126</code></pre>
+<p>Imagine we scale the data by:</p>
+<ul>
+<li>adding +2, because morphologically some lateral plates are always missed - Scaling 1<br />
+</li>
+<li>expressing that as standardized number of plates by dividing it by the number by 62.8 (the mean of the most “armored” genotype) - Scaling 2</li>
+</ul>
+</div>
+<div id="create-a-dataset-where-the-data-are-scaled-according-to-1-and-2." class="section level4">
+<h4>Create a dataset where the data are scaled according to 1 and 2.</h4>
+<p><u>1. Scaling 1</u></p>
+<pre class="r"><code># In Base R, we create a brand new dataframe like this:
+SticklebackPlates_scale1 = data.frame(genotype = SticklebackPlates$genotype, plates = SticklebackPlates$plates + 2)
+# when we create this new dataframe, we say what columns (variables) we want - this is the &quot;genotype =&quot; and &quot;plates =&quot; part
+# then we say what values we want those variables to have
+# here we just grab the genotype values from the original dataset as they were, and for the plates, we get the original values as well but we add +2 to every single one of them</code></pre>
+<p>For those of you who want to be total R wizards, here’s another solution to the previous problem. It uses a package called dplyr which is part of <a href="https://www.tidyverse.org/" target="_blank">Tidyverse</a>, a package collection designed to make data science more fun and tidy.</p>
+<p>It’s a bit more difficult syntactically, however, once you get used to it, it’s super useful.</p>
+<pre class="r"><code>SticklebackPlates %&gt;%
+  mutate(plates = plates + 2) -&gt; SticklebackPlates_scale1_d
+
+# in the first line we choose which data we want to work with
+# that weird %&gt;% thing is called a pipe - you can think about our data flowing through it, being channeled into whatever command we have next
+# in this case, it&#39;s mutate() - which just simply transforms our variable, so adds 2 to every plate value
+# at the end, with -&gt; we save all this to another dataframe</code></pre>
+<p>At the end of the day, both solutions should give us the same result.</p>
+<pre class="r"><code>head(SticklebackPlates_scale1)</code></pre>
+<pre><code>##   genotype plates
+## 1       mm     13
+## 2       Mm     65
+## 3       Mm     24
+## 4       Mm     12
+## 5       mm     16
+## 6       mm     13</code></pre>
+<pre class="r"><code>head(SticklebackPlates_scale1_d)</code></pre>
+<pre><code>##   genotype plates
+## 1       mm     13
+## 2       Mm     65
+## 3       Mm     24
+## 4       Mm     12
+## 5       mm     16
+## 6       mm     13</code></pre>
+<p><u>2. Scaling 2</u></p>
+<p>We can use the exact same principles.</p>
+<pre class="r"><code># Base R
+SticklebackPlates_scale2 = data.frame(genotype = SticklebackPlates$genotype, plates = SticklebackPlates$plates / 62.8)
+
+# Dplyr
+SticklebackPlates %&gt;%
+  mutate(plates = plates / 62.8) -&gt; SticklebackPlates_scale2_d
+
+head(SticklebackPlates_scale2)</code></pre>
+<pre><code>##   genotype    plates
+## 1       mm 0.1751592
+## 2       Mm 1.0031847
+## 3       Mm 0.3503185
+## 4       Mm 0.1592357
+## 5       mm 0.2229299
+## 6       mm 0.1751592</code></pre>
+<pre class="r"><code>head(SticklebackPlates_scale2_d)</code></pre>
+<pre><code>##   genotype    plates
+## 1       mm 0.1751592
+## 2       Mm 1.0031847
+## 3       Mm 0.3503185
+## 4       Mm 0.1592357
+## 5       mm 0.2229299
+## 6       mm 0.1751592</code></pre>
+<p>Just to visualize what we have done, here are some plots (it’s not mandatory for you to make any, but they are nice to look at). I made them using the ggplot2 package (also part of the Tidyverse) and put them together using the cowplot package.</p>
+<pre class="r"><code># A histogram for the original data:
+orig_hist &lt;- ggplot(data = SticklebackPlates) +
+              geom_histogram(aes(x = plates, fill = genotype), bins = 30) +
+              ggtitle(&quot;Original Data&quot;) 
+  
+# A histogram for the first scaling:
+scale1_hist &lt;- ggplot(data = SticklebackPlates_scale1) +
+            geom_histogram(aes(x = plates, fill = genotype), bins = 30) +
+            ggtitle(&quot;Original Data&quot;) 
+
+
+# A histogram for the second scaling:
+scale2_hist &lt;- ggplot(data = SticklebackPlates_scale2) +
+            geom_histogram(aes(x = plates, fill = genotype), bins = 30) +
+            ggtitle(&quot;Scaling 2&quot;)
+
+# Let&#39;s put them together on a figure:
+plot_grid(orig_hist, scale1_hist, scale2_hist, nrow = 3)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>It seems that Scaling 1 changed the distribution - however, this is just an artefact of the plotting that can easily lead us astray. The data have changed, however, we’re plotting with the same intervals. Let’s see what happens if we finetune the binwidths a bit.</p>
+<pre class="r"><code># A histogram for the original data:
+orig_hist &lt;- ggplot(data = SticklebackPlates) +
+              geom_histogram(aes(x = plates, fill = genotype), binwidth = 1) +
+              ggtitle(&quot;Original Data&quot;)
+
+# A histogram for the first scaling:
+scale1_hist &lt;- ggplot(data = SticklebackPlates_scale1) +
+            geom_histogram(aes(x = plates, fill = genotype), binwidth = 1) +
+            ggtitle(&quot;Scaling 1&quot;) 
+
+plot_grid(orig_hist, scale1_hist, nrow = 2)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>We can see that the distributions are the same - the scaled one is just shifted to the right, and this was enough to make it show up as a different distribution when using a wider binwidth. This illustrates it very well that when you are creating histograms, you might need to try a couple different binwidths and choose the one that you think fits your data best.</p>
+<p>Let’s see how the summary statistics have changed:</p>
+<pre class="r"><code># Means:
+mean(SticklebackPlates$plates) # original data</code></pre>
+<pre><code>## [1] 43.43314</code></pre>
+<pre class="r"><code>mean(SticklebackPlates_scale1$plates) # Scaling 1</code></pre>
+<pre><code>## [1] 45.43314</code></pre>
+<pre class="r"><code>mean(SticklebackPlates$plates) + 2 # Equals the mean of the Scaling 1 data    </code></pre>
+<pre><code>## [1] 45.43314</code></pre>
+<pre class="r"><code>mean(SticklebackPlates_scale2$plates) # Scaling 2</code></pre>
+<pre><code>## [1] 0.6916105</code></pre>
+<pre class="r"><code>mean(SticklebackPlates$plates)/62.8 # Equals the mean of the Scaling 2 data    </code></pre>
+<pre><code>## [1] 0.6916105</code></pre>
+<pre class="r"><code># Standard deviations:
+sd(SticklebackPlates$plates) # original data</code></pre>
+<pre><code>## [1] 22.23716</code></pre>
+<pre class="r"><code>sd(SticklebackPlates_scale1$plates) # Scaling 1, same as the SD of the original data</code></pre>
+<pre><code>## [1] 22.23716</code></pre>
+<pre class="r"><code>sd(SticklebackPlates_scale2$plates) # Scaling 2</code></pre>
+<pre><code>## [1] 0.3540949</code></pre>
+<pre class="r"><code>sd(SticklebackPlates$plates)/62.8 # Equals the SD of the Scaling 2 data</code></pre>
+<pre><code>## [1] 0.3540949</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="developing-your-intuition-for-histograms-and-boxplots" class="section level3">
+<h3><a name="exercise3"></a>3. Developing your intuition for histograms and boxplots</h3>
+<div id="reproduce-figure-3-3-1-in-the-book-using-the-histogram-function-hist." class="section level4">
+<h4>Reproduce figure 3-3-1 in the book using the histogram function hist().</h4>
+<p>This is how you do it in Base R:</p>
+<pre class="r"><code>par(mfrow=c(3,1))
+
+hist(dataMM$plates, 
+     right = FALSE, 
+     breaks = 15, 
+     xlim = c(0,max(dataMM$plates)), 
+     ylim = c(0,40), 
+     col = &quot;brown&quot;, 
+     main = &quot;&quot;,  
+     xlab = &quot;&quot;)
+
+hist(dataMm$plates, 
+     right = FALSE, 
+     breaks = 30, 
+     xlim = c(0,max(dataMM$plates)), 
+     ylim = c(0,40), 
+     col = &quot;brown&quot;, 
+     main = &quot;&quot;,  
+     xlab = &quot;&quot;)
+
+hist(datamm$plates, 
+     right = FALSE, 
+     breaks = 15, 
+     xlim = c(0,max(dataMM$plates)), 
+     ylim = c(0,40), 
+     col = &quot;brown&quot;, 
+     main = &quot;&quot;, 
+     xlab = &quot;Number of lateral plates&quot;)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>This is how you do it in ggplot2 (okay, this is pretty complex but hey, at least it’s fancy, right?):</p>
+<pre class="r"><code>plot_MM &lt;- ggplot(data = dataMM) +
+          geom_histogram(aes(x = plates), fill = &quot;deeppink4&quot;, col = &quot;black&quot;, binwidth = 2) +
+          annotate(&quot;text&quot;, x = 0, y = 35, label = &quot;italic(MM)&quot;, parse=TRUE) +
+  scale_y_continuous(breaks=c(seq(0,40,10)), name = &quot;&quot;, labels = seq(0,40,10), limits = c(0,40)) +
+  scale_x_continuous(breaks=c(seq(0,70,10)), name = &quot;&quot;, labels = NULL , limits = c(0,70))
+
+
+plot_Mm &lt;- ggplot(data = dataMm) +
+          geom_histogram(aes(x = plates), fill = &quot;deeppink4&quot;, col = &quot;black&quot;, binwidth = 2) +
+          annotate(&quot;text&quot;, x = 0, y = 35, label = &quot;italic(Mm)&quot;, parse=TRUE) +
+  scale_y_continuous(breaks=c(seq(0,40,10)), name = &quot;&quot;, labels = seq(0,40,10), limits = c(0,40)) +
+  scale_x_continuous(breaks=c(seq(0,70,10)), name = &quot;&quot;, labels = NULL , limits = c(0,70))
+
+
+plot_mm &lt;- ggplot(data = datamm) +
+          geom_histogram(aes(x = plates), fill = &quot;deeppink4&quot;, col = &quot;black&quot;, binwidth = 2) +
+          annotate(&quot;text&quot;, x = 0, y = 35, label = &quot;italic(mm)&quot;, parse=TRUE) +
+  scale_y_continuous(breaks=c(seq(0,40,10)), name = &quot;&quot;, labels = seq(0,40,10), limits = c(0,40)) +
+  scale_x_continuous(breaks=c(seq(0,70,10)), name = &quot;&quot;, labels = NULL , limits = c(0,70))
+
+
+plot_grid(plot_MM, plot_Mm, plot_mm, nrow =  3) + 
+  draw_label(&quot;Number of lateral plates&quot;, fontface = &quot;bold&quot;, y = 0.02) </code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="complement-the-figure-by-doing-a-side-by-side-boxplot-for-each-genotype-hint-use-boxplot-." class="section level4">
+<h4>Complement the figure by doing a side by side boxplot for each genotype (hint: use boxplot() ).</h4>
+<pre class="r"><code>boxplot(SticklebackPlates$plates ~ SticklebackPlates$genotype) </code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre class="r"><code># first you say what the numerical variable should be that you want to plot (here: plates)
+# then you say what categories your data has, which will create the different boxplots (here: genotype)</code></pre>
+</div>
+<div id="sketch-by-hand-and-do-in-r-a-graph-of-the-cumulative-distribution-of-the-number-of-lateral-plates-in-the-sticklebacks-data.-hint-google-it" class="section level4">
+<h4>Sketch by hand and do in R a graph of the cumulative distribution of the number of lateral plates in the Sticklebacks data. (hint: Google it!)</h4>
+<pre class="r"><code>plot(ecdf(dataMm$plates), main = &quot;Cumulative distribution&quot;, xlab = &quot;Number of lateral plates&quot;, pch = &quot;.&quot;)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<pre class="r"><code># ecdf: Empirical Cumulative Distribution Function - we want to plot it
+# pch stands for plotting character - it&#39;s responsible for how your plotted points look</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="making-up-your-own-data-by-sampling-from-a-theoretical-distribution" class="section level3">
+<h3><a name="exercise4"></a>4. Making up your own data by sampling from a theoretical distribution</h3>
+<p>In R, you can very easily “draw” observations from the normal distribution (pictured in Fig 1-4.2, described in Chapter 10).</p>
+<pre class="r"><code>meanOfMM=62.8 #the observed mean of MM individuals
+SDOfMM=3.4 # standard deviation of the MM individuals
+myFakeSample=rnorm(n = 82, mean = meanOfMM, sd=SDOfMM) ## 82 independent observations drawn from the normal distribution that matches the data (aka has the same mean and standard deviation as the original data)
+myFakeSample</code></pre>
+<pre><code>##  [1] 65.28906 60.10489 63.77570 66.16952 63.03745 59.89028 57.25677
+##  [8] 58.82429 60.21559 65.90057 63.65269 59.97042 60.49989 63.96225
+## [15] 55.04320 59.07272 60.85630 63.71272 63.73290 66.52605 64.35344
+## [22] 63.84894 57.91447 66.42131 65.15629 62.40376 65.37944 62.66438
+## [29] 66.87671 63.64722 62.26850 67.98236 64.16927 60.63364 61.10842
+## [36] 60.03740 63.79374 67.38931 54.65677 67.81247 64.13291 60.96611
+## [43] 61.24008 56.38006 63.63537 55.06696 64.67980 63.67331 60.53042
+## [50] 61.78090 63.81488 61.73619 58.27836 60.75250 67.88725 63.48675
+## [57] 62.19585 65.35574 60.97711 66.11233 63.40167 59.80887 61.90916
+## [64] 64.01450 62.59378 61.43028 64.77993 61.00960 65.10433 60.15361
+## [71] 62.66764 60.98315 65.71330 58.04917 59.75232 66.06574 66.41358
+## [78] 58.93662 61.21133 61.34995 66.12856 60.11596</code></pre>
+<pre class="r"><code>hist(myFakeSample)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><strong>rnorm:</strong> draws values from the normal distribution, <strong>n</strong> is the number of samples drawn, <strong>mean</strong> and <strong>sd</strong> is the mean and standard distribution of the normal distribution we’re drawing from.</p>
+<div id="discuss-to-what-extent-is-this-fake-sample-a-good-match-to-the-actual-data." class="section level4">
+<h4>Discuss to what extent is this fake sample a good “match” to the actual data.</h4>
+<p>It’s a good idea to generate fake samples for every genotype, then plot them to see how well the distributions match.</p>
+<pre class="r"><code># drawing samples
+fakeMM=rnorm(n = length(dataMM$plates), mean = mean(dataMM$plates), sd=sd(dataMM$plates))
+# putting them in a dataframe for plotting purposes
+fakeMM_df &lt;- data_frame(genotype = rep(&quot;MM&quot;, length(fakeMM)), 
+                        plates = fakeMM)
+
+fakeMm=rnorm(n = length(dataMm$plates), mean = mean(dataMm$plates), sd=sd(dataMm$plates))
+
+fakeMm_df &lt;- data_frame(genotype = rep(&quot;Mm&quot;, length(fakeMm)), 
+                        plates = fakeMm)
+
+fakemm=rnorm(n = length(datamm$plates), mean = mean(datamm$plates), sd=sd(datamm$plates))
+
+fakemm_df &lt;- data_frame(genotype = rep(&quot;mm&quot;, length(fakemm)), 
+                        plates = fakemm)</code></pre>
+<p>Let’s do it in Base R first:</p>
+<pre class="r"><code>par(mfrow = c(3, 2))
+
+plot1b &lt;- hist(dataMM$plates, 
+               breaks = 30, 
+               col = &quot;deeppink4&quot;, 
+               xlim = c(0, 100), 
+               ylim = c(0, 25), 
+               xlab = &quot;&quot;, 
+               main = &quot;Real MM&quot;)
+
+plot2b &lt;- hist(fakeMM_df$plates, 
+               breaks = 30, 
+               col = &quot;deeppink4&quot;, 
+               xlim = c(0, 100), 
+               ylim = c(0, 25), 
+               xlab = &quot;&quot;, 
+               main = &quot;Fake MM&quot;)
+
+plot3b &lt;- hist(dataMm$plates, 
+               breaks = 50, 
+               col = &quot;deeppink4&quot;, 
+               xlim = c(0, 100), 
+               ylim = c(0, 25), 
+               xlab = &quot;&quot;, 
+               main = &quot;Real Mm&quot;)
+
+plot4b &lt;- hist(fakeMm_df$plates, 
+               breaks = 50, 
+               col = &quot;deeppink4&quot;, 
+               xlim = c(0, 100), 
+               ylim = c(0, 25), 
+               xlab = &quot;&quot;, 
+               main = &quot;Fake Mm&quot;)
+
+plot5b &lt;- hist(datamm$plates, 
+               breaks = 30, 
+               col = &quot;deeppink4&quot;, 
+               xlim = c(0, 100), 
+               ylim = c(0, 25), 
+               xlab = &quot;&quot;, 
+               main = &quot;Real mm&quot;)
+
+plot6b &lt;- hist(fakemm_df$plates, 
+               breaks = 30, 
+               col = &quot;deeppink4&quot;, 
+               xlim = c(0, 100), 
+               ylim = c(0, 25), 
+               xlab = &quot;&quot;, 
+               main = &quot;Fake mm&quot;)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Here is the ggplot version:</p>
+<pre class="r"><code>plot1 &lt;- ggplot(data = dataMM) +
+  geom_histogram(aes(x = plates), binwidth = 1, fill = &quot;deeppink4&quot;) +
+  ggtitle(&quot;Real MM&quot;) +
+  xlim(c(0,100)) +
+  ylim(c(0,25)) +
+  xlab(&quot;&quot;)
+
+plot2 &lt;- ggplot(data = fakeMM_df) +
+  geom_histogram(aes(x = plates), binwidth = 1, fill = &quot;deeppink4&quot;) +
+  ggtitle(&quot;Fake MM&quot;) +
+  xlim(c(0,100)) +
+  ylim(c(0,25)) +
+  xlab(&quot;&quot;)
+
+plot3 &lt;- ggplot(data = dataMm) +
+  geom_histogram(aes(x = plates), binwidth = 1, fill = &quot;deeppink4&quot;) +
+  ggtitle(&quot;Real Mm&quot;) +
+  xlim(c(0,100)) +
+  ylim(c(0,25)) +
+  xlab(&quot;&quot;)
+
+plot4 &lt;- ggplot(data = fakeMm_df) +
+  geom_histogram(aes(x = plates), binwidth = 1, fill = &quot;deeppink4&quot;) +
+  ggtitle(&quot;Fake Mm&quot;) +
+  xlim(c(0,100)) +
+  ylim(c(0,25)) +
+  xlab(&quot;&quot;)
+
+plot5 &lt;- ggplot(data = datamm) +
+  geom_histogram(aes(x = plates), binwidth = 1, fill = &quot;deeppink4&quot;) +
+  ggtitle(&quot;Real mm&quot;) +
+  xlim(c(0,100)) +
+  ylim(c(0,25)) 
+
+plot6 &lt;- ggplot(data = fakemm_df) +
+  geom_histogram(aes(x = plates), binwidth = 1, fill = &quot;deeppink4&quot;) +
+  ggtitle(&quot;Fake mm&quot;) +
+  xlim(c(0,100)) +
+  ylim(c(0,25)) 
+
+plot_grid(plot1, plot2, plot3, plot4, plot5, plot6, ncol = 2)</code></pre>
+<p><img src="/week2_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>We can see that in the case of the MM and mm genotypes the fake data is a pretty good match - the reason for this is because these distributions were approximately normal to begin with, so it’s easier to simulate them by drawing observations from a normal distribution.</p>
+<p>This is not the case with the Mm genotype - the fake sample is all over the place. It’s because the real distribution isn’t close to a normal distribution, so if we want to simulate it by drawing samples from a normal distribution, we won’t succeed. We just get something that has a similar standard deviation and mean as the original distribution (because remember, we sampled using these values), but the shape isn’t maintained.</p>
+</div>
+<div id="for-each-genotype-use-summaries-of-the-simulated-data-mean-median-variance-quantiles-min-max-and-discuss-whether-the-simulated-data-assuming-the-normal-are-looking-like-the-real-one." class="section level4">
+<h4>For each genotype, use summaries of the simulated data (mean, median, variance, quantiles, min, max) and discuss whether the simulated data (assuming the normal) are looking like the real one.</h4>
+<pre class="r"><code>summary(dataMM)</code></pre>
+<pre><code>##  genotype     plates     
+##  mm: 0    Min.   :42.00  
+##  Mm: 0    1st Qu.:62.00  
+##  MM:82    Median :63.00  
+##           Mean   :62.78  
+##           3rd Qu.:64.00  
+##           Max.   :69.00</code></pre>
+<pre class="r"><code>summary(fakeMM_df)</code></pre>
+<pre><code>##    genotype             plates     
+##  Length:82          Min.   :54.26  
+##  Class :character   1st Qu.:59.88  
+##  Mode  :character   Median :62.23  
+##                     Mean   :62.38  
+##                     3rd Qu.:64.37  
+##                     Max.   :73.51</code></pre>
+<pre class="r"><code>summary(dataMm)</code></pre>
+<pre><code>##  genotype     plates     
+##  mm:  0   Min.   :10.00  
+##  Mm:174   1st Qu.:41.00  
+##  MM:  0   Median :59.00  
+##           Mean   :50.38  
+##           3rd Qu.:62.00  
+##           Max.   :68.00</code></pre>
+<pre class="r"><code>summary(fakeMm_df)</code></pre>
+<pre><code>##    genotype             plates      
+##  Length:174         Min.   : 4.069  
+##  Class :character   1st Qu.:37.861  
+##  Mode  :character   Median :47.400  
+##                     Mean   :49.897  
+##                     3rd Qu.:61.473  
+##                     Max.   :94.636</code></pre>
+<pre class="r"><code>summary(datamm)</code></pre>
+<pre><code>##  genotype     plates     
+##  mm:88    Min.   : 6.00  
+##  Mm: 0    1st Qu.:10.00  
+##  MM: 0    Median :11.00  
+##           Mean   :11.67  
+##           3rd Qu.:13.00  
+##           Max.   :37.00</code></pre>
+<pre class="r"><code>summary(fakemm_df)</code></pre>
+<pre><code>##    genotype             plates      
+##  Length:88          Min.   : 4.065  
+##  Class :character   1st Qu.: 9.430  
+##  Mode  :character   Median :11.752  
+##                     Mean   :11.968  
+##                     3rd Qu.:14.672  
+##                     Max.   :20.329</code></pre>
+</div>
+<div id="is-the-simulated-data-able-to-reproduce-sample-the-property-of-the-sample" class="section level4">
+<h4>Is the simulated data able to reproduce sample the property of the sample:</h4>
+<ul>
+<li>the mean and median ?</li>
+</ul>
+<pre class="r"><code>mean(dataMM$plates)</code></pre>
+<pre><code>## [1] 62.78049</code></pre>
+<pre class="r"><code>mean(fakeMM_df$plates)</code></pre>
+<pre><code>## [1] 62.37537</code></pre>
+<pre class="r"><code>mean(dataMm$plates)</code></pre>
+<pre><code>## [1] 50.37931</code></pre>
+<pre class="r"><code>mean(fakeMm_df$plates)</code></pre>
+<pre><code>## [1] 49.89661</code></pre>
+<pre class="r"><code>mean(datamm$plates)</code></pre>
+<pre><code>## [1] 11.67045</code></pre>
+<pre class="r"><code>mean(fakemm_df$plates)</code></pre>
+<pre><code>## [1] 11.96826</code></pre>
+<p>The means match up nicely, but it’s no surprise since we specified the means when we were generating the fake samples.</p>
+<pre class="r"><code>median(dataMM$plates)</code></pre>
+<pre><code>## [1] 63</code></pre>
+<pre class="r"><code>median(fakeMM_df$plates)</code></pre>
+<pre><code>## [1] 62.22722</code></pre>
+<pre class="r"><code>median(dataMm$plates)</code></pre>
+<pre><code>## [1] 59</code></pre>
+<pre class="r"><code>median(fakeMm_df$plates)</code></pre>
+<pre><code>## [1] 47.40021</code></pre>
+<pre class="r"><code>median(datamm$plates)</code></pre>
+<pre><code>## [1] 11</code></pre>
+<pre class="r"><code>median(fakemm_df$plates)</code></pre>
+<pre><code>## [1] 11.75174</code></pre>
+<p>The medians match for the MM and mm genotypes and differ quite a bit for the Mm genotype - this just supports what we have seen on the plots before. In the real data the median is more to the right (we have a skewed distribution there), most likely somewhere around the peak, while in the fake data it’s close to the mean and around the middle of the distribution (which is expected because in the normal distribution the mean and the median are identical, while in the real Mm data this is not the case).</p>
+<ul>
+<li>the SD ?</li>
+</ul>
+<pre class="r"><code>sd(dataMM$plates)</code></pre>
+<pre><code>## [1] 3.410313</code></pre>
+<pre class="r"><code>sd(fakeMM_df$plates)</code></pre>
+<pre><code>## [1] 3.785009</code></pre>
+<pre class="r"><code>sd(dataMm$plates)</code></pre>
+<pre><code>## [1] 15.14687</code></pre>
+<pre class="r"><code>sd(fakeMm_df$plates)</code></pre>
+<pre><code>## [1] 17.17245</code></pre>
+<pre class="r"><code>sd(datamm$plates)</code></pre>
+<pre><code>## [1] 3.567805</code></pre>
+<pre class="r"><code>sd(fakemm_df$plates)</code></pre>
+<pre><code>## [1] 3.817405</code></pre>
+<p>The standard deviations match up as well because we also specified them when generating the fake samples.</p>
+<ul>
+<li>some other aspect of the data such as the more outlier points (such as the lowest value)?</li>
+</ul>
+<pre class="r"><code>min(dataMM$plates)</code></pre>
+<pre><code>## [1] 42</code></pre>
+<pre class="r"><code>min(fakeMM_df$plates)</code></pre>
+<pre><code>## [1] 54.25836</code></pre>
+<pre class="r"><code>min(dataMm$plates)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>min(fakeMm_df$plates)</code></pre>
+<pre><code>## [1] 4.068729</code></pre>
+<pre class="r"><code>min(datamm$plates)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>min(fakemm_df$plates)</code></pre>
+<pre><code>## [1] 4.064744</code></pre>
+<pre class="r"><code>max(dataMM$plates)</code></pre>
+<pre><code>## [1] 69</code></pre>
+<pre class="r"><code>max(fakeMM_df$plates)</code></pre>
+<pre><code>## [1] 73.51365</code></pre>
+<pre class="r"><code>max(dataMm$plates)</code></pre>
+<pre><code>## [1] 68</code></pre>
+<pre class="r"><code>max(fakeMm_df$plates)</code></pre>
+<pre><code>## [1] 94.63612</code></pre>
+<pre class="r"><code>max(datamm$plates)</code></pre>
+<pre><code>## [1] 37</code></pre>
+<pre class="r"><code>max(fakemm_df$plates)</code></pre>
+<pre><code>## [1] 20.32914</code></pre>
+<p>If we look at the two extremes, we see that they don’t match up perfectly - but we can see these on the plots as well. This is most likely due to the random sampling process - we can’t quite expect to be as lucky as to pick the same minimum and maximum values at random as we have in the original data, especially when we are working with a relatively low sample size.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+<p><em>This R notebook was made by Judit Kisistók, incorporating some snippets from Moisés Coll Maciá’s solution sheet.<br />
+The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</em></p>
+</div>
+</div>
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: ["r"]});
+hljs.initHighlightingOnLoad();
+</script>
+
+
+    </div>
+
+    
+  </body>
+</html>
