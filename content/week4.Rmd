@@ -86,6 +86,7 @@ V[a \cdot X + b]
 &= a^2 \cdot V[X] \\
 \end{aligned}
 $$
+*Take me back to [the beginning!](#toc)*
 
 #### A2.
 
@@ -125,7 +126,7 @@ Notice that this is exactly how we calculated the standard error of the mean!
 
 In these proofs we were able to substitute $$E[X_i] = \mu$$ and $$V[X_i] = \sigma^2$$ because the observations are independent and come from the same underlying probability distribution. <b>The random variables are independently and identically distributed, so they have the same mean and variance.</b>
 
-Take me back to [the beginning!](#toc)\cdot
+*Take me back to [the beginning!](#toc)*
 
 ###<a name="problemB"></a>Problem B
 
@@ -181,4 +182,4 @@ V[X] &= E[X^2] - (E[X])^2 \\
 Notice what you need to square here! $(E[X])^2$ is fairly simple - you just take what you calculated in the previous exercise, square it and call it a day.  
 $E[X^2]$ is a bit more tricky - it's the expectation of $X^2$. The <b>probabilities remain the same</b>, however, you need to multiply them by $X^2$ instead of $X$ (ie. 0, 1, and 4 instead of 0, 1 and 2). 
 
-\cdotTake me back to [the beginning!](#toc)\cdot
+*Take me back to [the beginning!](#toc)*
