@@ -1,0 +1,239 @@
+---
+title: "Week 5: Hypothesis testing"
+author: Judit Kisistok
+date: '2018-02-28'
+slug: week-5
+summary: Simulations, probability calculations and a little bit of hypothesis testing.
+credit: Made by Judit Kisistók. The exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.
+categories: []
+tags: []
+---
+
+###<a name="toc"></a>A. Table of contents
+1. [Table of contents](#toc)
+2. [Learning goals](#goals)
+3. [Exercises](#exercises)
+    * [Sampling](#exercise1)
+    * [Simulating a null distribution using 1 million simulations](#exercise2)
+    * [Basic probability calculations](#exercise3)
+    * [P values by comparing the test statistic to the null distribution](#exercise4)
+
+###<a name="goals"></a>Learning goals
+#### By the end of this session, you should be able to...
+- Understand conditional probability
+- Understand Bayes theorem: how to calculate the conditional probability
+- Understand several key concepts within hypothesis testing
+    * Null hypothesis
+    * Null distribution
+    * Test statistic
+    * P value (probability of observing the value of the test statistic if the null hypothesis were true)
+
+###<a name="exercises"></a><u>Exercises</u>
+
+
+###<a name="exercise1"></a><u>Sampling</u>
+
+This is how you can simulate data:
+
+```{r}
+sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+```
+
+#### What does the sample() function do?
+
+It's going to shuffle your data around and resample with or without replacement (depending on whether you write replace = TRUE or replace = FALSE).
+
+
+You can use this to simulate a die:
+```{r}
+sample((1:6), size=1,replace=TRUE)
+```
+
+Or a coin:
+```{r}
+sample(c("plat","krone"), size=1, replace=TRUE)
+```
+
+Or just shuffle data around:
+```{r}
+sample(1:100)
+```
+
+#### What does set.seed() do?
+
+```{r}
+set.seed(0)
+sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+set.seed(0)
+sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+set.seed(0)
+sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+```
+
+Sampling is inherently random - setting the seed will cause the sampling to give the same result every time (given every other parameter is the same), making your "experiment" reproducible. 
+
+An example of summarising a sample:
+
+```{r}
+x = sample(x = c("A", "B"), size = 1000, replace = TRUE, prob = c(0.5,0.5) )
+sum(x=="B") # means that there are this many B's in your sample
+```
+
+Notice that when you say x = c("A", "B"), you essentially define x to be these 2 values. Then, when you re-define x to be a sample of size 1000 taken from these 2 values, what you do is you pick a value, you "write it down", then <em>you put it back</em> (because you said replace = TRUE) and repeat this 1000 times. 
+
+What about <em>sampling without replacement</em>? In that case, you have one less datapoint after every round because after you pick a value and write it down, you put it away. Try running this code after setting replace = FALSE - it will throw an error, because you can't take 1000 samples from something that has only 2 elements as you run out of things to sample after the second round.
+
+#### How many "A" in this large sample of 1000 observations?
+
+```{r}
+set.seed(47)
+x = sample(x = c("A", "B", "O"), size = 1000, replace = TRUE)
+sum(x=="A")
+```
+
+Example of a simulation:
+
+```{r}
+set.seed(0)
+nl = rep(NA,100) # creates a vector of length 100, consisting of NAs (Not Available - used in the case of missing data)
+for (i in (1:length(nl))) { #you want to populate the nl vector, hence you want to run this loop as many times as long the nl vector is
+  x = sample(x = c("A", "B", "O"), size = 10, replace = TRUE) # you take the sample
+  nl[i] = sum(x=="A") # you calculate how many A's are there in that sample and put it in the i-th position in the nl vector
+  # rinse and repeat
+}
+
+x
+```
+
+Summary (and the frequency distribution of A's):
+```{r}
+table(nl) # how many times do you see 0...8 A's 
+table(nl)/length(nl) # same idea, but with fractions
+barplot(table(nl), col = "deeppink4") # histogram visualizing the counts (absolute frequencies)
+barplot(table(nl)/length(nl), col = "deeppink4") # histogram visualizing the fractions - same tendencies, different scale (relative frequencies)
+```
+
+Counting extreme values:
+
+```{r}
+sum(nl >= 8)
+sum(nl >= 8) / length(nl)
+sum(nl <= 2)
+```
+
+###<a name="exercise2"></a><u>Simulating a null distribution using 1 million simulations</u>
+
+#### Use the information above to simulate 1 million random samples of 18 toads and make the barplot. We assume that the probability of left is 0.5 and right is 0.5 (null hypothesis). 
+
+```{r}
+set.seed(0)
+nl = rep(NA,1000000)
+
+for (i in (1:length(nl))) {
+  x = sample(x = c("L", "R"), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+  nl[i] = sum(x=="L")
+}
+
+barplot(table(nl), col = "deeppink4")
+barplot(table(nl)/length(nl), col = "deeppink4")
+```
+
+#### Compare you table of frequencies of left handed toads with table 6.2-1.
+
+```{r}
+table(nl)/length(nl)
+```
+
+#### It may not be the same for the very rare outcomes - why?
+
+It's because if something has a very small probability, you need to take a lot of samples to observe it at least once. For example, if something has 1% probability, you'll need to try approximately 100 times until you observe it once.
+
+*Take me back to [the beginning!](#toc)*
+
+###<a name="exercise3"></a><u>Basic probability calculations</u>
+
+#### Calculate the probability of all 18 toads to be left handed.
+
+```{r}
+0.5^18
+```
+
+Individually, every toad has 50% chance to be left-handed, so you just multiply this 18 times. This statement is essentially: <b>Pr[first toad is left-handed AND ... AND 18th toad is left-handed]</b>.
+
+You can, of course, calculate this probability from your simulated distribution - but beware, it won't give you the same exact result due to the fact that simulations introduce a whole lot of randomness. The answer above is grounded in maths and theory, the answer you'd get from the distribution is grounded in (simulated) data.
+
+#### Calculate the probability of all 18 toads to be left handed.
+
+```{r}
+0.5^18
+```
+
+#### Calculate the probability of 17/18 toads to be left handed (it is 18 different outcomes).
+
+```{r}
+18*(0.5^17*0.5)
+```
+
+This statement is saying the following: <b>Pr[first toad is left-handed AND ... AND 17th toad is left-handed AND 18th toad is right-handed]</b>, so to deal with the left-handed ones, you multiply 0.5 17 times and then you multiply this by 0.5 to account for the one right-handed toad. Because you can choose that one right-handed toad in 18 different ways (aka any toad out of the 18 could be the right-handed one), you need to multiply this whole expression by 18.
+
+#### Calculate the probability of all 18 toads to be left handed if we expect the population to have a frequency of 30% "left handed" toads.
+
+```{r}
+0.3^18 
+```
+
+#### Calculate the probability of all 18 toads to be right handed if we expect the population to have a frequency of 30% "left handed" toads.
+
+```{r}
+0.7^18 # because the probability of being right-handed now is 0.7
+```
+
+#### Let's calculate the probability of 17/18 toads to be left handed if we expect the population to have a frequency of 30% "left-handed" toads now and see how the expression changes:
+
+```{r}
+18*(0.3^17*0.7)
+```
+
+We can see that this is a much smaller probability, which makes sense as right-handed toads are more than twice as frequent in the population - so we wouldn't be suprised if it was pretty hard to take a sample where an overwhelming majority (almost 95%) of the toads are left-handed.
+
+*Take me back to [the beginning!](#toc)*
+
+###<a name="exercise4"></a><u>P values by comparing the test statistic to the null distribution</u>
+
+#### How often did your simulation yield 14 or more left handed toads?
+
+```{r}
+sum(nl >= 14)
+```
+
+#### How often did it yield the equivalent "lower tail"? (i.e. a similar lower than expected number of left handed toads)
+
+```{r}
+sum(nl <= 4)
+```
+
+#### What is the sum of extreme simulations from the null distribution?
+
+```{r}
+sum(nl >= 14) + sum(nl <= 4)
+```
+
+#### How much is this sum out of the total number of simulations?
+
+```{r}
+(sum(nl >= 14) + sum(nl <= 4)) / length(nl)
+```
+
+#### How does this value compare with the obtained P value from the book example?
+
+It is the same value, however, it is based on simulations and not real probabilities.
+
+#### If you only observed 13 left handed toads - would you reject the null hypothesis?
+
+```{r}
+(sum(nl >= 13) + sum(nl <= 5)) / length(nl)
+```
+
+We wouldn't.

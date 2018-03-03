@@ -21,6 +21,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "Week 4: Probability"
     url = "/week-4/"
+    
+    [[menu.main]]
+    name = "Week 5: Hypothesis testing"
+    url = "/week-5/"
 
 [params]
     description = "R notebooks created for students taking the course in Spring 2018 at Aarhus University."

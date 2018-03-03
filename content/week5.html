@@ -1,0 +1,243 @@
+---
+title: "Week 5: Hypothesis testing"
+author: Judit Kisistok
+date: '2018-02-28'
+slug: week-5
+summary: Simulations, probability calculations and a little bit of hypothesis testing.
+credit: Made by Judit Kisistók. The exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.
+categories: []
+tags: []
+---
+
+
+
+<div id="a.-table-of-contents" class="section level3">
+<h3><a name="toc"></a>A. Table of contents</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#toc">Table of contents</a></li>
+<li><a href="#goals">Learning goals</a></li>
+<li><a href="#exercises">Exercises</a>
+<ul>
+<li><a href="#exercise1">Sampling</a></li>
+<li><a href="#exercise2">Simulating a null distribution using 1 million simulations</a></li>
+<li><a href="#exercise3">Basic probability calculations</a></li>
+<li><a href="#exercise4">P values by comparing the test statistic to the null distribution</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="learning-goals" class="section level3">
+<h3><a name="goals"></a>Learning goals</h3>
+<div id="by-the-end-of-this-session-you-should-be-able-to" class="section level4">
+<h4>By the end of this session, you should be able to…</h4>
+<ul>
+<li>Understand conditional probability</li>
+<li>Understand Bayes theorem: how to calculate the conditional probability</li>
+<li>Understand several key concepts within hypothesis testing
+<ul>
+<li>Null hypothesis</li>
+<li>Null distribution</li>
+<li>Test statistic</li>
+<li>P value (probability of observing the value of the test statistic if the null hypothesis were true)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="exercises" class="section level3">
+<h3><a name="exercises"></a><u>Exercises</u></h3>
+</div>
+<div id="sampling" class="section level3">
+<h3><a name="exercise1"></a><u>Sampling</u></h3>
+<p>This is how you can simulate data:</p>
+<pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot;
+## [18] &quot;R&quot;</code></pre>
+<pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot;
+## [18] &quot;R&quot;</code></pre>
+<pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot;
+## [18] &quot;L&quot;</code></pre>
+<div id="what-does-the-sample-function-do" class="section level4">
+<h4>What does the sample() function do?</h4>
+<p>It’s going to shuffle your data around and resample with or without replacement (depending on whether you write replace = TRUE or replace = FALSE).</p>
+<p>You can use this to simulate a die:</p>
+<pre class="r"><code>sample((1:6), size=1,replace=TRUE)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Or a coin:</p>
+<pre class="r"><code>sample(c(&quot;plat&quot;,&quot;krone&quot;), size=1, replace=TRUE)</code></pre>
+<pre><code>## [1] &quot;plat&quot;</code></pre>
+<p>Or just shuffle data around:</p>
+<pre class="r"><code>sample(1:100)</code></pre>
+<pre><code>##   [1]  56  65  53   6  14  72  88  85  96  57  64  79  82  12  19  42  60
+##  [18]  10  58   8  31  47  44  23   2   9  55  30  45  86  78  80  22  63
+##  [35]  92  74  35  90   1  91  67  97   7  94  21  98  89  99  76  34  49
+##  [52]  29  84  38  66  11  13  36  59  18  81  75  50  52  62  33  40  68
+##  [69]  24  69  46  48  73  16  15  20 100  54  17  37  61  70  83  51  28
+##  [86]  32   5  77  26  93   4  87  41   3  95  25  27  71  39  43</code></pre>
+</div>
+<div id="what-does-set.seed-do" class="section level4">
+<h4>What does set.seed() do?</h4>
+<pre class="r"><code>set.seed(0)
+sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot;
+## [18] &quot;L&quot;</code></pre>
+<pre class="r"><code>set.seed(0)
+sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot;
+## [18] &quot;L&quot;</code></pre>
+<pre class="r"><code>set.seed(0)
+sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot;
+## [18] &quot;L&quot;</code></pre>
+<p>Sampling is inherently random - setting the seed will cause the sampling to give the same result every time (given every other parameter is the same), making your “experiment” reproducible.</p>
+<p>An example of summarising a sample:</p>
+<pre class="r"><code>x = sample(x = c(&quot;A&quot;, &quot;B&quot;), size = 1000, replace = TRUE, prob = c(0.5,0.5) )
+sum(x==&quot;B&quot;) # means that there are this many B&#39;s in your sample</code></pre>
+<pre><code>## [1] 517</code></pre>
+<p>Notice that when you say x = c(“A”, “B”), you essentially define x to be these 2 values. Then, when you re-define x to be a sample of size 1000 taken from these 2 values, what you do is you pick a value, you “write it down”, then <em>you put it back</em> (because you said replace = TRUE) and repeat this 1000 times.</p>
+<p>What about <em>sampling without replacement</em>? In that case, you have one less datapoint after every round because after you pick a value and write it down, you put it away. Try running this code after setting replace = FALSE - it will throw an error, because you can’t take 1000 samples from something that has only 2 elements as you run out of things to sample after the second round.</p>
+</div>
+<div id="how-many-a-in-this-large-sample-of-1000-observations" class="section level4">
+<h4>How many “A” in this large sample of 1000 observations?</h4>
+<pre class="r"><code>set.seed(47)
+x = sample(x = c(&quot;A&quot;, &quot;B&quot;, &quot;O&quot;), size = 1000, replace = TRUE)
+sum(x==&quot;A&quot;)</code></pre>
+<pre><code>## [1] 324</code></pre>
+<p>Example of a simulation:</p>
+<pre class="r"><code>set.seed(0)
+nl = rep(NA,100) # creates a vector of length 100, consisting of NAs (Not Available - used in the case of missing data)
+for (i in (1:length(nl))) { #you want to populate the nl vector, hence you want to run this loop as many times as long the nl vector is
+  x = sample(x = c(&quot;A&quot;, &quot;B&quot;, &quot;O&quot;), size = 10, replace = TRUE) # you take the sample
+  nl[i] = sum(x==&quot;A&quot;) # you calculate how many A&#39;s are there in that sample and put it in the i-th position in the nl vector
+  # rinse and repeat
+}
+
+x</code></pre>
+<pre><code>##  [1] &quot;B&quot; &quot;A&quot; &quot;B&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot; &quot;O&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot;</code></pre>
+<p>Summary (and the frequency distribution of A’s):</p>
+<pre class="r"><code>table(nl) # how many times do you see 0...8 A&#39;s </code></pre>
+<pre><code>## nl
+##  0  1  2  3  4  5  6  7  8 
+##  2 10 20 30 24  8  2  1  3</code></pre>
+<pre class="r"><code>table(nl)/length(nl) # same idea, but with fractions</code></pre>
+<pre><code>## nl
+##    0    1    2    3    4    5    6    7    8 
+## 0.02 0.10 0.20 0.30 0.24 0.08 0.02 0.01 0.03</code></pre>
+<pre class="r"><code>barplot(table(nl), col = &quot;deeppink4&quot;) # histogram visualizing the counts (absolute frequencies)</code></pre>
+<p><img src="/week5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>barplot(table(nl)/length(nl), col = &quot;deeppink4&quot;) # histogram visualizing the fractions - same tendencies, different scale (relative frequencies)</code></pre>
+<p><img src="/week5_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>Counting extreme values:</p>
+<pre class="r"><code>sum(nl &gt;= 8)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>sum(nl &gt;= 8) / length(nl)</code></pre>
+<pre><code>## [1] 0.03</code></pre>
+<pre class="r"><code>sum(nl &lt;= 2)</code></pre>
+<pre><code>## [1] 32</code></pre>
+</div>
+</div>
+<div id="simulating-a-null-distribution-using-1-million-simulations" class="section level3">
+<h3><a name="exercise2"></a><u>Simulating a null distribution using 1 million simulations</u></h3>
+<div id="use-the-information-above-to-simulate-1-million-random-samples-of-18-toads-and-make-the-barplot.-we-assume-that-the-probability-of-left-is-0.5-and-right-is-0.5-null-hypothesis." class="section level4">
+<h4>Use the information above to simulate 1 million random samples of 18 toads and make the barplot. We assume that the probability of left is 0.5 and right is 0.5 (null hypothesis).</h4>
+<pre class="r"><code>set.seed(0)
+nl = rep(NA,1000000)
+
+for (i in (1:length(nl))) {
+  x = sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )
+  nl[i] = sum(x==&quot;L&quot;)
+}
+
+barplot(table(nl), col = &quot;deeppink4&quot;)</code></pre>
+<p><img src="/week5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>barplot(table(nl)/length(nl), col = &quot;deeppink4&quot;)</code></pre>
+<p><img src="/week5_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+</div>
+<div id="compare-you-table-of-frequencies-of-left-handed-toads-with-table-6.2-1." class="section level4">
+<h4>Compare you table of frequencies of left handed toads with table 6.2-1.</h4>
+<pre class="r"><code>table(nl)/length(nl)</code></pre>
+<pre><code>## nl
+##        0        1        2        3        4        5        6        7 
+## 0.000008 0.000080 0.000590 0.003229 0.011858 0.033034 0.071079 0.121916 
+##        8        9       10       11       12       13       14       15 
+## 0.166540 0.184632 0.166451 0.121632 0.070837 0.032731 0.011689 0.003080 
+##       16       17       18 
+## 0.000552 0.000060 0.000002</code></pre>
+</div>
+<div id="it-may-not-be-the-same-for-the-very-rare-outcomes---why" class="section level4">
+<h4>It may not be the same for the very rare outcomes - why?</h4>
+<p>It’s because if something has a very small probability, you need to take a lot of samples to observe it at least once. For example, if something has 1% probability, you’ll need to try approximately 100 times until you observe it once.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="basic-probability-calculations" class="section level3">
+<h3><a name="exercise3"></a><u>Basic probability calculations</u></h3>
+<div id="calculate-the-probability-of-all-18-toads-to-be-left-handed." class="section level4">
+<h4>Calculate the probability of all 18 toads to be left handed.</h4>
+<pre class="r"><code>0.5^18</code></pre>
+<pre><code>## [1] 3.814697e-06</code></pre>
+<p>Individually, every toad has 50% chance to be left-handed, so you just multiply this 18 times. This statement is essentially: <b>Pr[first toad is left-handed AND … AND 18th toad is left-handed]</b>.</p>
+<p>You can, of course, calculate this probability from your simulated distribution - but beware, it won’t give you the same exact result due to the fact that simulations introduce a whole lot of randomness. The answer above is grounded in maths and theory, the answer you’d get from the distribution is grounded in (simulated) data.</p>
+</div>
+<div id="calculate-the-probability-of-all-18-toads-to-be-left-handed.-1" class="section level4">
+<h4>Calculate the probability of all 18 toads to be left handed.</h4>
+<pre class="r"><code>0.5^18</code></pre>
+<pre><code>## [1] 3.814697e-06</code></pre>
+</div>
+<div id="calculate-the-probability-of-1718-toads-to-be-left-handed-it-is-18-different-outcomes." class="section level4">
+<h4>Calculate the probability of 17/18 toads to be left handed (it is 18 different outcomes).</h4>
+<pre class="r"><code>18*(0.5^17*0.5)</code></pre>
+<pre><code>## [1] 6.866455e-05</code></pre>
+<p>This statement is saying the following: <b>Pr[first toad is left-handed AND … AND 17th toad is left-handed AND 18th toad is right-handed]</b>, so to deal with the left-handed ones, you multiply 0.5 17 times and then you multiply this by 0.5 to account for the one right-handed toad. Because you can choose that one right-handed toad in 18 different ways (aka any toad out of the 18 could be the right-handed one), you need to multiply this whole expression by 18.</p>
+</div>
+<div id="calculate-the-probability-of-all-18-toads-to-be-left-handed-if-we-expect-the-population-to-have-a-frequency-of-30-left-handed-toads." class="section level4">
+<h4>Calculate the probability of all 18 toads to be left handed if we expect the population to have a frequency of 30% “left handed” toads.</h4>
+<pre class="r"><code>0.3^18 </code></pre>
+<pre><code>## [1] 3.874205e-10</code></pre>
+</div>
+<div id="calculate-the-probability-of-all-18-toads-to-be-right-handed-if-we-expect-the-population-to-have-a-frequency-of-30-left-handed-toads." class="section level4">
+<h4>Calculate the probability of all 18 toads to be right handed if we expect the population to have a frequency of 30% “left handed” toads.</h4>
+<pre class="r"><code>0.7^18 # because the probability of being right-handed now is 0.7</code></pre>
+<pre><code>## [1] 0.001628414</code></pre>
+</div>
+<div id="lets-calculate-the-probability-of-1718-toads-to-be-left-handed-if-we-expect-the-population-to-have-a-frequency-of-30-left-handed-toads-now-and-see-how-the-expression-changes" class="section level4">
+<h4>Let’s calculate the probability of 17/18 toads to be left handed if we expect the population to have a frequency of 30% “left-handed” toads now and see how the expression changes:</h4>
+<pre class="r"><code>18*(0.3^17*0.7)</code></pre>
+<pre><code>## [1] 1.627166e-08</code></pre>
+<p>We can see that this is a much smaller probability, which makes sense as right-handed toads are more than twice as frequent in the population - so we wouldn’t be suprised if it was pretty hard to take a sample where an overwhelming majority (almost 95%) of the toads are left-handed.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="p-values-by-comparing-the-test-statistic-to-the-null-distribution" class="section level3">
+<h3><a name="exercise4"></a><u>P values by comparing the test statistic to the null distribution</u></h3>
+<div id="how-often-did-your-simulation-yield-14-or-more-left-handed-toads" class="section level4">
+<h4>How often did your simulation yield 14 or more left handed toads?</h4>
+<pre class="r"><code>sum(nl &gt;= 14)</code></pre>
+<pre><code>## [1] 15383</code></pre>
+</div>
+<div id="how-often-did-it-yield-the-equivalent-lower-tail-i.e.a-similar-lower-than-expected-number-of-left-handed-toads" class="section level4">
+<h4>How often did it yield the equivalent “lower tail”? (i.e. a similar lower than expected number of left handed toads)</h4>
+<pre class="r"><code>sum(nl &lt;= 4)</code></pre>
+<pre><code>## [1] 15765</code></pre>
+</div>
+<div id="what-is-the-sum-of-extreme-simulations-from-the-null-distribution" class="section level4">
+<h4>What is the sum of extreme simulations from the null distribution?</h4>
+<pre class="r"><code>sum(nl &gt;= 14) + sum(nl &lt;= 4)</code></pre>
+<pre><code>## [1] 31148</code></pre>
+</div>
+<div id="how-much-is-this-sum-out-of-the-total-number-of-simulations" class="section level4">
+<h4>How much is this sum out of the total number of simulations?</h4>
+<pre class="r"><code>(sum(nl &gt;= 14) + sum(nl &lt;= 4)) / length(nl)</code></pre>
+<pre><code>## [1] 0.031148</code></pre>
+</div>
+<div id="how-does-this-value-compare-with-the-obtained-p-value-from-the-book-example" class="section level4">
+<h4>How does this value compare with the obtained P value from the book example?</h4>
+<p>It is the same value, however, it is based on simulations and not real probabilities.</p>
+</div>
+<div id="if-you-only-observed-13-left-handed-toads---would-you-reject-the-null-hypothesis" class="section level4">
+<h4>If you only observed 13 left handed toads - would you reject the null hypothesis?</h4>
+<pre class="r"><code>(sum(nl &gt;= 13) + sum(nl &lt;= 5)) / length(nl)</code></pre>
+<pre><code>## [1] 0.096913</code></pre>
+<p>We wouldn’t.</p>
+</div>
+</div>
