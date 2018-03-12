@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.36" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Week 6: Analyzing proportions &middot; Genome Analysis &amp; Statistics</title>
+
+  
+  <link rel="stylesheet" href="/css/print.css" media="print">
+  <link rel="stylesheet" href="/css/poole.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css" rel="stylesheet">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Genome Analysis &amp; Statistics" />
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/"><h1>Genome Analysis &amp; Statistics</h1></a>
+      <p class="lead">
+       R notebooks created for students taking the course in Spring 2018 at Aarhus University. 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      <li><a href="/week-1/"> Week 1: Introduction </a></li><li><a href="/week-2/"> Week 2: Summary statistics </a></li><li><a href="/week-3/"> Week 3: Sampling distributions </a></li><li><a href="/week-4/"> Week 4: Probability </a></li><li><a href="/week-5/"> Week 5: Hypothesis testing </a></li><li><a href="/week-6/"> Week 6: Analyzing proportions </a></li>
+    </ul>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Week 6: Analyzing proportions</h1>
+  <span class="post-date">Wed, Mar 7, 2018</span>
+  <span class="post-date">Made by Judit Kisistók. Supplemented by Simon Grund Sørensen. The exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.</span>
+  <pre class="r"><code>library(tidyverse) # I will need this later for fancy plotting</code></pre>
+<div id="a.-table-of-contents" class="section level3">
+<h3><a name="toc"></a>A. Table of contents</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#toc">Table of contents</a></li>
+<li><a href="#goals">Learning goals</a></li>
+<li><a href="#exercises">Exercises</a>
+<ul>
+<li><a href="#exercise1">Introducing dbinom() and rbinom()</a></li>
+<li><a href="#exercise2">Visualizing the binomial distribution in R</a></li>
+<li><a href="#exercise3">Example 7.2 of the book “Sex and the X” in R</a></li>
+<li><a href="#exercise4">Chapter 7 Problems</a></li>
+<li><a href="#exercise5">Planning a survey according to statistical power</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="learning-goals" class="section level3">
+<h3><a name="goals"></a>Learning goals</h3>
+<div id="by-the-end-of-this-session-you-should-be-able-to" class="section level4">
+<h4>By the end of this session, you should be able to…</h4>
+<ul>
+<li>understand several key concepts within hypothesis testing:
+<ul>
+<li>null hypothesis &amp; null distribution</li>
+<li>test statistic &amp; P-values</li>
+<li>which errors can we make when performing hypothesis testing (I and II)</li>
+<li>what is statistical power</li>
+</ul></li>
+<li>understand the binomial distribution and in what context it arises</li>
+<li>how the binomial probability distribution can be used as a null distribution when testing null hypothesis with proportion data</li>
+</ul>
+</div>
+<div id="readme-first--" class="section level4">
+<h4>README FIRST :-)</h4>
+<p>We first introduce/illustrate two important new R functions: dbinom() and rbinom(). You then have to reuse these 2 functions in a variety of situations.</p>
+<p>It’s a good idea to work sequentially:<br />
+1. Try the R function and how they relate to the binomial distribution of Chapter 7 and how to graph the distribution<br />
+2. Try the next questions that basically redo in R some examples of Chapter 7<br />
+3. Try the set of Chapter 7 problems<br />
+4. Try the last question on statistical power (more challenging)</p>
+</div>
+</div>
+<div id="exercises" class="section level3">
+<h3><a name="exercises"></a><u>Exercises</u></h3>
+</div>
+<div id="introducing-dbinom-and-rbinom" class="section level3">
+<h3><a name="exercise1"></a><u>Introducing dbinom() and rbinom()</u></h3>
+<p>R functions for simulating from /calculating the binomial probability</p>
+<p>If you want to draw 1 random number from a binomial distribution with 25 trials(tests) and probability of success 1/2</p>
+<pre class="r"><code>rbinom(n = 1, size = 25, prob = 0.5) ## try to evaluate that several times (you get different numbers)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<p>If you want to calculate the probability of having exactly 2 success out of 25 trials</p>
+<pre class="r"><code>dbinom(x = 2, size = 25, prob = 0.5)</code></pre>
+<pre><code>## [1] 8.940697e-06</code></pre>
+<div id="using-dbinom-and-rbinom" class="section level4">
+<h4>Using dbinom() and rbinom()</h4>
+<p>Let’s call X3 the random variable that records the number of “6” you get when rolling 3 dices. Use rbinom() and generate 100 observations from X3 (instead of just 1 observation).</p>
+<pre class="r"><code>rbinom(n = 100, size = 3, prob = 1/6)</code></pre>
+<pre><code>##   [1] 0 1 0 0 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 1 0 1 1 1 0 1 0 2 0 1 0 0 0 1 1
+##  [36] 0 0 0 0 1 0 1 1 2 1 2 1 0 0 1 0 0 0 2 1 0 0 1 2 1 2 0 1 1 0 0 0 0 1 0
+##  [71] 1 0 2 0 1 0 0 0 0 2 0 1 1 0 0 0 2 1 0 1 0 0 0 2 1 0 0 0 3 0</code></pre>
+<pre class="r"><code># we want 100 observations
+# we have 3 dice - so the number of trials is 3
+# and the probability of getting a 3 is 1/6</code></pre>
+</div>
+<div id="using-dbinom-calculate-px30-and-px3-2." class="section level4">
+<h4>Using dbinom(), Calculate P(X3=0) and P(X3 = 2).</h4>
+<pre class="r"><code>dbinom(x = 0, size = 3, prob = 1/6)</code></pre>
+<pre><code>## [1] 0.5787037</code></pre>
+<pre class="r"><code>dbinom(x = 2, size = 3, prob = 1/6)</code></pre>
+<pre><code>## [1] 0.06944444</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="visualizing-the-binomial-distribution-in-r" class="section level3">
+<h3><a name="exercise2"></a><u>Visualizing the binomial distribution in R</u></h3>
+<p>We can simulate 1000 times from the binomial and make a histogram like in example 7.1-1</p>
+<pre class="r"><code>nleftHanded= rbinom(n = 10^3, size =27, p=0.25) # Simulated H0 distribution for the number of left handed flowers
+
+hist(nleftHanded, prob=T, breaks=seq(from=0, to = 27, by = 1), col=&quot;deeppink4&quot;,
+     xlab=&quot;Number of lefthanded flowers (X)&quot;,
+     ylim=c(0,0.2), 
+     ylab=&quot;Probability&quot;)</code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>We can also directly get the exact probability from the binomial distribution:</p>
+<pre class="r"><code>nLeftFlowers=seq(from=0, to = 27, by = 1) #creates a sequence of numbers from 0 to 27 - you can think about this as &quot;bins&quot; on your histogram
+PnL=dbinom(x = nLeftFlowers, size = 27, prob = 0.25 ) # exact H0 distribution for the number of left handed flowers - we take the sequence of numbers (&quot;bins&quot;) we created before and calculate the probabilities for every single one (aka the probability of observing 0, 1, 2...27 left-handed flowers out of 27 if the probability of being left-handed is 0.25)
+
+sum(PnL) # sanity check (if it is a probability --&gt; sums to 1)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>plot(nLeftFlowers,PnL, type =&quot;h&quot;, col=&quot;deeppink4&quot;, lwd=5) #lwd is just the width of the lines, so you can play around with it and see if you find a different line width more aesthetically pleasing</code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+<div id="example-7.2-of-the-book-sex-and-the-x-in-r" class="section level3">
+<h3><a name="exercise3"></a><u>Example 7.2 of the book “Sex and the X” in R</u></h3>
+<p>Let’s just recap briefly: out of 25 spermatogenesis genes, 10 are located on the X (that makes up 6.1 % of the mouse genome).<br />
+And the biological question is: How improbable is this, if the X gene reportoire was not special? The H0 (p. 186) is that the probability of any spermatognesis gene falls on X is 6.1%.</p>
+<div id="graph-the-null-probability-distribution-for-sunderxh0-the-number-of-spermatogenesis-genes-that-are-on-the-x-under-h0." class="section level4">
+<h4>Graph the (null) probability distribution for SunderXh0, the number of spermatogenesis genes that are on the X under H0.</h4>
+<pre class="r"><code># Simulated
+SunderXh0 = rbinom(n = 10^3, size = 25, p=0.061) # simulated nulldistribution for the number of spermatogenesis genes falling on X under H0 - we have 25 genes in total and the probability of falling on the X is 0.061 under the null
+# what rbinom does is that it gives you a bunch (10^3) random numbers from the binomial distribution - and depending on the probability, you may or may not see every possibility / event happening
+
+hist(SunderXh0, prob=T, breaks=seq(from=0, to = 27, by = 1), col=&quot;deeppink4&quot;,
+     xlab=&quot;Number of genes on Chromosome X given H0&quot;,
+     ylim=c(0,0.2), 
+     ylab=&quot;Probability&quot;, 
+     main = &quot;Simulated H0 distribution from 1000 simulations&quot;)</code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code># here you can see that there is not much to look at after X = 7 - the probability of observing more is so small that 1000 simulations are not enough to observe them at least once
+
+# Exact
+SunderXh0=seq(from=0, to = 25, by = 1)
+Pr_sunderXh0=dbinom(x = SunderXh0, size = 25, prob = 0.061) # exact H0 distribution for the number of spermatogenesis genes falling on X under H0
+
+# this one is exact because you are not relying on your luck (and simulation) and hope that you&#39;ll observe every possibility at least once - instead, you are calculating the exact probabilities of observing 0, 1...25 genes on the X under H0
+
+sum(Pr_sunderXh0) # sanity check (if it is a probability --&gt; sums to 1)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>plot(x = SunderXh0, y = Pr_sunderXh0, type =&quot;h&quot;, col=&quot;deeppink4&quot;, lwd=7, main = &quot;Exact H0 distribution&quot;) </code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+</div>
+<div id="calculate-prsunderxh0-10." class="section level4">
+<h4>Calculate Pr(SunderXh0 &gt; 10).</h4>
+<pre class="r"><code>#Sum the probabilities from being 11 and above
+sum(Pr_sunderXh0[11:25])</code></pre>
+<pre><code>## [1] 9.93988e-07</code></pre>
+</div>
+<div id="why-is-the-p-value-for-this-case-calculated-as-2-prsunderxh0-10" class="section level4">
+<h4>Why is the p value for this case calculated as 2* Pr(SunderXh0 &gt; 10)?</h4>
+<p>Because we reject the null hypothesis in two cases - if there are more spermatogenesis genes on X than expected under the null, or if there are less, hence, we’re looking at a two-tailed test. To get the P-value, we need to take into account both extremes - the probability that we see 10 or more spermatogenesis genes on the X and its equivalent in the lower tail.</p>
+<p>It is not immediately apparent what the “equivalent lower tail” is in this case because the distribution is asymmetrical - however, you can think about it in terms of probabilities. If you sum up the probability from being 11 and above, you get a value y - and in the lower tail, you will find the same y probability and that is going to be your equivalently extreme lower tail.</p>
+<p>If you are unsure whether you should multiply by 2 to get the P-value, think about the null hypothesis. If it’s like this:<br />
+<span class="math inline">\(H_0: p_0 = 0.5\)</span> - the opposite of this is:<br />
+<span class="math inline">\(H_A: p_0 =/= 0.5\)</span>.<br />
+This means that you need to look at both extremes. On the other hand, if the null hypothesis looks like this:<br />
+<span class="math inline">\(H_0: p_0 &gt;= 0.5\)</span> - the corresponding alternative hypothesis is this:<br />
+<span class="math inline">\(H_A: p_0 &lt; 0.5\)</span>, in which case you are only interested in one extreme.</p>
+</div>
+<div id="simulation-based-p-value-versus-exact-p-values" class="section level4">
+<h4>Simulation based p-value versus exact p-values</h4>
+<p>Using 10^5 simulations, simulate the null distribution for SunderXh0 and get the (approximate) p-value by comparing the simulated distribution and the data.</p>
+<pre class="r"><code>SimulatedP= rbinom(n = 10^5, size =25, p=0.061) # Simulated H0 distribution for the number of left handed flowers
+
+2*(sum(SimulatedP&gt;10)/(10^5)) #P-value of 10 or more genes on X, assuming H0 - you sum up the simulated values that are larger than 10, divide it by the total number of simulations and multiply it by 2 to get the P-value for this two-tailed test</code></pre>
+<pre><code>## [1] 0</code></pre>
+</div>
+<div id="why-are-the-exact-p-value-and-the-approximate-p-value-you-got-different-hint-think-about-how-many-simulations-you-need-to-do-in-order-to-observe-an-event-that-has-probability-0.0001-versus-0.0000001." class="section level4">
+<h4>Why are the exact p-value and the approximate p-value you got different? (Hint: think about how many simulations you need to do in order to observe an event that has probability 0.0001 versus 0.0000001?).</h4>
+<p>If an event has a very small probability, we need to do a huge amount of simulations to be able to observe it at least once - so these events might get lost when we’re doing simulations to determine the p-value, but are covered in the exact p-value calculations.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="chapter-7-problems" class="section level3">
+<h3><a name="exercise4"></a><u>Chapter 7 Problems</u></h3>
+<p>Answers to problems 1, 2, 5, 6, 13 and 16 can be found in the book.</p>
+<div id="exercise-24" class="section level4">
+<h4><u>Exercise 24</u></h4>
+<ol style="list-style-type: lower-alpha">
+<li>On average, 0.25 of 12 peas should be wrinkled - which is 3.</li>
+</ol>
+<pre class="r"><code>0.25*12</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>The standard error of an estimate is the standard deviation of the sampling distribution - in this case, the standard error of the proportion estimate.</li>
+</ol>
+<pre class="r"><code>n = 12
+prop_estimate = 0.25 #expected fraction of wrinkled peas
+SE = sqrt((prop_estimate*(1-prop_estimate))/n)
+SE</code></pre>
+<pre><code>## [1] 0.125</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The variance is the square of the standard deviation.</li>
+</ol>
+<pre class="r"><code>var = SE**2
+var</code></pre>
+<pre><code>## [1] 0.015625</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>The proportion of students seeing exactly 2 wrinkled pea plants:</li>
+</ol>
+<pre class="r"><code>dbinom(x = 2, size = 12, prob = 0.25)</code></pre>
+<pre><code>## [1] 0.2322932</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="planning-a-survey-according-to-statistical-power" class="section level3">
+<h3><a name="exercise5"></a><u>Planning a survey according to statistical power</u></h3>
+<p>Imagine that you are planning a survey where you want to show that a species has a biased sex ratio. The null hypothesis is that the ratio is balanced (1/2 males and 1/2 females at birth), but you suspect that the sex ratio in that species is actually 1/3 2/3.</p>
+<div id="what-mimimum-number-of-individuals-should-you-examine-i.e.sex-determine-in-order-to-have-have-a-power-of-90-to-reject-the-null-we-use-a-type-i-error-of-0.01-to-reject-the-null" class="section level4">
+<h4>What mimimum number of individuals should you examine (i.e. sex determine) in order to have have a power of 90% to reject the null (we use a type I error of 0.01 to reject the null)?</h4>
+<p>First of all, pick a sample size and see if you can simulate the null and the alternative distributions (remember that we have a specific alternative hypothesis so this should be doable). Plot them and see how far they are from eachother - if there is a huge overlap, that implies that you don’t have enough power to reject the null at that sample size.</p>
+<p>What we want is really just the following - finding a sample size where 99.5% of the <span class="math inline">\(H_0\)</span> distribution is <b>above</b> the lower tail significance threshold and 90% of the <span class="math inline">\(H_A\)</span> distribution is <b>below</b> that threshold.</p>
+<p>We need to set the 99% significance threshold on the <span class="math inline">\(H_0\)</span> distribution and then calculate how many <span class="math inline">\(H_A\)</span> values are lower than this - this number is going to be the power.</p>
+<p>So, in a nutshell:</p>
+<ol style="list-style-type: decimal">
+<li>Figure out the null you want to reject and the critical value at 0.01 levels</li>
+<li>Simulate different null distribution until you have 90% of the simulated value that reject the NULL</li>
+</ol>
+<p>Here is one solution. Let’s pretend that someone told us that n = 120, but feel free to play around with it and see what happens if it’s way less.</p>
+<pre class="r"><code>xs=seq(from =0, to =120, by=1)
+H0=dbinom(x = xs,size = 120,prob = 0.5) #the null distribution
+HA = dbinom(x = xs,size = 120,prob = 2/3) #the alternative distribution
+data = as.data.frame(cbind(xs, H0, HA)) #putting everything to one dataframe for convenience
+
+# What&#39;s the treshold where 90% of data is expected to lie within?
+i = seq(1,120,1) # just numbers from 1 to 120
+p = 2 * (1-pbinom(q = i,size = 120,prob = 0.5)) # 120 p-values
+treshold = as.data.frame(cbind(i, p))
+
+# let&#39;s plot it - the horizontal line signifies that threshold:
+ggplot(treshold)+
+  geom_point(aes(i,p))+
+  geom_hline(aes(yintercept = 0.1))</code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code># another plot to show the distributions
+ggplot(data)+
+geom_histogram(aes(x = xs, y = H0, fill = &quot;H0&quot;), stat = &quot;identity&quot;, alpha = 0.80)+
+geom_histogram(aes(x = xs, y = HA, fill = &quot;HA&quot;), stat = &quot;identity&quot;, alpha = 0.60)+
+ylab(&quot;&quot;)+
+geom_vline(aes(xintercept = 72))</code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<pre class="r"><code># we measure how many values from HA are over this threshold, which is going to be our desired power
+cat(&quot;Power, with n = 120 and significance level = 0.1:&quot; ,1-pbinom(q = 72,size = 120,prob = 2/3))</code></pre>
+<pre><code>## Power, with n = 120 and significance level = 0.1: 0.9253669</code></pre>
+<p>Let’s see another solution with classic plots and less steps.</p>
+<p>Here you know that <span class="math inline">\(H_A\)</span> is binomial wih n trials and p = 2/3 and you can only vary n. Here is an approx answer that gives about 90% power (actually 85%) with n=120:</p>
+<pre class="r"><code>xs=seq(from =0, to =120, by=1)
+MypH0=dbinom(x = xs, size = 120, prob = 0.5)
+# calculate the number of individuals that would result in NOT rejecting the null and the number of individuals that would result in rejecting the null - this is the threshold we&#39;re looking for, which is 74 individuals in this case
+1-pbinom(q = 74,size = 120,prob = 0.5) </code></pre>
+<pre><code>## [1] 0.003923297</code></pre>
+<pre class="r"><code>MypHA=dbinom(x = xs,size = 120,prob = 2/3)
+plot(xs,MypH0, col=&quot;black&quot;, type=&quot;h&quot;, lwd=3, xlab=&quot;xs&quot;, ylim=c(0,0.1), ylab=&quot;Probability&quot;, cex.axis=1.6)
+abline(v=74, col=&quot;red&quot;, lwd=2, lty=2)
+points(xs+0.2,MypHA, col=&quot; green&quot;, type=&quot;h&quot;, lwd=3)</code></pre>
+<p><img src="/week6_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>1- pbinom(q = 74, prob = 2/3,size = 120) #the power</code></pre>
+<pre><code>## [1] 0.8563232</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: ["r"]});
+hljs.initHighlightingOnLoad();
+</script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+
+    </div>
+
+    
+  </body>
+</html>

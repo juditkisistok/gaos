@@ -6,10 +6,19 @@
     <description>Recent content on Genome Analysis &amp; Statistics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Week 6: Analyzing proportions</title>
+      <link>/week-6/</link>
+      <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/week-6/</guid>
+      <description>library(tidyverse) # I will need this later for fancy plotting A. Table of contents Table of contents Learning goals Exercises  Introducing dbinom() and rbinom() Visualizing the binomial distribution in R Example 7.2 of the book “Sex and the X” in R Chapter 7 Problems Planning a survey according to statistical power    Learning goals By the end of this session, you should be able to…  understand several key concepts within hypothesis testing:  null hypothesis &amp;amp; null distribution test statistic &amp;amp; P-values which errors can we make when performing hypothesis testing (I and II) what is statistical power  understand the binomial distribution and in what context it arises how the binomial probability distribution can be used as a null distribution when testing null hypothesis with proportion data   README FIRST :-) We first introduce/illustrate two important new R functions: dbinom() and rbinom().</description>
+    </item>
     
     <item>
       <title>Week 5: Hypothesis testing</title>

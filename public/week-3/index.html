@@ -38,7 +38,7 @@
 
     <ul class="sidebar-nav">
       <li><a href="/">Home</a> </li>
-      <li><a href="/week-1/"> Week 1: Introduction </a></li><li><a href="/week-2/"> Week 2: Summary statistics </a></li><li><a href="/week-3/"> Week 3: Sampling distributions </a></li><li><a href="/week-4/"> Week 4: Probability </a></li><li><a href="/week-5/"> Week 5: Hypothesis testing </a></li>
+      <li><a href="/week-1/"> Week 1: Introduction </a></li><li><a href="/week-2/"> Week 2: Summary statistics </a></li><li><a href="/week-3/"> Week 3: Sampling distributions </a></li><li><a href="/week-4/"> Week 4: Probability </a></li><li><a href="/week-5/"> Week 5: Hypothesis testing </a></li><li><a href="/week-6/"> Week 6: Analyzing proportions </a></li>
     </ul>
 
     <p>&copy; 2018. All rights reserved. </p>
@@ -251,7 +251,7 @@ myBreaks</code></pre>
 <p>Hint: Here is a simple example to draw 5 numbers with replacement from a “made-up” empirical distribution - adapt that for your purposes.</p>
 <pre class="r"><code>madeup=c(3,3,4,5,6,7,8,2,1,3,5,6,12,435,23)
 sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and replace=  specifying here (check the help)?</code></pre>
-<pre><code>## [1]   3   7 435   6   3</code></pre>
+<pre><code>## [1] 3 5 5 6 4</code></pre>
 <p><strong>x:</strong> the data that we want to draw samples from<br />
 <strong>size:</strong> the size of the sample that we want to take<br />
 <strong>replace:</strong> whether or not we want to sample with replacement</p>
@@ -293,15 +293,15 @@ sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and 
   cat(&quot;And the median is: &quot;, mymedian, &quot;\n&quot;) #we concatenate and print it out
 }</code></pre>
 <pre><code>## And the median is:  3 
-## And the median is:  6 
-## And the median is:  12 
-## And the median is:  6 
-## And the median is:  6 
-## And the median is:  3 
-## And the median is:  12 
-## And the median is:  3 
 ## And the median is:  5 
-## And the median is:  6</code></pre>
+## And the median is:  6 
+## And the median is:  5 
+## And the median is:  5 
+## And the median is:  3 
+## And the median is:  3 
+## And the median is:  3 
+## And the median is:  3 
+## And the median is:  3</code></pre>
 <p>Or we can be smart and instead of “printing it” we “write it down” i.e. store that in a vector:</p>
 <pre class="r"><code>myMedians = NULL # this initializes a &quot;nullvector&quot;
 for (i in 1:10) {
@@ -309,7 +309,7 @@ for (i in 1:10) {
   myMedians[i]=median(tryit) #we add the calculated medians to the nullvector
 }
 myMedians </code></pre>
-<pre><code>##  [1] 6 5 5 4 7 7 5 3 8 6</code></pre>
+<pre><code>##  [1] 4 6 6 6 4 7 3 5 5 3</code></pre>
 <div id="adapt-this-code-to-generate-fig-4.1-3-and-4.1-4-use-104-samples-to-get-the-sampling-distributions." class="section level4">
 <h4>Adapt this code to generate fig 4.1-3 and 4.1-4 (use 10^4 samples to get the sampling distributions).</h4>
 <pre class="r"><code>#nullvectors for the means (different sample sizes)
@@ -459,23 +459,23 @@ hist(medianLength_500,
 <h4>Compare the statistical precision we have to estimate mean SD and median: is the summary statistic that entails most uncertainty?</h4>
 <p>So we created all these nice sampling distributions and we can calculate the standard error to get an idea about their uncertainty:</p>
 <pre class="r"><code>sd(meanLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 100.9272</code></pre>
+<pre><code>## [1] 102.6191</code></pre>
 <pre class="r"><code>sd(meanLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 20.18769</code></pre>
+<pre><code>## [1] 20.33959</code></pre>
 <pre class="r"><code>sd(meanLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 4.039965</code></pre>
+<pre><code>## [1] 4.099199</code></pre>
 <pre class="r"><code>sd(sdLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 209.1471</code></pre>
+<pre><code>## [1] 196.6163</code></pre>
 <pre class="r"><code>sd(sdLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 62.94009</code></pre>
+<pre><code>## [1] 59.68604</code></pre>
 <pre class="r"><code>sd(sdLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 21.29206</code></pre>
+<pre><code>## [1] 21.1433</code></pre>
 <pre class="r"><code>sd(medianLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 92.03199</code></pre>
+<pre><code>## [1] 92.9071</code></pre>
 <pre class="r"><code>sd(medianLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 17.61048</code></pre>
+<pre><code>## [1] 17.96683</code></pre>
 <pre class="r"><code>sd(medianLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 3.550439</code></pre>
+<pre><code>## [1] 3.549096</code></pre>
 <p>We can see that if we compare the precision of our estimates given the 3 sample sizes, the n = 500 estimate is the most precise which is expected. If we take a look at the different summary statistics at the same sample sizes, we find that the median estimate is the least uncertain - this is also expected given that this statistic is the most resistant to the influence of the outliers while the mean and standard deviation are more sensitive to them (remember, the standard deviation is the most uncertain - it is calculated using the mean, which was already pretty sensitive to extreme observations!).</p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
 </div>
