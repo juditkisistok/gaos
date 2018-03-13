@@ -529,7 +529,8 @@ Attaching package: 'cowplot'
 
 "
 "2","Warning messages:
-1: package 'mosaic' was built under R version 3.4.3 
+"
+"2","1: package 'mosaic' was built under R version 3.4.3 
 2: package 'mosaicData' was built under R version 3.4.3 
 3: package 'cowplot' was built under R version 3.4.3 
 "
@@ -644,7 +645,8 @@ Attaching package: 'cowplot'
 "2","During startup - Warning messages:
 1: Setting LC_CTYPE failed, using ""C"" 
 2: Setting LC_COLLATE failed, using ""C"" 
-3: Setting LC_TIME failed, using ""C"" 
+"
+"2","3: Setting LC_TIME failed, using ""C"" 
 4: Setting LC_MESSAGES failed, using ""C"" 
 5: Setting LC_MONETARY failed, using ""C"" 
 "
@@ -664,8 +666,7 @@ Attaching package: 'cowplot'
 2: Setting LC_COLLATE failed, using ""C"" 
 3: Setting LC_TIME failed, using ""C"" 
 4: Setting LC_MESSAGES failed, using ""C"" 
-"
-"2","5: Setting LC_MONETARY failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
 "
 "2","-- Attaching packages --------------------------------------------------------------------- tidyverse 1.2.1 --
 "
@@ -697,11 +698,32 @@ x dplyr::lag()    masks stats::lag()
   Static files     | 82  
   Processed images |  0  
   Aliases          |  0  
+  Sitemaps         | "
+"1"," 1  
+  Cleaned          |  0  
+
+Total in 133 ms
+"
+"1","[?25lBuilding sites … "
+"1","[?25h[K"
+"1","
+"
+"1"," "
+"1","                  | EN  
++------------------+----+
+  "
+"1","Pages            | 13  "
+"1","
+  Paginator pages  |  0  
+  Non-page files   |  3  "
+"1","
+  Static files     | 82  
+  Processed images |  0  
+  Aliases          |  0  
   Sitemaps         |  1  
   Cleaned          |  0  
 
-"
-"1","Total in 111 ms
+Total in 162 ms
 "
 "0","blogdown::serve_site()"
 "1","[?25lBuilding sites … "
@@ -712,16 +734,18 @@ x dplyr::lag()    masks stats::lag()
   Pages            | 13  
   Paginator pages  |  0  
   Non-page files   |  3  
-  Static files     | 82  "
-"1","
+  Static files     | 82  
   Processed images |  0  
   Aliases          |  0  
-  Sitemaps         |  1  
+  Sitemaps        "
+"1"," "
+"1","|"
+"1","  1  
   Cleaned          |  0  
 
-Total in 56 ms
+Total in 90 ms
 "
-"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:7946
+"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:3781
 "
-"2","To stop the server, run servr::daemon_stop(""4326394608"") or restart your R session
+"2","To stop the server, run servr::daemon_stop(""4420479472"") or restart your R session
 "

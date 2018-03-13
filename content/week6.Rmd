@@ -143,7 +143,7 @@ sum(Pr_sunderXh0[11:25])
 
 Because we reject the null hypothesis in two cases - if there are more spermatogenesis genes on X than expected under the null, or if there are less, hence, we're looking at a two-tailed test. To get the P-value, we need to take into account both extremes - the probability that we see 10 or more spermatogenesis genes on the X and its equivalent in the lower tail.
 
-It is not immediately apparent what the "equivalent lower tail" is in this case because the distribution is asymmetrical - however, you can think about it in terms of probabilities. If you sum up the probability from being 11 and above, you get a value y - and in the lower tail, you will find the same y probability and that is going to be your equivalently extreme lower tail.
+It is not immediately apparent what the "equivalent lower tail" is <em>in this case</em> because the distribution is asymmetrical - however, you can think about it in terms of probabilities. If you sum up the probability from being 11 and above, you get a value y - and in the lower tail, you will find the same y probability and that is going to be your equivalently extreme lower tail. However, note that it is not always so - the analysis always depends on the data and the questions you're asking!
 
 If you are unsure whether you should multiply by 2 to get the P-value, think about the null hypothesis. If it's like this:  
 $H_0: p_0 = 0.5$ - the opposite of this is:   

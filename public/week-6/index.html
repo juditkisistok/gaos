@@ -100,7 +100,7 @@
 <p>R functions for simulating from /calculating the binomial probability</p>
 <p>If you want to draw 1 random number from a binomial distribution with 25 trials(tests) and probability of success 1/2</p>
 <pre class="r"><code>rbinom(n = 1, size = 25, prob = 0.5) ## try to evaluate that several times (you get different numbers)</code></pre>
-<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 13</code></pre>
 <p>If you want to calculate the probability of having exactly 2 success out of 25 trials</p>
 <pre class="r"><code>dbinom(x = 2, size = 25, prob = 0.5)</code></pre>
 <pre><code>## [1] 8.940697e-06</code></pre>
@@ -108,9 +108,9 @@
 <h4>Using dbinom() and rbinom()</h4>
 <p>Let’s call X3 the random variable that records the number of “6” you get when rolling 3 dices. Use rbinom() and generate 100 observations from X3 (instead of just 1 observation).</p>
 <pre class="r"><code>rbinom(n = 100, size = 3, prob = 1/6)</code></pre>
-<pre><code>##   [1] 0 1 0 0 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 1 0 1 1 1 0 1 0 2 0 1 0 0 0 1 1
-##  [36] 0 0 0 0 1 0 1 1 2 1 2 1 0 0 1 0 0 0 2 1 0 0 1 2 1 2 0 1 1 0 0 0 0 1 0
-##  [71] 1 0 2 0 1 0 0 0 0 2 0 1 1 0 0 0 2 1 0 1 0 0 0 2 1 0 0 0 3 0</code></pre>
+<pre><code>##   [1] 0 0 1 0 0 0 1 1 2 1 0 0 0 2 0 0 0 0 0 0 1 0 1 0 0 0 0 1 0 1 0 0 0 1 1
+##  [36] 0 0 1 0 0 2 0 1 1 0 1 0 0 0 1 0 0 0 0 1 1 0 1 1 0 2 0 0 0 0 0 1 1 1 0
+##  [71] 0 0 1 0 1 1 0 1 0 0 0 3 0 2 1 0 0 0 1 0 1 0 1 0 1 1 0 1 0 0</code></pre>
 <pre class="r"><code># we want 100 observations
 # we have 3 dice - so the number of trials is 3
 # and the probability of getting a 3 is 1/6</code></pre>
@@ -182,7 +182,7 @@ sum(Pr_sunderXh0[11:25])</code></pre>
 <div id="why-is-the-p-value-for-this-case-calculated-as-2-prsunderxh0-10" class="section level4">
 <h4>Why is the p value for this case calculated as 2* Pr(SunderXh0 &gt; 10)?</h4>
 <p>Because we reject the null hypothesis in two cases - if there are more spermatogenesis genes on X than expected under the null, or if there are less, hence, we’re looking at a two-tailed test. To get the P-value, we need to take into account both extremes - the probability that we see 10 or more spermatogenesis genes on the X and its equivalent in the lower tail.</p>
-<p>It is not immediately apparent what the “equivalent lower tail” is in this case because the distribution is asymmetrical - however, you can think about it in terms of probabilities. If you sum up the probability from being 11 and above, you get a value y - and in the lower tail, you will find the same y probability and that is going to be your equivalently extreme lower tail.</p>
+<p>It is not immediately apparent what the “equivalent lower tail” is <em>in this case</em> because the distribution is asymmetrical - however, you can think about it in terms of probabilities. If you sum up the probability from being 11 and above, you get a value y - and in the lower tail, you will find the same y probability and that is going to be your equivalently extreme lower tail. However, note that it is not always so - the analysis always depends on the data and the questions you’re asking!</p>
 <p>If you are unsure whether you should multiply by 2 to get the P-value, think about the null hypothesis. If it’s like this:<br />
 <span class="math inline">\(H_0: p_0 = 0.5\)</span> - the opposite of this is:<br />
 <span class="math inline">\(H_A: p_0 =/= 0.5\)</span>.<br />
