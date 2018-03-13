@@ -58,6 +58,7 @@ html {
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
   background-color: #202020;
+  overflow: scroll !important;
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -67,6 +68,7 @@ html {
     bottom: 0;
     width: 18rem;
     text-align: center;
+    overflow: scroll;
   }
 }
 
@@ -105,16 +107,17 @@ a.sidebar-nav-item:focus {
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the
  * contents to the bottom of the sidebar in tablets and up.
  */
-
+/*
 @media (min-width: 48em) {
   .sidebar-sticky {
     position: absolute;
     right:  1rem;
     bottom: 1rem;
     left:   1rem;
+    overflow: scroll !important;
   }
 }
-
+*/
 
 /* Container
  *
