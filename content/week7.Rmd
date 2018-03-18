@@ -37,7 +37,7 @@ It's a good idea to work sequentially:
 2. Try the next questions where you will redo in R 2 examples of Chapter 8 step by step  
 3. Try the set of Chapter 8 practice and assignment problems listed below (also listed in the weekly note)  
 
-*Take me back to [the beginning!](#toc)*
+###<a name="exercises"></a><u>Exercises</u>
 
 ###<a name="exercise1"></a>R functions for simulating from / calculating the Chi^2 probability distribution 
 
