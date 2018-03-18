@@ -17,7 +17,7 @@
       <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-7/</guid>
-      <description>A. Table of contents Table of contents Learning goals Exercises  R functions for simulating from /calculating the Chi^2 probability distribution Mastering Chi^2 distributions using dchisq() pchisq() and rchisq() No weekend getaway Gene content of the human X chromosome Designer 2 child families Chapter 8 exercises    Learning goals By the end of this session, you should be able to…  Understand Goodness-of-fit tests:  How do we quantify lack of fit for frequency data: the chi2 test stastistic?</description>
+      <description>Table of contents Table of contents Learning goals Exercises  R functions for simulating from /calculating the Chi^2 probability distribution Mastering Chi^2 distributions using dchisq() pchisq() and rchisq() No weekend getaway Gene content of the human X chromosome Designer 2 child families Chapter 8 exercises    Learning goals By the end of this session, you should be able to…  Understand Goodness-of-fit tests:  How do we quantify lack of fit for frequency data: the chi2 test stastistic?</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-6/</guid>
-      <description>library(tidyverse) # I will need this later for fancy plotting A. Table of contents Table of contents Learning goals Exercises  Introducing dbinom() and rbinom() Visualizing the binomial distribution in R Example 7.2 of the book “Sex and the X” in R Chapter 7 Problems Planning a survey according to statistical power    Learning goals By the end of this session, you should be able to…  understand several key concepts within hypothesis testing:  null hypothesis &amp;amp; null distribution test statistic &amp;amp; P-values which errors can we make when performing hypothesis testing (I and II) what is statistical power  understand the binomial distribution and in what context it arises how the binomial probability distribution can be used as a null distribution when testing null hypothesis with proportion data   README FIRST :-) We first introduce/illustrate two important new R functions: dbinom() and rbinom().</description>
+      <description>library(tidyverse) # I will need this later for fancy plotting Table of contents Table of contents Learning goals Exercises  Introducing dbinom() and rbinom() Visualizing the binomial distribution in R Example 7.2 of the book “Sex and the X” in R Chapter 7 Problems Planning a survey according to statistical power    Learning goals By the end of this session, you should be able to…  understand several key concepts within hypothesis testing:  null hypothesis &amp;amp; null distribution test statistic &amp;amp; P-values which errors can we make when performing hypothesis testing (I and II) what is statistical power  understand the binomial distribution and in what context it arises how the binomial probability distribution can be used as a null distribution when testing null hypothesis with proportion data   README FIRST :-) We first introduce/illustrate two important new R functions: dbinom() and rbinom().</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-5/</guid>
-      <description>A. Table of contents Table of contents Learning goals Exercises  Sampling Simulating a null distribution using 1 million simulations Basic probability calculations P values by comparing the test statistic to the null distribution    Learning goals By the end of this session, you should be able to…  Understand conditional probability Understand Bayes theorem: how to calculate the conditional probability Understand several key concepts within hypothesis testing  Null hypothesis Null distribution Test statistic P value (probability of observing the value of the test statistic if the null hypothesis were true)     Exercises  Sampling This is how you can simulate data:</description>
+      <description>Table of contents Table of contents Learning goals Exercises  Sampling Simulating a null distribution using 1 million simulations Basic probability calculations P values by comparing the test statistic to the null distribution    Learning goals By the end of this session, you should be able to…  Understand conditional probability Understand Bayes theorem: how to calculate the conditional probability Understand several key concepts within hypothesis testing  Null hypothesis Null distribution Test statistic P value (probability of observing the value of the test statistic if the null hypothesis were true)     Exercises  Sampling This is how you can simulate data:</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-4/</guid>
-      <description>A. Table of contents Table of contents Learning goals Exercises  Problem A Problem B    Learning goals By the end of this session, you should be able to…  Calculate probabilities by hand Calculate expectation and variance of a random variable Calculate the expectation and variance of a sum of n random variables and relate this to the terms:  SD of a population SE of a sample     Exercises Problem A  A1.</description>
+      <description>Table of contents Table of contents Learning goals Exercises  Problem A Problem B    Learning goals By the end of this session, you should be able to…  Calculate probabilities by hand Calculate expectation and variance of a random variable Calculate the expectation and variance of a sum of n random variables and relate this to the terms:  SD of a population SE of a sample     Exercises Problem A  A1.</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@
       <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-3/</guid>
-      <description>A. Table of contents Table of contents Loading libraries Problem 9 Exercises  Reproducing in R the Figure 4.1-1 &amp;amp; important details of histogram drawing in R Generating Figure 4.1-2 Reproducing Figures 4.1-3 and 4.1-4 Trying and evalutating the +/- 2 SEs rule of thumb    Loading libraries library(abd) #we need to load the ABD dataset to be able to access the YeastGenes data in Exercise 1 library(cowplot) #this is just for plotting but you don&amp;#39;t need to worry about it  Chapter 4, Problem 9 One of the great discoveries of biology is that organisms have a class of genes called “regulatory genes”, whose only job is to regulate the activity of other genes.</description>
+      <description>Table of contents Table of contents Loading libraries Problem 9 Exercises  Reproducing in R the Figure 4.1-1 &amp;amp; important details of histogram drawing in R Generating Figure 4.1-2 Reproducing Figures 4.1-3 and 4.1-4 Trying and evalutating the +/- 2 SEs rule of thumb    Loading libraries library(abd) #we need to load the ABD dataset to be able to access the YeastGenes data in Exercise 1 library(cowplot) #this is just for plotting but you don&amp;#39;t need to worry about it  Chapter 4, Problem 9 One of the great discoveries of biology is that organisms have a class of genes called “regulatory genes”, whose only job is to regulate the activity of other genes.</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@
       <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-2/</guid>
-      <description>A. Table of contents Table of contents Learning goals Exercises  Calculating summary statistics in a sample Summarizing and visualizing the Stickleback data of Chapter 3 Developing your intuition for histograms and boxplots Making up your own data by sampling from a theoretical distribution    Learning goals By the end of this session, you should be able to…  load datasets in R from the ABD package calculate summary statistics by hand and using the summary stats functions in R slice data in R (selecting subsets of data) create data but also sample data from a first theoretical distribution and discuss how much samples from this distribution are close to the real observed data be good at making the correspondance between summary statistics (mean, median, SD, etc.</description>
+      <description>Table of contents Table of contents Learning goals Exercises  Calculating summary statistics in a sample Summarizing and visualizing the Stickleback data of Chapter 3 Developing your intuition for histograms and boxplots Making up your own data by sampling from a theoretical distribution    Learning goals By the end of this session, you should be able to…  load datasets in R from the ABD package calculate summary statistics by hand and using the summary stats functions in R slice data in R (selecting subsets of data) create data but also sample data from a first theoretical distribution and discuss how much samples from this distribution are close to the real observed data be good at making the correspondance between summary statistics (mean, median, SD, etc.</description>
     </item>
     
     <item>
@@ -71,7 +71,7 @@
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-1/</guid>
-      <description>A. Table of contents Table of contents Learning goals The basics of R Plotting The guppy dataset   Learning goals By the end of this session, you should be able to…  Open an existing R script Save an existing R script Create a new R script Know the 4 panels in RStudio Know how and where to get help (StackOverflow, Google Groups)    1. The basics of R Whenever you need to use a package, you might need to install it first (without the #) - this only needs to be done once:</description>
+      <description>Table of contents Table of contents Learning goals The basics of R Plotting The guppy dataset   Learning goals By the end of this session, you should be able to…  Open an existing R script Save an existing R script Create a new R script Know the 4 panels in RStudio Know how and where to get help (StackOverflow, Google Groups)    1. The basics of R Whenever you need to use a package, you might need to install it first (without the #) - this only needs to be done once:</description>
     </item>
     
   </channel>

@@ -10,7 +10,7 @@ tags: []
 ---
 
 
-###<a name="toc"></a>A. Table of contents
+###<a name="toc"></a>Table of contents
 1. [Table of contents](#toc)
 2. [Learning goals](#goals)
 3. [The basics of R](#basics)

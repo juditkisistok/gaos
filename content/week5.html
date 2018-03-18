@@ -11,8 +11,8 @@ tags: []
 
 
 
-<div id="a.-table-of-contents" class="section level3">
-<h3><a name="toc"></a>A. Table of contents</h3>
+<div id="table-of-contents" class="section level3">
+<h3><a name="toc"></a>Table of contents</h3>
 <ol style="list-style-type: decimal">
 <li><a href="#toc">Table of contents</a></li>
 <li><a href="#goals">Learning goals</a></li>
@@ -49,31 +49,31 @@ tags: []
 <h3><a name="exercise1"></a><u>Sampling</u></h3>
 <p>This is how you can simulate data:</p>
 <pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
-<pre><code>##  [1] &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot;
+<pre><code>##  [1] &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot;
+## [18] &quot;L&quot;</code></pre>
+<pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
+<pre><code>##  [1] &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot;
 ## [18] &quot;R&quot;</code></pre>
 <pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
-<pre><code>##  [1] &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot;
-## [18] &quot;R&quot;</code></pre>
-<pre class="r"><code>sample(x = c(&quot;L&quot;, &quot;R&quot;), size = 18, replace = TRUE, prob = c(0.5,0.5) )</code></pre>
-<pre><code>##  [1] &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot;
+<pre><code>##  [1] &quot;L&quot; &quot;R&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot; &quot;L&quot; &quot;L&quot; &quot;R&quot; &quot;R&quot; &quot;R&quot;
 ## [18] &quot;R&quot;</code></pre>
 <div id="what-does-the-sample-function-do" class="section level4">
 <h4>What does the sample() function do?</h4>
 <p>It’s going to shuffle your data around and resample with or without replacement (depending on whether you write replace = TRUE or replace = FALSE).</p>
 <p>You can use this to simulate a die:</p>
 <pre class="r"><code>sample((1:6), size=1,replace=TRUE)</code></pre>
-<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 5</code></pre>
 <p>Or a coin:</p>
 <pre class="r"><code>sample(c(&quot;plat&quot;,&quot;krone&quot;), size=1, replace=TRUE)</code></pre>
-<pre><code>## [1] &quot;krone&quot;</code></pre>
+<pre><code>## [1] &quot;plat&quot;</code></pre>
 <p>Or just shuffle data around:</p>
 <pre class="r"><code>sample(1:100)</code></pre>
-<pre><code>##   [1]   4  97  46  42  94  83  98  20  80  78  74  75  52  90  23  49  73
-##  [18]  26   3  66  57  34  40  19  16  10  47  87  21  77  22  70  79  41
-##  [35]  86  71  55  72  56  68  17  95   8  85  37  51  29  15  59  96  44
-##  [52]  25  53  62  35  84  81  50  33   9  65  18  27  13  28  32  54  92
-##  [69]   7  69  38  82  43  99  36  60  76 100  24  45  48  12  63  39  67
-##  [86]  11  89   1   5  30  64  93   2  61  31  88  14   6  91  58</code></pre>
+<pre><code>##   [1]  37   8  47  29  69  10  99   6  58  11  64  12  16  15  65  51  70
+##  [18]  23  17  85  94  35  84  59  26  74  67  97   9  41  20   1  91  39
+##  [35]  55  61  57  62  38  76  21  80  22  45  89  34  93  54  75   2  49
+##  [52]  77  83  31  43  25   7  78  73  81  24  36  13  27  95  52  32 100
+##  [69]  72   3  28  71  63  18  60  79  66  90  53   5  86  19  46  30  92
+##  [86]  42  56  87  50  68  14  82  98  44  33  48  88  40   4  96</code></pre>
 </div>
 <div id="what-does-set.seed-do" class="section level4">
 <h4>What does set.seed() do?</h4>
