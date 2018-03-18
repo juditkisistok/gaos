@@ -50,8 +50,8 @@
   <h1>Week 1: Introduction</h1>
   <span class="post-date">Wed, Jan 31, 2018</span>
   <span class="post-date">Made by Judit Kisistók. The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.</span>
-  <div id="a.-table-of-contents" class="section level3">
-<h3><a name="toc"></a>A. Table of contents</h3>
+  <div id="table-of-contents" class="section level3">
+<h3><a name="toc"></a>Table of contents</h3>
 <ol style="list-style-type: decimal">
 <li><a href="#toc">Table of contents</a></li>
 <li><a href="#goals">Learning goals</a></li>
@@ -152,21 +152,21 @@ mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # mydata$y appends another column (variable) to your dataframe
 # the expression after &quot;=&quot; just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) </code></pre>
-<pre><code>##        x                 y         
-##  Min.   :-2.8323   Min.   :-2.401  
-##  1st Qu.:-0.8832   1st Qu.: 6.597  
-##  Median :-0.1512   Median :10.093  
-##  Mean   :-0.1883   Mean   :10.054  
-##  3rd Qu.: 0.5345   3rd Qu.:13.799  
-##  Max.   : 1.7532   Max.   :20.319</code></pre>
+<pre><code>##        x                  y         
+##  Min.   :-2.87045   Min.   :-1.982  
+##  1st Qu.:-0.55799   1st Qu.: 8.799  
+##  Median : 0.10011   Median :11.178  
+##  Mean   : 0.03312   Mean   :11.153  
+##  3rd Qu.: 0.70144   3rd Qu.:14.235  
+##  Max.   : 2.23780   Max.   :22.194</code></pre>
 <pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
 <pre><code>##            x         y
-## 1 -1.2004886  5.189066
-## 2 -1.4964708  4.259197
-## 3 -1.1890994  5.443291
-## 4  1.1864240 17.059328
-## 5  0.9302871 15.248602
-## 6 -0.7370018  7.999347</code></pre>
+## 1 -1.1911185  5.051858
+## 2 -2.8704456 -1.982322
+## 3 -0.4108695 10.506126
+## 4 -0.1576926  9.358624
+## 5 -0.5392134 10.384035
+## 6 -1.5842660  3.356147</code></pre>
 <pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
