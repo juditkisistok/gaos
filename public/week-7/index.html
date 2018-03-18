@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.36" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Week 7: Goodness of fit &middot; Genome Analysis &amp; Statistics</title>
+
+  
+  <link rel="stylesheet" href="/css/print.css" media="print">
+  <link rel="stylesheet" href="/css/poole.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css" rel="stylesheet">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Genome Analysis &amp; Statistics" />
+</head>
+
+  <body class=" ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/"><h1>Genome Analysis &amp; Statistics</h1></a>
+      <p class="lead">
+       R notebooks created for students taking the course in Spring 2018 at Aarhus University. 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2018. All rights reserved. </p>
+  </div>
+</div>
+
+    <div class="content container">
+    <div class="post">
+  <h1>Week 7: Goodness of fit</h1>
+  <span class="post-date">Wed, Mar 14, 2018</span>
+  <span class="post-date">Made by Judit Kisistók, incorporating some snippets from Sara Moeskjær&#39;s solution sheet. The exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.</span>
+  <div id="a.-table-of-contents" class="section level3">
+<h3><a name="toc"></a>A. Table of contents</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#toc">Table of contents</a></li>
+<li><a href="#goals">Learning goals</a></li>
+<li><a href="#exercises">Exercises</a>
+<ul>
+<li><a href="#exercise1">R functions for simulating from /calculating the Chi^2 probability distribution</a></li>
+<li><a href="#exercise2">Mastering Chi^2 distributions using dchisq() pchisq() and rchisq()</a></li>
+<li><a href="#exercise3">No weekend getaway</a></li>
+<li><a href="#exercise4">Gene content of the human X chromosome</a></li>
+<li><a href="#exercise5">Designer 2 child families</a></li>
+<li><a href="#exercise6">Chapter 8 exercises</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="learning-goals" class="section level3">
+<h3><a name="goals"></a>Learning goals</h3>
+<div id="by-the-end-of-this-session-you-should-be-able-to" class="section level4">
+<h4>By the end of this session, you should be able to…</h4>
+<ul>
+<li>Understand Goodness-of-fit tests:
+<ul>
+<li>How do we quantify lack of fit for frequency data: the chi2 test stastistic?</li>
+<li>How much lack of fit do we expect “just by chance” under H0?</li>
+<li>The Chi^2 probability distribution and its use as a null distribution for goodness-of-fit tests</li>
+<li>Understand the difference between the Chi^2 statistic and the Chi^2 probability distribution</li>
+</ul></li>
+</ul>
+<p>README FIRST :-) !!!<br />
+We first introduce/illustrate THREE important new R functions: dchisq() pchisq() and rchisq().</p>
+<p>You then have to apply these functions in a variety of situations.<br />
+It’s a good idea to work sequentially:<br />
+1. Try the R new functions especially the one that allow you to vizualize and calculate probabilities using the Chi^2 probablity distributions<br />
+2. Try the next questions where you will redo in R 2 examples of Chapter 8 step by step<br />
+3. Try the set of Chapter 8 practice and assignment problems listed below (also listed in the weekly note)</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="r-functions-for-simulating-from-calculating-the-chi2-probability-distribution" class="section level3">
+<h3><a name="exercise1"></a>R functions for simulating from / calculating the Chi^2 probability distribution</h3>
+<p>If you want to draw 100 random number from a Chi^2 distribution with 1, 2, and 5 degrees of freedom (hereafter d.f):</p>
+<pre class="r"><code>my100deviates=rchisq(n = 100, df = 1) ## try to evaluate that several times (you get different numbers)
+hist(my100deviates, main=&quot;100 draws from a Chi^2 1 df&quot;, col = &quot;deeppink4&quot;)</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>my100deviates=rchisq(n = 100, df = 2) ## try to evaluate that several times (you get different numbers)
+hist(my100deviates, main=&quot;100 draws from a Chi^2 2 df&quot;, col = &quot;deeppink4&quot;)</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>my100deviates=rchisq(n = 100, df = 5) ## try to evaluate that several times (you get different numbers)
+hist(my100deviates, main=&quot;100 draws from a Chi^2 5 df&quot;, col = &quot;deeppink4&quot;)</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>If you want to graph the Chi^2 probability distribution: you have to “plot” the density function over a grid of coordinates</p>
+<pre class="r"><code>xs= seq(from = 0.01, to=10, by=0.05 ) # xs is a vector of coordinates on the X axis 
+
+y1=dchisq(x =xs , df = 1) #y1 stores the density of the Chi^2 (1 d.f) distribution at each coordinate. 
+
+y2=dchisq(x =xs , df = 2) #y2 stores the density of the Chi^2 (2 d.f) distribution at each coordinate. 
+
+y6=dchisq(x =xs , df = 6) #y6 stores the density of the Chi^2 (6 d.f) distribution at each coordinate. </code></pre>
+<p>Visualizing Chi^2 distributions in R: Plotting the densities of 3 different Chi^2 distributions</p>
+<pre class="r"><code>plot(xs,y1, type =&quot;l&quot;, lwd=3)  # Plotting the density of the Chi^2 (1.df) probability distribution 
+
+lines(xs,y2, type =&quot;l&quot;, lwd=3, col=&quot;blue&quot;)  #Adding the density of the Chi^2 (1.df) probability distribution, on the previous plot
+
+lines(xs,y6, type=&quot;l&quot;, lwd=3, col=&quot;magenta&quot;)#Adding the density of the Chi^2 (1.df) probability distribution, on the previous plot</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>If you want to calculate the area under the curve of the density of a Chi^2 distribution you need to do an integral and pchisq() can do that:</p>
+<pre class="r"><code>pchisq(q = 10,df = 1) # This calculates P( X &lt;10) if X is a random variable following a Chi^2 (1 d.f) probability distribution</code></pre>
+<pre><code>## [1] 0.9984346</code></pre>
+<pre class="r"><code>pchisq(q = 10,df = 6) # This calculates P( X &lt;10) if X is a random variable following a Chi^2 (1 d.f) probability distribution</code></pre>
+<pre><code>## [1] 0.875348</code></pre>
+<pre class="r"><code>plot(xs,y1, type =&quot;l&quot;, lwd=3, ylim=c(0,2)) # we need to choose the range of Y wisely to be able to plot these distributions properly 
+lines(xs,y2, type =&quot;l&quot;, lwd=3, col=&quot;blue&quot;)  #Adding the density curve of the Chi^2 (1.df) probability distribution, on the previous plot
+lines(xs,y6, type=&quot;l&quot;, lwd=3, col=&quot;magenta&quot;)#Adding the density curve of the Chi^2 (1.df) probability distribution, on the previous plot</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+<div id="mastering-chi2-distributions-using-dchisq-pchisq-and-rchisq" class="section level3">
+<h3><a name="exercise2"></a>Mastering Chi^2 distributions using dchisq(), pchisq() and rchisq()</h3>
+<p>Let’s call:</p>
+<ul>
+<li>XX1 a random variable that follows a probability distribution that is Chi^2 (1 d.f)</li>
+</ul>
+<pre class="r"><code>XX1 = rchisq(n = 1, df = 1)</code></pre>
+<ul>
+<li>XX6 a random variable that follows a distribution that is Chi^2 (6 d.f)</li>
+</ul>
+<pre class="r"><code>XX6 = rchisq(n = 1, df = 6)</code></pre>
+<p>Note that we just drew 2 numbers from the corresponding chi^2 distributions.</p>
+<div id="generate-105-draws-from-the-distributions-of-xx1-and-xx6-use-these-draws-to-calculate" class="section level4">
+<h4>Generate 10^5 draws from the distributions of XX1 and XX6 use these draws to calculate:</h4>
+</div>
+<div id="p1-xx1-2" class="section level4">
+<h4>P(1 &lt; XX1 &lt; 2)</h4>
+</div>
+<div id="pxx6-25" class="section level4">
+<h4>P(XX6 &gt; 25)</h4>
+<pre class="r"><code># simulating the distribution
+XX1_distr = rchisq(n = 10^5, df = 1)
+# calculating the p-value by summing up how many times to I see a number in my simulated distribution that&#39;s between 1 and 2, and dividing it by the number of simulated values (10^5)
+p_XX1_s = length(XX1_distr[XX1_distr &gt; 1 &amp; XX1_distr &lt; 2]) / length(XX1_distr)
+
+# and then we can plot it
+hist(XX1_distr, col = &quot;deeppink4&quot;, xlim = c(0,10), breaks = 100)
+# and put our XX1 random variable on the plot to see where it is in the distribution
+abline(v = XX1)</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code># same thing with XX6
+XX6_distr = rchisq(n = 10^5, df = 6)
+p_XX6_s = length(XX6_distr[XX6_distr &gt; 25]) / length(XX6_distr)
+
+hist(XX6_distr, col = &quot;deeppink4&quot;, xlim = c(0,10), breaks = 100)
+abline(v = XX6)</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+</div>
+<div id="use-pchisq-to-calculate-cand-compare-with-your-simulation-based-results." class="section level4">
+<h4>Use pchisq() to calculate cand compare with your simulation based results.</h4>
+</div>
+<div id="p-1-xx1-2" class="section level4">
+<h4>P( 1 &lt; XX1 &lt; 2)</h4>
+</div>
+<div id="p-xx6-25" class="section level4">
+<h4>P( XX6 &gt; 25)</h4>
+<pre class="r"><code>pchisq(q = 2,df = 1) # P(X &lt; 2)</code></pre>
+<pre><code>## [1] 0.8427008</code></pre>
+<pre class="r"><code>pchisq(q = 1,df = 1) # P(X &lt; 1)</code></pre>
+<pre><code>## [1] 0.6826895</code></pre>
+<pre class="r"><code># to get the &quot;middle part&quot;, aka the part between 1 and 2, we need to calculate the probability that X is smaller than 2 and divide the probability that X is smaller than 1
+p_XX1_r = pchisq(q = 2,df = 1) - pchisq(q = 1,df = 1)
+
+p_XX6_r = 1-pchisq(q = 25,df = 6)</code></pre>
+</div>
+<div id="using-qchisq-calculate-the-probabilities-below" class="section level4">
+<h4>Using qchisq() calculate the probabilities below:</h4>
+<p>Find the critical values C, such that - P(X1 &lt; C) = 0.95<br />
+- P(X1 &gt; C) = 0.01<br />
+- P(X6 &gt; C) = 0.01</p>
+<pre class="r"><code># P(XX1 &lt; C) = 0.95
+qchisq(0.95, df=1)</code></pre>
+<pre><code>## [1] 3.841459</code></pre>
+<pre class="r"><code># P(XX1 &gt; C) = 0.01
+qchisq(0.01, df=1)</code></pre>
+<pre><code>## [1] 0.0001570879</code></pre>
+<pre class="r"><code># P(XX6 &gt; C) = 0.01
+qchisq(0.01, df=6)</code></pre>
+<pre><code>## [1] 0.8720903</code></pre>
+</div>
+<div id="calculate-critical-values-for-the-5-level-of-a-chi2-with-1-2-and-6-d.f.-visualize-the-three-densities-and-their-critical-values-on-the-graph-using-the-rug-function-or-use-the-ablinev-c-to-set-a-vertical-line-at-the-c-coordinate." class="section level4">
+<h4>Calculate critical values for the 5% level of a Chi^2 with 1, 2 and 6 d.f. Visualize the three densities and their critical values on the graph using the rug() function, or use the abline(v= C) to set a vertical line at the C coordinate.</h4>
+<pre class="r"><code>xs= seq(from = 0.01, to=13, by=0.05 ) 
+y1=dchisq(x =xs, df = 1)  
+y2=dchisq(x =xs, df = 2) 
+y6=dchisq(x =xs, df = 6)  
+
+plot(xs,y1, type =&quot;l&quot;, lwd=3, ylim=c(0,2), col = &quot;coral&quot;, xlim = c(0,13)) 
+lines(xs,y2, type =&quot;l&quot;, lwd=3, col=&quot;skyblue&quot;)  
+lines(xs,y6, type=&quot;l&quot;, lwd=3, col=&quot;seagreen3&quot;)
+abline(v = qchisq(0.95, df=1), col = &quot;coral&quot;)
+abline(v = qchisq(0.95, df=2), col=&quot;skyblue&quot;)
+abline(v = qchisq(0.95, df=6), col=&quot;seagreen3&quot;)</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="no-weekend-getaway-example-8.1-from-the-book" class="section level3">
+<h3><a name="exercise3"></a>No weekend getaway (Example 8.1 from the book)</h3>
+<p>Reproduce in R the calculations of the example: - calculate the lack of fit “chi square” statistic X2obs<br />
+- use pchisq() to get the p-value</p>
+<pre class="r"><code>expected = NULL
+expected[1:5] = 350*(52/365)
+expected[6] = 350*(53/365)
+expected[7] = 350*(52/365)
+
+observed = c(33, 41, 63, 63, 47, 56, 47)
+
+weekend_data &lt;- as.data.frame(cbind(expected, observed)) #putting it all to a dataframe in case we want to look at it later
+# and it&#39;s also useful to have for plotting purposes
+rownames(weekend_data) &lt;- c(&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;)
+
+# this gives a barplot - t() stands for transpose, it basically turns the columns into rows to help R draw the graphs properly
+barplot(t(weekend_data), beside = TRUE, col=c(&quot;deeppink4&quot;,&quot;lightblue&quot;), legend = colnames(weekend_data))</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>X2obs = sum((observed-expected)^2/expected) # the chi^2 statistic
+# here we are doing calculations with vectors - what R is doing is that it goes through the vectors simultaneously, element by element, and does the operations like that - so first, it takes the first element from the observed vector and the first element from the expected vector, does the calculations, then moves on to the second elements and so on, and at the end it sums them up, giving us the chi^2 value
+
+p_value1 &lt;- 1 - pchisq(q = X2obs, df = 6)
+# a little bit different way to get the p-value - if you specify lower.tail = FALSE, you get P[X &gt; X2obs]
+p_value2 &lt;- pchisq(q = X2obs, df = 6, lower.tail=FALSE)</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+<div id="gene-content-of-the-human-x-chromosome-example-8.4-from-the-book" class="section level3">
+<h3><a name="exercise4"></a>Gene content of the human X chromosome (Example 8.4 from the book)</h3>
+<p>H0: 5.2% of genes in the human genome are located on the X (this is an a priori expectation based on physical size of the X)</p>
+<div id="calculate-in-r-the-test-statistic-that-quantifies-the-lack-of-fit-between-observed-and-expected-counts-we-call-that-x2obs" class="section level4">
+<h4>Calculate in R the test statistic that quantifies the lack of fit between observed and expected counts (we call that X2obs)</h4>
+<pre class="r"><code>n = 20290
+expectedX = c(1055, 19235)
+
+observedX = c(781, 19509)
+
+X2obsX = sum((observedX-expectedX)^2/expectedX)</code></pre>
+</div>
+<div id="calculate-the-p-value-for-a-goodness-of-fit-test-assuming-that-under-h0-x2obs-should-be-chi2-with-1.df" class="section level4">
+<h4>Calculate the p-value for a goodness of fit test assuming that under H0 X2obs should be Chi^2 with 1.df</h4>
+<pre class="r"><code>1-pchisq(q = X2obsX, df = 1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># there are significantly less genes on the X than we would expect</code></pre>
+</div>
+<div id="why-is-the-p-value-for-this-case-not-calculated-as-2-prx1-x2obs" class="section level4">
+<h4>Why is the p value for this case NOT calculated as 2* Pr(X1 &gt; X2obs…) ?</h4>
+<p>X^2 approaching 0 actually means that we have a good fit - and every deviation is going to <em>increase</em> the value of X^2. Therefore, in this context, only the upper tail is meaningful in terms of calculating the p-value.</p>
+</div>
+<div id="do-a-binomial-test-as-way-to-do-a-goodness-of-fit-and-calculate-p-value-using-the-binomial-distribution" class="section level4">
+<h4>Do a binomial test as way to do a goodness of fit and calculate p-value using the binomial distribution</h4>
+<pre class="r"><code>2*pbinom(q = 781, size = 20290, prob = 0.052) # this is how you calculate it using pbinom</code></pre>
+<pre><code>## [1] 1.507498e-19</code></pre>
+<pre class="r"><code>sum(dbinom(x = 0:781, size = 20290, prob = 0.052)*2) # and this is how to do it with dbinom</code></pre>
+<pre><code>## [1] 1.507498e-19</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="designer-2-child-families-example-8.5-from-the-book" class="section level3">
+<h3><a name="exercise5"></a>Designer 2 child families (Example 8.5 from the book)</h3>
+<div id="redo-in-r-the-different-steps-of-goodness-of-fit-test-to-test-the-hypothesis-that-the-data-presented-in-table-8.5-1-is-binomial" class="section level4">
+<h4>Redo in R the different steps of goodness of fit test to test the hypothesis that the data presented in table 8.5-1 is binomial</h4>
+<pre class="r"><code>data = read.csv(&quot;chap08e5NumberOfBoys.csv&quot;)
+
+total_nr = nrow(data) #2444 families
+
+boy_0_obs = length(data[data == 0]) #530
+boy_1_obs = length(data[data == 1]) #1332
+boy_2_obs = length(data[data == 2]) #582
+
+# we estimate the proportion of boys
+prop = (boy_1_obs + 2*boy_2_obs) / (2*total_nr)
+
+boy_0 = dbinom(x = 0, size = 2, prob = prop)
+boy_0_exp = boy_0 * total_nr #expected number of families with 0 boys
+
+boy_1 = dbinom(x = 1, size = 2, prob = prop)
+boy_1_exp = boy_1 * total_nr #expected number of families with 1 boy
+
+boy_2 = dbinom(x = 2, size = 2, prob = prop)
+boy_2_exp = boy_2 * total_nr #expected number of families with 0 boys
+
+#plot the data and see how the observed and expected frequencies differ
+boy_data = as.data.frame(cbind(rbind(boy_0_obs, boy_1_obs, boy_2_obs), rbind(boy_0_exp, boy_1_exp, boy_2_exp))) # putting every counts into the same dataframe
+# rbind creates the rows (row-bind) and cbind creates the columns (column-bind)
+
+rownames(boy_data) &lt;- c(&quot;0 boys&quot;, &quot;1 boy&quot;, &quot;2 boys&quot;)
+
+colnames(boy_data) &lt;- c(&quot;Observed&quot;, &quot;Expected&quot;) #naming the columns in the matrix
+barplot(t(boy_data), beside = TRUE, col=c(&quot;deeppink4&quot;,&quot;lightblue&quot;), legend = colnames(boy_data))</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r"><code># calculating chi square
+chi_sq = sum(((boy_data$Observed - boy_data$Expected)^2) / boy_data$Expected) 
+
+# degrees of freedom &amp; calculating the critical value
+df = 1 #3 categories, and we had to estimate prop from the data
+
+chi_krit = qchisq(0.05, df=1) #critical value at the 0.01 significance level - 0.0039
+
+chi_sq &lt; chi_krit #FALSE - we reject the null</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="questions-from-chapter-8-problems" class="section level3">
+<h3><a name="exercise6"></a>Questions from Chapter 8 Problems</h3>
+<p>At this stage, you have done your warm up in R, and mastered the binomial and Chi^2 probability distributions! In Chapter 8 do: Practice problem 3, Practice problem 5 (skip 5.d), Practice problem 6, Assignment Problem 12+13 - calculate them manually and in R as well.</p>
+<p>You can find the answers to Practice problem 3, 5 and 6 in the book. Here is Assignment problem 12 to walk you through a goodness of fit test again:</p>
+<pre class="r"><code># the data
+number_of_bears = 87
+BB_count = 42
+Bb_count = 24
+bb_count = 21
+
+# H0: the frequency of b alleles follows a binomial distribution
+# HA: it doesn&#39;t
+
+# fraction of b alleles in the population:
+p_b = (1*24 + 2*21) / (2*87) #0,379
+
+# expected frequency of bears with 0, 1 and 2 b alleles
+b_0 = dbinom(x = 0, size = 2, prob = p_b)
+b_0_exp = b_0*number_of_bears #expected number of bears with 0 b alleles: 33,5
+
+b_1 = dbinom(x = 1, size = 2, prob = p_b)
+b_1_exp = b_1*number_of_bears #expected number of bears with 1 b allele: 41
+
+b_2 = dbinom(x = 2, size = 2, prob = p_b)
+b_2_exp = b_2*number_of_bears #expected number of bears with 2 b alleles: 12,5
+
+#plot the data and see how the observed and expected frequencies differ
+bear_data = as.data.frame(cbind(rbind(BB_count, Bb_count, bb_count), rbind(b_0_exp, b_1_exp, b_2_exp))) #putting every count into the same dataframe
+
+colnames(bear_data) &lt;- c(&quot;Observed&quot;, &quot;Expected&quot;) #naming the columns in the matrix
+barplot(t(bear_data), beside = TRUE, col=c(&quot;deeppink4&quot;,&quot;lightblue&quot;), legend = colnames(bear_data))</code></pre>
+<p><img src="/week7_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code># calculating chi square
+chi_sq = sum(((bear_data$Observed - bear_data$Expected)^2) / bear_data$Expected) #14.92
+
+# degrees of freedom &amp; calculating the critical value
+df = 1 #3 categories, and we had to estimate p_b from the data
+
+chi_krit = qchisq(0.05, df=1) #critical value at the 0.01 significance level - 0.0039
+
+chi_sq &lt; chi_krit #FALSE - we reject the null</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+
+<script>
+hljs.configure({languages: ["r"]});
+hljs.initHighlightingOnLoad();
+</script>
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+
+    </div>
+
+    
+  </body>
+</html>

@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Week 7: TBA</title>
+      <title>Week 7: Goodness of fit</title>
       <link>/week-7/</link>
       <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/week-7/</guid>
-      <description>A. Table of contents Table of contents Learning goals Exercises  Introducing dbinom() and rbinom() Visualizing the binomial distribution in R Example 7.2 of the book “Sex and the X” in R Chapter 7 Problems Planning a survey according to statistical power    Learning goals By the end of this session, you should be able to…  Understand Goodness-of-fit tests:  How do we quantify lack of fit for frequency data: the chi2 test stastistic?</description>
+      <description>A. Table of contents Table of contents Learning goals Exercises  R functions for simulating from /calculating the Chi^2 probability distribution Mastering Chi^2 distributions using dchisq() pchisq() and rchisq() No weekend getaway Gene content of the human X chromosome Designer 2 child families Chapter 8 exercises    Learning goals By the end of this session, you should be able to…  Understand Goodness-of-fit tests:  How do we quantify lack of fit for frequency data: the chi2 test stastistic?</description>
     </item>
     
     <item>

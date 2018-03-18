@@ -529,8 +529,7 @@ Attaching package: 'cowplot'
 
 "
 "2","Warning messages:
-"
-"2","1: package 'mosaic' was built under R version 3.4.3 
+1: package 'mosaic' was built under R version 3.4.3 
 2: package 'mosaicData' was built under R version 3.4.3 
 3: package 'cowplot' was built under R version 3.4.3 
 "
@@ -540,7 +539,8 @@ Attaching package: 'cowplot'
 1: Setting LC_CTYPE failed, using ""C"" 
 2: Setting LC_COLLATE failed, using ""C"" 
 3: Setting LC_TIME failed, using ""C"" 
-4: Setting LC_MESSAGES failed, using ""C"" 
+"
+"2","4: Setting LC_MESSAGES failed, using ""C"" 
 5: Setting LC_MONETARY failed, using ""C"" 
 "
 "2","Loading required package: nlme
@@ -634,8 +634,8 @@ Attaching package: 'cowplot'
 1: package 'mosaic' was built under R version 3.4.3 
 2: package 'mosaicData' was built under R version 3.4.3 
 3: package 'cowplot' was built under R version 3.4.3 
-"
-"2","4: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+4: "
+"2","In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
 5: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
@@ -645,8 +645,7 @@ Attaching package: 'cowplot'
 "2","During startup - Warning messages:
 1: Setting LC_CTYPE failed, using ""C"" 
 2: Setting LC_COLLATE failed, using ""C"" 
-"
-"2","3: Setting LC_TIME failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
 4: Setting LC_MESSAGES failed, using ""C"" 
 5: Setting LC_MONETARY failed, using ""C"" 
 "
@@ -668,14 +667,14 @@ Attaching package: 'cowplot'
 4: Setting LC_MESSAGES failed, using ""C"" 
 5: Setting LC_MONETARY failed, using ""C"" 
 "
-"2","-- Attaching packages --------------------------------------------------------------------- tidyverse 1.2.1 --
+"2","-- Attaching packages ------------------------------------------------------------------ tidyverse 1.2.1 --
 "
 "2","<U+221A> ggplot2 2.2.1     <U+221A> purrr   0.2.4
 <U+221A> tibble  1.4.2     <U+221A> dplyr   0.7.4
 <U+221A> tidyr   0.8.0     <U+221A> stringr 1.2.0
 <U+221A> readr   1.1.1     <U+221A> forcats 0.2.0
 "
-"2","-- Conflicts ------------------------------------------------------------------------ tidyverse_conflicts() --
+"2","-- Conflicts --------------------------------------------------------------------- tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
 "
@@ -684,68 +683,59 @@ x dplyr::lag()    masks stats::lag()
 "2","Warning: Ignoring unknown parameters: binwidth, bins, pad
 "
 "2","Warning messages:
-1: package 'tibble' was built under R version 3.4.3 
+"
+"2","1: package 'tibble' was built under R version 3.4.3 
 2: package 'tidyr' was built under R version 3.4.3 
+"
+"2","Rendering content/week7.Rmd
+"
+"2","During startup - Warning messages:
+1: Setting LC_CTYPE failed, using ""C"" 
+2: Setting LC_COLLATE failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
+"
+"2","5: Setting LC_MONETARY failed, using ""C"" 
 "
 "1","[?25lBuilding sites … "
 "1","[?25h[K
 "
-"1","                   | EN  
+"1","                   |"
+"1"," EN  
 +------------------+----+
-  Pages            | 13  
+  Pages            | 14  
   Paginator pages  |  0  
-  Non-page files   |  3  
-  Static files     | 82  
-  Processed images |  0  
-  Aliases          |  0  
-  Sitemaps         | "
-"1"," 1  
-  Cleaned          |  0  
-
-Total in 133 ms
-"
-"1","[?25lBuilding sites … "
-"1","[?25h[K"
-"1","
-"
-"1"," "
-"1","                  | EN  
-+------------------+----+
-  "
-"1","Pages            | 13  "
-"1","
-  Paginator pages  |  0  
-  Non-page files   |  3  "
-"1","
-  Static files     | 82  
+  Non-page files   |  4  
+  Static files     | 93 "
+"1"," 
   Processed images |  0  
   Aliases          |  0  
   Sitemaps         |  1  
   Cleaned          |  0  
 
-Total in 162 ms
+Total in 225 ms
 "
 "0","blogdown::serve_site()"
 "1","[?25lBuilding sites … "
-"1","[?25h[K
+"1","[?25h[K"
+"1","
 "
-"1","                   | EN  
+"1","                   |"
+"1"," EN  
 +------------------+----+
-  Pages            | 13  
+  Pages            | 14  
   Paginator pages  |  0  
-  Non-page files   |  3  
-  Static files     | 82  
+  Non-page files   |  4  
+  Static files     | 93  
   Processed images |  0  
-  Aliases          |  0  
-  Sitemaps        "
-"1"," "
-"1","|"
-"1","  1  
+  Aliases          |  0"
+"1","  
+  Sitemaps         |  1  
   Cleaned          |  0  
 
-Total in 90 ms
+Total in 91 ms
 "
-"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:3781
+"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:6578
 "
-"2","To stop the server, run servr::daemon_stop(""4420479472"") or restart your R session
+"2","To stop the server, run servr::daemon_stop(""4325099424"") or restart your R session
 "

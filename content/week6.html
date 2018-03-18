@@ -61,7 +61,7 @@ tags: []
 <p>R functions for simulating from /calculating the binomial probability</p>
 <p>If you want to draw 1 random number from a binomial distribution with 25 trials(tests) and probability of success 1/2</p>
 <pre class="r"><code>rbinom(n = 1, size = 25, prob = 0.5) ## try to evaluate that several times (you get different numbers)</code></pre>
-<pre><code>## [1] 13</code></pre>
+<pre><code>## [1] 17</code></pre>
 <p>If you want to calculate the probability of having exactly 2 success out of 25 trials</p>
 <pre class="r"><code>dbinom(x = 2, size = 25, prob = 0.5)</code></pre>
 <pre><code>## [1] 8.940697e-06</code></pre>
@@ -69,9 +69,9 @@ tags: []
 <h4>Using dbinom() and rbinom()</h4>
 <p>Let’s call X3 the random variable that records the number of “6” you get when rolling 3 dices. Use rbinom() and generate 100 observations from X3 (instead of just 1 observation).</p>
 <pre class="r"><code>rbinom(n = 100, size = 3, prob = 1/6)</code></pre>
-<pre><code>##   [1] 0 0 1 0 0 0 1 1 2 1 0 0 0 2 0 0 0 0 0 0 1 0 1 0 0 0 0 1 0 1 0 0 0 1 1
-##  [36] 0 0 1 0 0 2 0 1 1 0 1 0 0 0 1 0 0 0 0 1 1 0 1 1 0 2 0 0 0 0 0 1 1 1 0
-##  [71] 0 0 1 0 1 1 0 1 0 0 0 3 0 2 1 0 0 0 1 0 1 0 1 0 1 1 0 1 0 0</code></pre>
+<pre><code>##   [1] 0 0 1 1 0 1 0 0 0 1 1 2 2 0 0 0 1 0 1 0 0 0 1 2 1 0 1 0 0 1 0 0 0 1 1
+##  [36] 0 0 2 0 0 2 0 2 1 1 0 0 0 0 0 2 0 0 1 0 1 1 0 0 0 0 0 0 1 0 0 2 1 0 0
+##  [71] 1 0 2 1 0 0 1 0 0 0 0 0 0 0 1 0 1 0 1 0 0 0 0 0 0 1 2 1 0 1</code></pre>
 <pre class="r"><code># we want 100 observations
 # we have 3 dice - so the number of trials is 3
 # and the probability of getting a 3 is 1/6</code></pre>
