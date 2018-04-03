@@ -1,0 +1,503 @@
+---
+title: "Week 8: The Poisson distribution"
+author: Judit Kisistok
+date: '2018-03-21'
+slug: week-8
+summary: Understanding the Poisson distribution and testing randomness.
+credit: Made by Judit Kisistók, incorporating some snippets from the solution sheets of Sara Moeskjær and Moisés Coll Maciá. The exercise session was created by Thomas Bataillon and Palle Villesen at Aarhus University.
+categories: []
+tags: []
+---
+
+
+
+<pre class="r"><code>library(ggplot2)</code></pre>
+<div id="table-of-contents" class="section level3">
+<h3><a name="toc"></a>Table of contents</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#toc">Table of contents</a></li>
+<li><a href="#goals">Learning goals</a></li>
+<li><a href="#exercises">Exercises</a>
+<ul>
+<li><a href="#exercise1">R functions for simulating from /calculating the Poisson probability distribution</a></li>
+<li><a href="#exercise2">Mastering POISSON distributions calculations: example of genome sequencing</a></li>
+<li><a href="#exercise3">Example 8.6 of the book “Extinctions” in R</a></li>
+<li><a href="#exercise4">Questions from Chapter 8 Problems</a></li>
+<li><a href="#exercise5">Planning a metagenome sequencing experiment</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="learning-goals" class="section level3">
+<h3><a name="goals"></a>Learning goals</h3>
+<div id="by-the-end-of-this-session-you-should-be-able-to" class="section level4">
+<h4>By the end of this session, you should be able to…</h4>
+<ul>
+<li>master Goodness-of-fit tests:
+<ul>
+<li>What null is tested, what degrees of freedom are appropriate?</li>
+<li>The Poisson probability distribution and its use as a null distribution for randomness of events in space / time</li>
+<li>GOF test using the Poisson as a null model</li>
+</ul></li>
+</ul>
+<p>README FIRST :-)<br />
+We first introduce / illustrate THREE important new R functions: dpois(), ppois() and rpois().</p>
+<p>You then have to apply these functions in a variety of situations.<br />
+It’s a good idea to work sequentially:<br />
+1. Try the R new functions especially the one that allows you to visualize and calculate probabilities using the Poisson probablity distributions<br />
+2. Try the next questions where you will redo in R the extinction example of Chapter 8 step by step<br />
+3. Try the set of Chapter 8 practice and assignment problems listed below (also listed in the weekly note)<br />
+4. Try the example where you have to “plan” a sequencing experiment</p>
+</div>
+</div>
+<div id="exercises" class="section level3">
+<h3><a name="exercises"></a><u>Exercises</u></h3>
+</div>
+<div id="r-functions-for-simulating-from-calculating-the-poisson-probability-distribution" class="section level3">
+<h3><a name="exercise1"></a>R functions for simulating from /calculating the Poisson probability distribution</h3>
+<pre class="r"><code># If you want to draw 100 random numbers from a Poisson distribution with mean 0.1, 1 ..etc 
+my100deviates=rpois(n = 10^4, lambda = 0.1) ## try to evaluate that several times (you get different numbers)
+hist(my100deviates, main=&quot;Draws from a Poisson with mean 0.1&quot;, col=&quot;deeppink4&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>my100deviates=rpois(n = 10^4, lambda = 1) ## try to evaluate that several times (you get different numbers)
+hist(my100deviates, main=&quot;10^4 draws from a Poisson with mean 1&quot;, col=&quot;deeppink4&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre class="r"><code>my100deviates=rpois(n = 10^4, lambda = 5) ## try to evaluate that several times (you get different numbers)
+hist(my100deviates, main=&quot;10^4 draws from a Poisson with mean 5&quot;, col=&quot;deeppink4&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<p>If you want to graph the Poisson probability distribution:</p>
+<pre class="r"><code># you have to &quot;plot&quot; the density function over a grid of coordinates (here 0,1,2, etc)
+xs= seq(from = 0, to=10, by=1 ) # xs is a vector of coordinates on the X axis 
+y1=dpois(x = xs, lambda = 0.1) # y1 stores the probabilities of the poisson distribution (mean 0.1) at each X discrete value 
+y2=dpois(x = xs, lambda = 1) # y2 stores the probabilities of the poisson distribution (mean 1) at each X discrete value  
+y3=dpois(x = xs, lambda = 5) # y3 stores the probabilities of the poisson distribution (mean 5) at each X discrete value  </code></pre>
+<div id="did-we-span-the-range-of-probability-that-matters" class="section level4">
+<h4>Did we span the range of probability that matters?</h4>
+<pre class="r"><code>sum(y1) #sums up to 1 - so we have all the probabilities in the range</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>sum(y2) #also sums up to 1</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>sum(y3) #this doesn&#39;t have all the probabilities in the range as it sums up to less than 1</code></pre>
+<pre><code>## [1] 0.9863047</code></pre>
+<p>Pretty much. While in principle the counts could span to infinity, in practice they fall relatively fast after the mean of the Poisson distribution has been reached. y1 and y2 illustrate this very well - and you could try to plot y3 on a slightly broader range (eg. 25 instead of 10) to see that you’re able to capture the entire probability range.</p>
+</div>
+<div id="visualizing-poisson-distributions-in-r" class="section level4">
+<h4>Visualizing Poisson distributions in R</h4>
+<pre class="r"><code># Plotting the densities of 3 different Poisson distributions
+plot(xs, y1, type =&quot;h&quot;, lwd=3, xlab=&quot;X &quot;, ylab= &quot;P(X)&quot;)  # Plotting the probability of Poisson distribution (mean 0.1)
+lines(xs+0.2, y2, type =&quot;h&quot;, lwd=3, col=&quot;blue&quot;)  # adding the probability of Poisson distribution (mean 1) to the previous plot
+lines(xs+0.4, y3, type=&quot;h&quot;, lwd=3, col=&quot;magenta&quot;)# adding the probability of Poisson distribution (mean 5) to the previous plot</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="mastering-poisson-distribution-calculations-example-of-genome-sequencing" class="section level3">
+<h3><a name="exercise2"></a>Mastering Poisson distribution calculations: example of genome sequencing</h3>
+<div id="lets-call-x-a-random-variable-that-tracks-how-many-times-a-nucleotide-was-sequenced-in-a-genome-for-a-2x-experiment.-if-sequencing-is-truly-random-discuss-why-it-is-a-fair-assumption-to-assume-x-is-poisson" class="section level4">
+<h4>Let’s call X a random variable that tracks how many times a nucleotide was sequenced in a genome for a 2X experiment. If sequencing is truly random discuss why it is a fair assumption to assume X is Poisson?</h4>
+<p>If the sequencing is truly random, that means that whether or not we happen to sequence a nucleotide is independent of any other nucleotide, and that the probability of sequencing a nucleotide is the same over the span of the entire genome. Since we assume that these assumptions are met, we can say that the number of times a nucleotide is sequenced is described by the Poisson distribution.<br />
+In “Poisson-talk”, the number of successes is the number of sequenced nucleotides and the blocks of space are the regions in the genome.</p>
+</div>
+<div id="what-is-the-probability-that-a-given-nucleotide-was-not-sequenced" class="section level4">
+<h4>What is the probability that a given nucleotide was not sequenced?</h4>
+<p>In this case, the number of successes is 0 and lambda is 2 because we know that it’s a 2X experiment (so we’d expect every nucleotide to be sequenced 2 times on average).</p>
+<pre class="r"><code>dpois(x = 0, lambda = 2)</code></pre>
+<pre><code>## [1] 0.1353353</code></pre>
+</div>
+<div id="what-is-the-probability-that-a-stretch-of-100-bp-was-missed-entirely" class="section level4">
+<h4>What is the probability that a stretch of 100 bp was missed entirely?</h4>
+<p>This is equivalent to saying that we are looking for the probability of having 0 successes 100 times in a row - so we can apply the multiplication rule.</p>
+<pre class="r"><code>(dpois(x = 0, lambda = 2))^100</code></pre>
+<pre><code>## [1] 1.383897e-87</code></pre>
+</div>
+<div id="simulate-the-distribution-of-coverage-you-expect-if-you-had-a-bactertial-genome-with" class="section level4">
+<h4>Simulate the distribution of coverage you expect if you had a bactertial genome with:</h4>
+</div>
+<div id="of-genes-with-intermediate-gc-content-where-sequencing-was-5x" class="section level4">
+<h4>- 90% of genes with “intermediate” GC content where sequencing was 5X</h4>
+</div>
+<div id="of-genes-with-very-low-gc-content-because-they-were-recently-acquired-from-a-gc-poor-bacteria-but-where-sequencing-did-not-work-well-so-only-1x-was-actually-achieved" class="section level4">
+<h4>- 10% of genes with “very low” GC content (because they were recently acquired from a GC poor bacteria) but where sequencing did not work well so only 1X was actually achieved</h4>
+</div>
+<div id="simulate-a-genome-of-5000-genes" class="section level4">
+<h4>- Simulate a genome of 5000 genes</h4>
+<p>To simulate this mixed distribution, we can create the two distributions individually and then concatenate them.</p>
+<pre class="r"><code># first of all, we simulate the two distributions that we intend to mix
+pois_90 = rpois(n = 5000*0.9, lambda = 5)
+pois_10 = rpois(n = 500, lambda = 1)
+mixed_pois = c(pois_90, pois_10) # this is our mixed distribution, created by concatenating the pois_90 and pois_10 distributions
+
+# then we put the simulated data into a dataframe - here I create a column called &quot;type&quot; and another called &quot;read counts&quot; and I populate them with the simulated data
+gc_data = data.frame(type = c(rep(&quot;normal_GC&quot;, 5000*0.9), rep(&quot;low_GC&quot;, 5000*0.1)),
+                  read_counts = c(pois_90, pois_10))
+
+# let&#39;s plot it in base R
+p2 &lt;- hist(pois_90, col = &quot;deeppink4&quot;) </code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>p3 &lt;- hist(pois_10, col = &quot;deeppink4&quot;) </code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<pre class="r"><code>p1 &lt;- hist(mixed_pois, col = &quot;deeppink4&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-3.png" width="672" /></p>
+<pre class="r"><code>plot(p1, col=&quot;darkgreen&quot;, xlim=c(0,15)) 
+plot(p2, col=&quot;deeppink4&quot;, xlim=c(0,15), ylim = c(0,800), xlab=&quot;Number of successes&quot;, add=T) 
+# add = T makes sure that you add these plots on top of eachother, and don&#39;t just create individual plots
+plot(p3, col=&quot;cornflowerblue&quot;, xlim=c(0,15), add=T) </code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-4.png" width="672" /></p>
+<pre class="r"><code># plot the data from our dataframe
+plot(table(gc_data$read_counts), main = &quot;Histogram of reads&quot;, xlab = &quot;Number of reads&quot;, ylab = &quot;Counts&quot;)
+
+# let&#39;s superimpose the &quot;clean&quot; Poisson distribution with mean = 5:
+points(x = 0:15, y = (dpois(x = 0:15, lambda = 5)*5000*.9), col = &quot;red&quot;, type = &quot;b&quot;)
+
+# and then the Poisson distribution with mean = 1:
+points(x = 0:15, y = (dpois(x = 0:15, lambda = 1)*5000*.1), col = &quot;blue&quot;, type = &quot;b&quot;)
+
+# neither of these fit perfectly - so let&#39;s superimpose the mixed distribution:
+points(x = 0:15, y = (dpois(x = 0:15, lambda = 1)*5000*.1)+(dpois(x = 0:15, lambda = 5)*5000*.9), 
+       col = &quot;green&quot;, type = &quot;b&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-5.png" width="672" /></p>
+<pre class="r"><code># and this is how we would do it in ggplot
+# we plot the data to see how it looks in general - note that this is all the data, so what you see is the mixed distribution
+ggplot(gc_data) +
+  geom_histogram(aes(x = read_counts, fill = type), binwidth = 1, col = &quot;black&quot;) +
+  xlab(&quot;Number of reads&quot;) +
+  ylab(&quot;Counts&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-6.png" width="672" /></p>
+<pre class="r"><code># we can plot the two types individually as well
+# first, we filter the data
+low_GC_reads = gc_data[gc_data$type == &quot;low_GC&quot;,]
+normal_GC_reads = gc_data[gc_data$type == &quot;normal_GC&quot;,]
+
+# and then we plot - we can see that the individual distributions fit the corresponding histograms well
+ggplot() +
+  geom_histogram(data = low_GC_reads, aes(x = read_counts, fill = type), binwidth = 1, alpha = .7, col = &quot;black&quot;) +
+  geom_histogram(data = normal_GC_reads, aes(x = read_counts, fill = type), binwidth = 1, alpha = .7, col = &quot;black&quot;) +
+  geom_line(data = data.frame(x = 0:13, y = dpois(x = 0:13, lambda = 5)*5000*.9), aes(x = x, y = y)) +
+  geom_line(data = data.frame(x = 0:13, y = dpois(x = 0:13, lambda = 1)*5000*.1), aes(x = x, y = y)) +
+  geom_point(data = data.frame(x = 0:13, y = dpois(x = 0:13, lambda = 5)*5000*.9), aes(x = x, y = y)) +
+  geom_point(data = data.frame(x = 0:13, y = dpois(x = 0:13, lambda = 1)*5000*.1), aes(x = x, y = y))</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-8-7.png" width="672" /></p>
+</div>
+<div id="will-this-look-like-a-poisson-distribution" class="section level4">
+<h4>Will this look like a Poisson distribution?</h4>
+<p>We can see that the distribution that we get is a mixture of different Poisson distributions - which is due to the heterogeneity in the sample. Luckily, in this case we knew what made the data heterogeneous - however, in real experiments it might not be this clear-cut so it can be a challenge finding out what biological factor modifies our expected distribution.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="example-8.6-of-the-book-extinctions-in-r" class="section level3">
+<h3><a name="exercise3"></a>Example 8.6 of the book “Extinctions” in R</h3>
+<pre class="r"><code># Here is where you can get the original data 
+library(abd)
+extinctData &lt;- read.csv(url(&quot;http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter08/chap08e6MassExtinctions.csv&quot;))
+head(extinctData)</code></pre>
+<pre><code>##   numberOfExtinctions
+## 1                   1
+## 2                   1
+## 3                   1
+## 4                   1
+## 5                   1
+## 6                   1</code></pre>
+<pre class="r"><code>dim(extinctData) #Check: you should have 76 observations (strata)  </code></pre>
+<pre><code>## [1] 76  1</code></pre>
+<pre class="r"><code>table(extinctData$numberOfExtinctions) # see &quot;holes&quot; in the vector - meaning that it doesn&#39;t list the ones where no extinctions happened</code></pre>
+<pre><code>## 
+##  1  2  3  4  5  6  7  8  9 10 11 14 16 20 
+## 13 15 16  7 10  4  2  1  2  1  1  1  2  1</code></pre>
+<pre class="r"><code>extinctData$nExtinctFactor &lt;- factor(extinctData$numberOfExtinctions, levels = c(0:20)) # forcing table to look at all entries - even categories with counts of 0 (no extinctions)
+extinctTable &lt;- table(extinctData$nExtinctFactor) ## check - it should be identical to the counts of the book table</code></pre>
+<div id="reproduce-in-r-the-calculations-of-the-example" class="section level4">
+<h4>Reproduce in R the calculations of the example:</h4>
+</div>
+<div id="step-a-calculate-the-mean-number-of-extinction-per-strata" class="section level4">
+<h4>Step A: calculate the mean number of extinction per strata</h4>
+<pre class="r"><code>mean_ext &lt;- mean(extinctData$numberOfExtinctions)
+mean_ext</code></pre>
+<pre><code>## [1] 4.210526</code></pre>
+</div>
+<div id="step-b-calculate-the-expected-counts-extinction-for-each-class-in-the-data-under-a-random-model-of-extinction" class="section level4">
+<h4>Step B: calculate the expected counts extinction for each class in the data under a random model of extinction</h4>
+<pre class="r"><code># let&#39;s plot it first just for demonstration purposes
+plot(extinctTable, col = &quot;deeppink4&quot;, ylab = &quot;Counts&quot;,
+     xlab = &quot;Number of extinctions&quot;)
+lines(x = 0:20, 
+     y = dpois(x = 0:20, lambda = mean_ext)* sum(extinctTable))
+points(x = 0:20, 
+     y = dpois(x = 0:20, lambda = mean_ext)* sum(extinctTable))</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code># so, to calculate the expected counts, we need the expected frequencies for 0, 1, 2... extinctions that we can get using dpois and the expected frequency of more than 20 extinction that we get with ppois:
+exp = c(dpois(x = 0:19, lambda = mean_ext)*sum(extinctTable),
+             (1-ppois(q = 19, lambda = mean_ext))*sum(extinctTable))</code></pre>
+</div>
+<div id="step-c-calculate-the-lack-of-fit-chi2-statistic-x2obs-of-the-data-to-this-model" class="section level4">
+<h4>Step C: calculate the lack of fit chi^2 statistic (X2obs) of the data to this model</h4>
+<pre class="r"><code>obs = as.vector(extinctTable) # here we are just taking the actual values from our table as a vector
+
+chi_sq = sum(((exp - obs)^2)/exp) #571658</code></pre>
+</div>
+<div id="step-d-discuss-if-why-you-should-pool-some-classes-decide-on-a-number-of-classes-and-accordingly-choose-df" class="section level4">
+<h4>Step D: discuss if /why you should pool some classes, decide on a number of classes and accordingly choose df</h4>
+<p>We should definitely pool some classes - if we look at the <span class="math inline">\(chi^2\)</span> value that we obtained, we see that it’s enormous, which is due to the fact that we used the <span class="math inline">\(chi^2\)</span> test even though our data didn’t meet the assumptions of the test (none of the categories should have an expected count less than 1 and no more than 20% of the categories should have expected counts less than 5).</p>
+<p>We can deal with this problem in multiple ways. First, we can create our new vectors “manually”:</p>
+<pre class="r"><code>obs</code></pre>
+<pre><code>##  [1]  0 13 15 16  7 10  4  2  1  2  1  1  0  0  1  0  2  0  0  0  1</code></pre>
+<pre class="r"><code>new_obs = NULL # we create a null vector
+new_obs[1] = obs[1] + obs[2] # we pool together categories 0 and 1
+# from category 2 up to 7, nothing changes:
+new_obs[2] = obs[3]
+new_obs[3] = obs[4]
+new_obs[4] = obs[5]
+new_obs[5] = obs[6]
+new_obs[6] = obs[7]
+new_obs[7] = obs[8]
+# and then we put everything else to category 8:
+new_obs[8] = obs[9] + obs[10] + obs[11] + obs[12] + obs[13] + obs[14] + obs[15]+ obs[16]+ obs[17]+ obs[18]+ obs[19]+ obs[20]+ obs[21]
+new_obs</code></pre>
+<pre><code>## [1] 13 15 16  7 10  4  2  9</code></pre>
+<p>Alternatively, we can deal with it using a for loop - we loop over our table and every time we see a number that is bigger than 8, we change it to be just 8.</p>
+<pre class="r"><code>new_obs_loop = NULL
+
+for(i in 1:length(extinctData$numberOfExtinctions)){
+  if(extinctData$numberOfExtinctions[i] &gt; 8) {
+    new_obs_loop[i] = 8 # changing the values to 8, thus pooling them together
+  } else {
+    new_obs_loop[i] = extinctData$numberOfExtinctions[i] # we leave the values that are smaller than 8 as they are
+  }
+}
+obs_loop = as.vector(table(new_obs_loop)) # we need the table function so that we don&#39;t have just a lot of individual values, but the counts of them</code></pre>
+<pre class="r"><code>new_exp = c(sum(ppois(q = 1, lambda = mean_ext)*sum(extinctTable)), # the new category having 0 and 1 successes
+                dpois(x = 2:7, lambda = mean_ext)*sum(extinctTable), # categories having 2 to 7 successes
+                (1-ppois(q = 7, lambda = mean_ext))*sum(extinctTable)) # 8 or more successes</code></pre>
+<p>And with this, we can obtain the test statistic:</p>
+<pre class="r"><code>new_chi &lt;- sum(((new_obs - new_exp)^2)/new_exp) #23,95
+new_chi_2 &lt;- sum(((obs_loop - new_exp)^2)/new_exp) #23,95
+# we get the same chi^2 values with both grouping methods</code></pre>
+<p>We can visualize where this <span class="math inline">\(chi^2\)</span> test statistic value falls:</p>
+<pre class="r"><code>plot(dchisq(x = 0:25, df = 6), type = &quot;l&quot;,
+      xlab = &quot;Number of extinctions&quot;, 
+      ylab = &quot;Frequency&quot;, 
+      main = &quot;Chi^2 distribution with 6 degrees of freedom&quot;)
+abline(v = new_chi, col = &quot;deeppink4&quot;) # puts the test statistic value as an abline</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="step-e-use-pchisq-to-get-the-pvalue-do-you-accept-or-reject-h0" class="section level4">
+<h4>Step E: use pchisq() to get the pvalue: do you accept or reject H0?</h4>
+<pre class="r"><code>1 - pchisq(q = new_chi, df = 6) # we reject the null</code></pre>
+<pre><code>## [1] 0.0005334919</code></pre>
+<p>Since the p-value is smaller than 0.01, we reject the null hypothesis - the data is not consistent with the hypothesis that the data is Poisson-distributed.</p>
+<p>We can also see if they are dispersed or clumped by comparing the mean to the variance:</p>
+<pre class="r"><code>var(extinctData$numberOfExtinctions)/mean(extinctData$numberOfExtinctions)</code></pre>
+<pre><code>## [1] 3.257333</code></pre>
+<p>Since the variance is larger than the mean, we can say that the extinctions are clumped.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="questions-from-chapter-8-problems" class="section level3">
+<h3><a name="exercise4"></a>Questions from Chapter 8 Problems</h3>
+<p>At this stage, you have done your warm up in R, and mastered the binomial and <span class="math inline">\(chi^2\)</span> probability distributions!</p>
+<div id="practice-problem-8.1" class="section level4">
+<h4><u>Practice Problem 8.1</u></h4>
+<pre class="r"><code>prog_data = c(rep(0, 118), rep(1, 64), rep(2, 16), rep(3, 2))</code></pre>
+<ol style="list-style-type: upper-alpha">
+<li><p>The Poisson distribution is appropriate in this case because the basic premise of the program is that it places individuals independently and the probability is the same everywhere - and if these indeed hold, then the number of successes per block of space is described by the Poisson-distribution.</p></li>
+<li><p><span class="math inline">\(H_0\)</span>: the program places individuals on a spatial landscape randomly <span class="math inline">\(H_A\)</span>: the program doesn’t place individuals randomly (instead, the placement is either dispersed or clumped)</p></li>
+<li><p>Frequency table of the data:</p></li>
+</ol>
+<pre class="r"><code>prog_table = table(prog_data)
+prog_table</code></pre>
+<pre><code>## prog_data
+##   0   1   2   3 
+## 118  64  16   2</code></pre>
+<ol start="4" style="list-style-type: upper-alpha">
+<li>Mean of individuals:</li>
+</ol>
+<pre class="r"><code>prog_mean = mean(prog_data)
+prog_mean</code></pre>
+<pre><code>## [1] 0.51</code></pre>
+<ol start="5" style="list-style-type: upper-alpha">
+<li>Probability of 0, 1, 2 and 3 individuals per block:</li>
+</ol>
+<pre class="r"><code>dpois(x = 0, lambda = prog_mean)</code></pre>
+<pre><code>## [1] 0.6004956</code></pre>
+<pre class="r"><code>dpois(x = 1, lambda = prog_mean)</code></pre>
+<pre><code>## [1] 0.3062527</code></pre>
+<pre class="r"><code>dpois(x = 2, lambda = prog_mean)</code></pre>
+<pre><code>## [1] 0.07809445</code></pre>
+<pre class="r"><code>dpois(x = 3, lambda = prog_mean)</code></pre>
+<pre><code>## [1] 0.01327606</code></pre>
+<ol start="6" style="list-style-type: upper-alpha">
+<li>Expected numbers of blocks with 0 to 3 individuals:</li>
+</ol>
+<pre class="r"><code>prog_exp  = c(dpois(x = 0:2, lambda = prog_mean)*200, # 0, 1 and 2 successes
+              (1-ppois(q = 2, lambda = prog_mean))*200) # 3 or more successes</code></pre>
+<ol start="7" style="list-style-type: upper-alpha">
+<li><p>No, they aren’t suitable - more than 20% of the categories have an expected count less than 5. Therefore, we should pool the categories 2 and 3 (or more) together.</p></li>
+<li><p>Pooling the categories together:</p></li>
+</ol>
+<pre class="r"><code>new_prog_obs = NULL
+
+# again, we can do it &quot;manually&quot;
+new_prog_obs[1] =  prog_table[1]
+new_prog_obs[2] = prog_table[2]
+new_prog_obs[3] = prog_table[3] + prog_table[4]
+
+# or with a for loop:
+new_obs_loop = NULL
+
+for(i in 1:length(prog_data)){
+  if(prog_data[i] &gt; 2){
+    new_obs_loop[i] = 2
+  }else{
+    new_obs_loop[i] = prog_data[i]
+  }
+}
+
+new_obs_loop_t = as.vector(table(new_obs_loop))
+
+# and then we get the expected counts:
+new_prog_exp  = c(dpois(x = 0:1, lambda = prog_mean)*200, # 0 and 1 successes
+                  (1-ppois(q = 1, lambda = prog_mean))*200) # 2 and more successes</code></pre>
+<ol style="list-style-type: upper-roman">
+<li>We have 3 categories and we calculated the mean, so we have 1 degrees of freedom left.<br />
+Degrees of freedom = number of categories - 1 - number of parameters calculated from the data</li>
+</ol>
+<ol start="10" style="list-style-type: upper-alpha">
+<li><span class="math inline">\(Chi^2\)</span> test statistic:</li>
+</ol>
+<pre class="r"><code>prog_chi = sum(((new_prog_obs - new_prog_exp)^2)/new_prog_exp)
+prog_chi</code></pre>
+<pre><code>## [1] 0.1827849</code></pre>
+<ol start="11" style="list-style-type: upper-alpha">
+<li>The p-value:</li>
+</ol>
+<pre class="r"><code>1 - pchisq(q = prog_chi, df = 1)</code></pre>
+<pre><code>## [1] 0.6689908</code></pre>
+<ol start="12" style="list-style-type: upper-alpha">
+<li>Since the p-value is larger than 0.05, we fail to reject the null hypothesis - the data is consistent with the hypothesis that the program places individuals on a spatial landscape randomly.</li>
+</ol>
+</div>
+<div id="practice-problem-8.2" class="section level4">
+<h4><u>Practice Problem 8.2</u></h4>
+<ol style="list-style-type: upper-alpha">
+<li>Plotting the data:</li>
+</ol>
+<pre class="r"><code>fish_data = c(rep(0, 103), rep(1, 72), rep(2, 44), rep(3, 14), rep(4, 3), rep(5, 1), rep(6, 1))
+
+hist(fish_data, col = &quot;deeppink4&quot;, 
+     xlab = &quot;Number of nematodes per fish&quot;, 
+     ylab = &quot;Frequency&quot;, 
+     breaks = 7,
+     main = &quot;Histogram of the nematode data&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: upper-alpha">
+<li>Expected frequencies:</li>
+</ol>
+<pre class="r"><code>fish_mean = mean(fish_data)
+
+fish_exp = c(dpois(0:5, lambda = fish_mean), 
+             1-ppois(5, lambda = fish_mean) ) * length(fish_data)</code></pre>
+<ol start="3" style="list-style-type: upper-alpha">
+<li>Overlaying the expected frequencies on the graph:</li>
+</ol>
+<pre class="r"><code>plot(x = 0:6, y = as.vector(table(fish_data)), col = &quot;deeppink4&quot;, xlab = &quot;Number of nematodes per fish&quot;, ylab = &quot;Frequency&quot;, type = &quot;h&quot;, lwd = 10)
+points(x = 0:6, y =  fish_exp, type = &quot;o&quot;)</code></pre>
+<p><img src="/week8_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>We can see that we observe more fish with 0 nematodes and less fish with 1 nematode than we’d expect under the assumption of randomness, however, the other categories match the expectations well.</p>
+<ol start="4" style="list-style-type: upper-alpha">
+<li>Hypothesis testing:</li>
+</ol>
+<p><span class="math inline">\(H_0\)</span>: Nematodes infect fish at random<br />
+<span class="math inline">\(H_A\)</span>: Nematodes do not infect fish at random</p>
+<pre class="r"><code>fish_table = table(fish_data)
+
+# first, we pool some categories so that the assumptions of the chi^2 test are met - so we have categories 0, 1, 2, 3 and 4 and more
+# this is another way to pool - just getting the values from the original data table
+fish_obs = c(fish_table[1:4], 
+             sum(fish_table[5:7]))
+fish_exp = c(dpois(0:3, lambda = fish_mean), 
+             1-ppois(3, lambda = fish_mean))*length(fish_data)
+
+# the test statistic
+fish_chi = sum(((fish_obs - fish_exp)^2)/fish_exp)
+fish_chi</code></pre>
+<pre><code>## [1] 4.570719</code></pre>
+<pre class="r"><code># the p-value
+1 - pchisq(q = fish_chi, df = 3) </code></pre>
+<pre><code>## [1] 0.2060684</code></pre>
+<p>The p-value is bigger than 0.05, so we can’t reject the null hypothesis - nematodes seem to infect fish randomly.</p>
+</div>
+<div id="assignment-problem-8.19" class="section level4">
+<h4><u>Assignment problem 8.19</u></h4>
+<ol style="list-style-type: upper-alpha">
+<li>Mean of the number of hurricanes per year:</li>
+</ol>
+<pre class="r"><code>hurricane_data = c(rep(0, 50), rep(1, 39), rep(2, 7), rep(3, 4))
+hurricane_table = table(hurricane_data)
+
+h_mean = mean(hurricane_data)
+h_mean</code></pre>
+<pre><code>## [1] 0.65</code></pre>
+<ol start="2" style="list-style-type: upper-alpha">
+<li><p>If the hurricanes were to hit independently of eachother and if the probability of a hurricane were the same in every year, then the number of hurricanes per year would be described by the Poisson-distribution.</p></li>
+<li><p>Testing the fit to the Poisson-distribution:</p></li>
+</ol>
+<pre class="r"><code>h_exp = c(dpois(x = 0:2, lambda = mean(data)), 
+          1-ppois(q = 2, lambda = mean(data)))*length(data)
+h_obs = as.vector(table(hurricane_data))
+
+h_obs</code></pre>
+<pre><code>## [1] 50 39  7  4</code></pre>
+<p>We need to pool the last 2 categories together.</p>
+<pre class="r"><code>h_exp_pool = c(dpois(x = 0:1, lambda = h_mean), 
+               1-ppois(q = 1, lambda = h_mean))*length(hurricane_data)
+
+h_obs_pool = c(hurricane_table[1:2], 
+               sum(hurricane_table[3:4]))
+
+fish_chi = sum(((h_obs_pool - h_exp_pool)^2)/h_exp_pool)
+
+1 - pchisq(q = fish_chi, df = 1)</code></pre>
+<pre><code>## [1] 0.2300109</code></pre>
+<p>We can’t reject the null hypothesis, hurricanes seem to hit the US randomly through the years.</p>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>
+<div id="planning-a-metagenome-sequencing-experiment" class="section level3">
+<h3><a name="exercise5"></a>Planning a metagenome sequencing experiment</h3>
+<p>When you sequence metagenomes you have a soup that consists of say all the bacteria in a water sample. The abundance of the bacteria species can vary a lot in a sample. Here we want to examine how much sequencing we need to do before we can “detect” a rare clade.</p>
+<p>We sequence 1kb of the 16S ribosomal DNA (a hypervariable region of this gene is used for doing this). Assume that we have extracted DNA “en masse” from our water sample.</p>
+<p>To detect reliably your bacteria you need at least 5 copies of the 16S gene being sequenced. We know that some groups of bacteria make up 50% of these so it is pretty easy to “catch them”.</p>
+<div id="but-what-volume-of-sequencing-expressed-in-total-kb-of-sequence-do-you-need-to-do-if-you-want-to-have-80-probability-to-detect-110-of-all-bacteria-present" class="section level4">
+<h4>But what volume of sequencing (expressed in total kb of sequence) do you need to do if you want to have 80% probability to “detect” 1/10 of all bacteria present?</h4>
+<pre class="r"><code>total_vol = 1 # let&#39;s start out with the volume of one
+bacteria_prop = 0.1 # we want to detect 1/10 of bacteria present
+
+# the easiest way to do this is with a while loop - so we increase the total volume until we see the probability that we calculate with 1-ppois reaching 80% - when it does, the loop terminates and we get the total volume of sequencing we need
+while(1-ppois(q = 4, lambda = total_vol*bacteria_prop) &lt; 0.8){
+  total_vol = total_vol + 1
+}
+
+total_vol</code></pre>
+<pre><code>## [1] 68</code></pre>
+</div>
+<div id="how-is-your-volume-of-sequencing-to-be-adjusted-if-you-were-to-detect-a-group-that-represents-1100-rare-or-11000-super-rare-of-all-bacteria-present" class="section level4">
+<h4>How is your volume of sequencing to be adjusted if you were to detect a group that represents 1/100 (rare) or 1/1000 (super rare) of all bacteria present?</h4>
+<pre class="r"><code>total_vol = 1 
+bacteria_prop = 0.01 
+
+while(1-ppois(q = 4, lambda = total_vol*bacteria_prop) &lt; 0.8){
+  total_vol = total_vol + 1
+}
+
+total_vol</code></pre>
+<pre><code>## [1] 673</code></pre>
+<pre class="r"><code>total_vol = 1 
+bacteria_prop = 0.001 
+
+while(1-ppois(q = 4, lambda = total_vol*bacteria_prop) &lt; 0.8){
+  total_vol = total_vol + 1
+}
+
+total_vol</code></pre>
+<pre><code>## [1] 6721</code></pre>
+<p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
+</div>
+</div>

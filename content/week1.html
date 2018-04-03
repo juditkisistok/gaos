@@ -113,21 +113,21 @@ mydata$y = 5 * mydata$x + 11.0 + rnorm(100)
 # mydata$y appends another column (variable) to your dataframe
 # the expression after &quot;=&quot; just means that this y variable is populated by values that are 5 * corresponding x + 11 + a value randomly sampled from a normal distribution
 summary(mydata) </code></pre>
-<pre><code>##        x                  y         
-##  Min.   :-2.87045   Min.   :-1.982  
-##  1st Qu.:-0.55799   1st Qu.: 8.799  
-##  Median : 0.10011   Median :11.178  
-##  Mean   : 0.03312   Mean   :11.153  
-##  3rd Qu.: 0.70144   3rd Qu.:14.235  
-##  Max.   : 2.23780   Max.   :22.194</code></pre>
+<pre><code>##        x                 y          
+##  Min.   :-2.6046   Min.   :-0.5073  
+##  1st Qu.:-0.6828   1st Qu.: 7.3742  
+##  Median :-0.1177   Median :10.5226  
+##  Mean   :-0.1349   Mean   :10.3818  
+##  3rd Qu.: 0.5121   3rd Qu.:13.5535  
+##  Max.   : 2.2843   Max.   :23.0348</code></pre>
 <pre class="r"><code>head(mydata) # you can see the first couple lines of your data frame - useful for seeing what kind of variables you have </code></pre>
-<pre><code>##            x         y
-## 1 -1.1911185  5.051858
-## 2 -2.8704456 -1.982322
-## 3 -0.4108695 10.506126
-## 4 -0.1576926  9.358624
-## 5 -0.5392134 10.384035
-## 6 -1.5842660  3.356147</code></pre>
+<pre><code>##             x         y
+## 1  0.61060304 12.887995
+## 2  0.76760836 13.357695
+## 3 -0.68869552  8.125125
+## 4 -0.05771948 10.514653
+## 5 -0.25559022  7.483461
+## 6  0.69849413 14.465673</code></pre>
 <pre class="r"><code>plot(x = mydata$x, y = mydata$y) # it&#39;s good to specify which data you want on the x axis and which to put on the y axis</code></pre>
 <p><img src="/week1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>

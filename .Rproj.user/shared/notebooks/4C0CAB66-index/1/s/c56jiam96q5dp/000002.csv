@@ -539,8 +539,7 @@ Attaching package: 'cowplot'
 1: Setting LC_CTYPE failed, using ""C"" 
 2: Setting LC_COLLATE failed, using ""C"" 
 3: Setting LC_TIME failed, using ""C"" 
-"
-"2","4: Setting LC_MESSAGES failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
 5: Setting LC_MONETARY failed, using ""C"" 
 "
 "2","Loading required package: nlme
@@ -594,8 +593,7 @@ Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.
 "2","
 Attaching package: 'mosaic'
 
-"
-"2","The following object is masked from 'package:Matrix':
+The following object is masked from 'package:Matrix':
 
     mean
 
@@ -634,8 +632,8 @@ Attaching package: 'cowplot'
 1: package 'mosaic' was built under R version 3.4.3 
 2: package 'mosaicData' was built under R version 3.4.3 
 3: package 'cowplot' was built under R version 3.4.3 
-4: "
-"2","In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+"
+"2","4: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
 5: In plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
@@ -651,9 +649,12 @@ Attaching package: 'cowplot'
 "
 "2","Rendering content/week5.Rmd
 "
-"2","During startup - Warning messages:
-1: Setting LC_CTYPE failed, using ""C"" 
-2: Setting LC_COLLATE failed, using ""C"" 
+"2","During startup - "
+"2","Warning messages:
+"
+"2","1: Setting LC_CTYPE failed, using ""C"" 
+"
+"2","2: Setting LC_COLLATE failed, using ""C"" 
 3: Setting LC_TIME failed, using ""C"" 
 4: Setting LC_MESSAGES failed, using ""C"" 
 5: Setting LC_MONETARY failed, using ""C"" 
@@ -680,7 +681,8 @@ x dplyr::lag()    masks stats::lag()
 "
 "2","Warning: Ignoring unknown parameters: binwidth, bins, pad
 "
-"2","Warning: Ignoring unknown parameters: binwidth, bins, pad
+"2","Warning:"
+"2"," Ignoring unknown parameters: binwidth, bins, pad
 "
 "2","Warning messages:
 "
@@ -694,48 +696,133 @@ x dplyr::lag()    masks stats::lag()
 2: Setting LC_COLLATE failed, using ""C"" 
 3: Setting LC_TIME failed, using ""C"" 
 4: Setting LC_MESSAGES failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
 "
-"2","5: Setting LC_MONETARY failed, using ""C"" 
+"2","Rendering content/week8.Rmd
 "
-"1","[?25lBuilding sites … "
-"1","[?25h[K
+"2","During startup - Warning messages:
+1: Setting LC_CTYPE failed, using ""C"" 
+2: Setting LC_COLLATE failed, using ""C"" 
+3: Setting LC_TIME failed, using ""C"" 
+4: Setting LC_MESSAGES failed, using ""C"" 
+5: Setting LC_MONETARY failed, using ""C"" 
 "
-"1","                   |"
-"1"," EN  
-+------------------+----+
-  Pages            | 14  
-  Paginator pages  |  0  
-  Non-page files   |  4  
-  Static files     | 93 "
-"1"," 
-  Processed images |  0  
-  Aliases          |  0  
-  Sitemaps         |  1  
-  Cleaned          |  0  
+"2","Loading required package: nlme
+"
+"2","Loading required package: lattice
+"
+"2","Loading required package: grid
+"
+"2","Loading required package: mosaic
+"
+"2","Loading required package: dplyr
+"
+"2","
+Attaching package: 'dplyr'
 
-Total in 225 ms
 "
-"0","blogdown::serve_site()"
+"2","The following object is masked from 'package:nlme':
+
+    collapse
+
+"
+"2","The following objects are masked from 'package:stats':
+
+    filter, lag
+
+"
+"2","The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+"
+"2","Loading required package: ggformula
+"
+"2","
+New to ggformula?  Try the tutorials: 
+	learnr::run_tutorial(""introduction"", package = ""ggformula"")
+	learnr::run_tutorial(""refining"", package = ""ggformula"")
+"
+"2","Loading required package: mosaicData
+"
+"2","Loading required package: Matrix
+"
+"2","
+The 'mosaic' package masks several functions from core packages in order to add 
+additional features.  The original behavior of these functions should not be affected by this.
+
+Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.
+"
+"2","
+Attaching package: 'mosaic'
+
+"
+"2","The following object is masked from 'package:Matrix':
+
+    mean
+
+The following objects are masked from 'package:dplyr':
+
+    count, do, tally
+
+"
+"2","The following objects are masked from 'package:stats':
+
+    IQR, binom.test, cor, cor.test, cov, fivenum, median,
+    prop.test, quantile, sd, t.test, var
+
+"
+"2","The following objects are masked from 'package:base':
+
+    max, mean, min, prod, range, sample, sum
+
+"
+"2","Warning messages:
+"
+"2","1: package 'mosaic' was built under R version 3.4.3 
+2: package 'mosaicData' was built under R version 3.4.3 
+3: In mean.default(x, ..., na.rm = na.rm) :
+  argument is not numeric or logical: returning NA
+4: In mean.default(x, ..., na.rm = na.rm) :
+  argument is not numeric or logical: returning NA
+"
 "1","[?25lBuilding sites … "
 "1","[?25h[K"
 "1","
-"
-"1","                   |"
-"1"," EN  
-+------------------+----+
-  Pages            | 14  
-  Paginator pages  |  0  
-  Non-page files   |  4  
-  Static files     | 93  
-  Processed images |  0  
-  Aliases          |  0"
+                   | EN   
++------------------+-----+
+  "
+"1","Pages            |  15  
+  Paginator pages  |   0  
+  Non-page files   |   4  
+  Static files     | 112  
+  Processed images |   0  
+  Aliases          |   0  
+  Sitemaps         |   1  
+  Cleaned          |   0"
 "1","  
-  Sitemaps         |  1  
-  Cleaned          |  0  
 
-Total in 91 ms
+Total in 234 ms
 "
-"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:6578
+"0","blogdown::serve_site()"
+"1","[?25lBuilding sites … "
+"1","[?25h[K
 "
-"2","To stop the server, run servr::daemon_stop(""4325099424"") or restart your R session
+"1","                   | EN   
++------------------+-----+
+  Pages            |  15  
+  Paginator pages  |   0  
+  Non-page files   |   4  
+  Static files     | 112  
+  Processed images |   0  
+  Aliases          |"
+"1","   0  
+  Sitemaps         |   1  
+  Cleaned          |   0  
+
+Total in 85 ms
+"
+"2","Serving the directory /Users/juci/Documents/GitHub/gaos at http://127.0.0.1:3299
+"
+"2","To stop the server, run servr::daemon_stop(""4623079152"") or restart your R session
 "

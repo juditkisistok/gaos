@@ -6,10 +6,19 @@
     <description>Recent content on Genome Analysis &amp; Statistics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Week 8: The Poisson distribution</title>
+      <link>/week-8/</link>
+      <pubDate>Wed, 21 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/week-8/</guid>
+      <description>library(ggplot2) Table of contents Table of contents Learning goals Exercises  R functions for simulating from /calculating the Poisson probability distribution Mastering POISSON distributions calculations: example of genome sequencing Example 8.6 of the book “Extinctions” in R Questions from Chapter 8 Problems Planning a metagenome sequencing experiment    Learning goals By the end of this session, you should be able to…  master Goodness-of-fit tests:  What null is tested, what degrees of freedom are appropriate?</description>
+    </item>
     
     <item>
       <title>Week 7: Goodness of fit</title>
