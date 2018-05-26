@@ -212,7 +212,7 @@ myBreaks</code></pre>
 <p>Hint: Here is a simple example to draw 5 numbers with replacement from a “made-up” empirical distribution - adapt that for your purposes.</p>
 <pre class="r"><code>madeup=c(3,3,4,5,6,7,8,2,1,3,5,6,12,435,23)
 sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and replace=  specifying here (check the help)?</code></pre>
-<pre><code>## [1] 23  5  1  7  4</code></pre>
+<pre><code>## [1]  5 23 12  3  3</code></pre>
 <p><strong>x:</strong> the data that we want to draw samples from<br />
 <strong>size:</strong> the size of the sample that we want to take<br />
 <strong>replace:</strong> whether or not we want to sample with replacement</p>
@@ -253,16 +253,16 @@ sample(x = madeup, size = 5,replace = T) # Q:what are the options x=, size= and 
   mymedian=median(tryit) #we calculate the median of the sample
   cat(&quot;And the median is: &quot;, mymedian, &quot;\n&quot;) #we concatenate and print it out
 }</code></pre>
-<pre><code>## And the median is:  5 
+<pre><code>## And the median is:  3 
+## And the median is:  3 
 ## And the median is:  6 
-## And the median is:  4 
+## And the median is:  3 
 ## And the median is:  5 
+## And the median is:  12 
 ## And the median is:  6 
-## And the median is:  6 
-## And the median is:  4 
-## And the median is:  23 
+## And the median is:  7 
 ## And the median is:  5 
-## And the median is:  6</code></pre>
+## And the median is:  7</code></pre>
 <p>Or we can be smart and instead of “printing it” we “write it down” i.e. store that in a vector:</p>
 <pre class="r"><code>myMedians = NULL # this initializes a &quot;nullvector&quot;
 for (i in 1:10) {
@@ -270,7 +270,7 @@ for (i in 1:10) {
   myMedians[i]=median(tryit) #we add the calculated medians to the nullvector
 }
 myMedians </code></pre>
-<pre><code>##  [1] 3 6 5 7 3 4 4 6 4 3</code></pre>
+<pre><code>##  [1]  7  4  6  3  5  3  7  4  5 12</code></pre>
 <div id="adapt-this-code-to-generate-fig-4.1-3-and-4.1-4-use-104-samples-to-get-the-sampling-distributions." class="section level4">
 <h4>Adapt this code to generate fig 4.1-3 and 4.1-4 (use 10^4 samples to get the sampling distributions).</h4>
 <pre class="r"><code>#nullvectors for the means (different sample sizes)
@@ -420,23 +420,23 @@ hist(medianLength_500,
 <h4>Compare the statistical precision we have to estimate mean SD and median: is the summary statistic that entails most uncertainty?</h4>
 <p>So we created all these nice sampling distributions and we can calculate the standard error to get an idea about their uncertainty:</p>
 <pre class="r"><code>sd(meanLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 98.75318</code></pre>
+<pre><code>## [1] 96.83555</code></pre>
 <pre class="r"><code>sd(meanLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 20.74283</code></pre>
+<pre><code>## [1] 20.04234</code></pre>
 <pre class="r"><code>sd(meanLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 4.079282</code></pre>
+<pre><code>## [1] 4.080065</code></pre>
 <pre class="r"><code>sd(sdLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 168.9971</code></pre>
+<pre><code>## [1] 210.2817</code></pre>
 <pre class="r"><code>sd(sdLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 67.97708</code></pre>
+<pre><code>## [1] 71.24216</code></pre>
 <pre class="r"><code>sd(sdLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 21.41449</code></pre>
+<pre><code>## [1] 20.85053</code></pre>
 <pre class="r"><code>sd(medianLength_20)/sqrt(20)</code></pre>
-<pre><code>## [1] 92.15014</code></pre>
+<pre><code>## [1] 91.86236</code></pre>
 <pre class="r"><code>sd(medianLength_100)/sqrt(100)</code></pre>
-<pre><code>## [1] 17.66063</code></pre>
+<pre><code>## [1] 17.89927</code></pre>
 <pre class="r"><code>sd(medianLength_500)/sqrt(500)</code></pre>
-<pre><code>## [1] 3.565774</code></pre>
+<pre><code>## [1] 3.552983</code></pre>
 <p>We can see that if we compare the precision of our estimates given the 3 sample sizes, the n = 500 estimate is the most precise which is expected. If we take a look at the different summary statistics at the same sample sizes, we find that the median estimate is the least uncertain - this is also expected given that this statistic is the most resistant to the influence of the outliers while the mean and standard deviation are more sensitive to them (remember, the standard deviation is the most uncertain - it is calculated using the mean, which was already pretty sensitive to extreme observations!).</p>
 <p><em>Take me back to <a href="#toc">the beginning!</a></em></p>
 </div>
