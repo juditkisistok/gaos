@@ -6,19 +6,10 @@
     <description>Recent content on Genome Analysis &amp; Statistics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Assignment</title>
-      <link>/assignment/</link>
-      <pubDate>Sat, 26 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/assignment/</guid>
-      <description>Table of contents Table of contents Learning goals GWAS project  Looking at the data Odds ratios for one contingency table Many odds ratios Look for a biological signal in the genome using the odds ratios Chi^2 calculations Correction for continuity Simulating/permuting the null distribution Trying Fisher’s exact test Making a Manhattan plot and correcting for multiple testing The distribution of the significant SNPs in the genome    Learning goals By the end of this session, you should be able to…  calculate odds ratios by hand and associated values (confidence intervals etc.</description>
-    </item>
     
     <item>
       <title>Week 8: The Poisson distribution</title>

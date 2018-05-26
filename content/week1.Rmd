@@ -3,7 +3,7 @@ title: "Week 1: Introduction"
 author: Judit Kisist??k
 date: '2018-01-31'
 slug: week-1
-summary: GWAS SNP project.
+summary: Introduction to statistics and R. Loading and plotting data.
 credit: Made by Judit Kisist??k. The R exercise session was created by Palle Villesen and Thomas Bataillon at Aarhus University.
 categories: []
 tags: []
