@@ -1,7 +1,0 @@
-"0","plot3b <- hist(dataMm$plates, "
-"0","               breaks = 50, "
-"0","               col = ""deeppink4"", "
-"0","               xlim = c(0, 100), "
-"0","               ylim = c(0, 25), "
-"0","               xlab = """", "
-"0","               main = ""Real Mm"")"

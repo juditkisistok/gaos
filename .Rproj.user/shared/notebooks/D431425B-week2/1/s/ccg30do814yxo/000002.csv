@@ -1,2 +1,0 @@
-"0","data(""SticklebackPlates"") # getting the dataset - this only works if a dataset is included in a package, otherwise you need another data import method (eg. read.csv() for comma-separated data)"
-"0","head(SticklebackPlates) # a quick peek at the dataset - useful for seeing the variables and the first couple datapoints"
